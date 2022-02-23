@@ -12,6 +12,9 @@ using UnityEngine.UI;
  * WCs -> collidersRuote
  * Metodo Go -> Move
  * maxSpeed -> velocitàMassima
+ * skidSound -> suonoSgommata
+ * wheelHit -> ruotaHit
+ * checkForSkid -> CheckSgommata
  */
 public class CarController : MonoBehaviour {
     
@@ -31,8 +34,8 @@ public class CarController : MonoBehaviour {
     public float angoloMassimoSterzata = 30.0f;
     
     
-
-    //public AudioSource skidSound;
+    /*dichiaro un oggetto AudioSource per l'audio della sgommata*/
+    public AudioSource suonoSgommata;
     //public AudioSource highAccel;
 
     //public Transform skidTrailPrefab;
@@ -83,19 +86,22 @@ public class CarController : MonoBehaviour {
     }*/
 
     // Start is called before the first frame update
-    void Start() {
-
-       /*
-        for (int i = 0; i < 4; ++i) {
-
-            skidSmoke[i] = Instantiate(smokePrefab);
-            skidSmoke[i].Stop();
-        }
-
-        brakeLight.SetActive(false);
-        */
-       // GameObject playerName = Instantiate(playerNamePrefab);
-       //playerName.GetComponent<NameUIController>().target = rb.gameObject.transform;
+    void Start()
+    {   
+        /*recupero il rigidbody*/
+        rb = this.GetComponent<Rigidbody>();
+        
+        /*
+         for (int i = 0; i < 4; ++i) {
+ 
+             skidSmoke[i] = Instantiate(smokePrefab);
+             skidSmoke[i].Stop();
+         }
+ 
+         brakeLight.SetActive(false);
+         */
+        // GameObject playerName = Instantiate(playerNamePrefab);
+        //playerName.GetComponent<NameUIController>().target = rb.gameObject.transform;
 /*
         if (this.GetComponent<AIController>().enabled)
             if (networkName != "")
@@ -106,7 +112,8 @@ public class CarController : MonoBehaviour {
             playerName.GetComponent<Text>().text = PlayerPrefs.GetString("PlayerName");
 
         playerName.GetComponent<NameUIController>().carRend = jeepMesh;
- */   }
+ */
+    }
 /*
     public void CalculateEngineSound() {
 
@@ -138,35 +145,48 @@ public class CarController : MonoBehaviour {
 
     }
 */
-  /*
-   public void CheckForSkid() {
-
-        int numSkidding = 0;
+  
+    /*Quando una ruota entra in collisione questa restituisce un oggetto WheelHit che rappresenta il colpo che subisce la ruota
+     *inoltre riproduce anche il suono della sgommata*/
+   public void CheckSgommata() {
+        
+        
+        int numeroRuoteSgommano = 0;
+        
+        /**
+         * Per ogni ruota gestico gli hit che riceve la ruota e gestisco il suono e il suo effetto sgommata
+         */
         for (int i = 0; i < 4; ++i) {
 
-            WheelHit wheelHit;
-            collidersRuote[i].GetGroundHit(out wheelHit);
+            WheelHit ruotaHit;
+            
+            /*ottengo l'hit della ruota corrispondente al collider*/
+            collidersRuote[i].GetGroundHit(out ruotaHit);
+            
+            /*Accedo allo slittamento su entrambi gli assi e controllo che sia effettivamente abbastanza grande, se questo
+             *valore è alto allora sta sgommando. Lo metto in valore assoluto perche gestisco solamente lo slittamento in
+             *accellerazione e non in decellerazione.*/
+            if (Mathf.Abs(ruotaHit.forwardSlip) >= 0.4f || Mathf.Abs(ruotaHit.sidewaysSlip) >= 0.4f) {
 
-            if (Mathf.Abs(wheelHit.forwardSlip) >= 0.4f || Mathf.Abs(wheelHit.sidewaysSlip) >= 0.4f) {
-
-                numSkidding++;
-                if (!skidSound.isPlaying) {
-                    skidSound.Play();
+                numeroRuoteSgommano++;
+                
+                if (!suonoSgommata.isPlaying) {
+                    suonoSgommata.Play();
                 }
                 // StartSkidTrail(i);
-                skidSmoke[i].transform.position = collidersRuote[i].transform.position - collidersRuote[i].transform.up * collidersRuote[i].radius;
-                skidSmoke[i].Emit(1);
+                //skidSmoke[i].transform.position = collidersRuote[i].transform.position - collidersRuote[i].transform.up * collidersRuote[i].radius;
+                //skidSmoke[i].Emit(1);
             } else {
 
-                // EndSkidTrail(i);
+                 //EndSkidTrail(i);
             }
         }
-        if (numSkidding == 0 && skidSound.isPlaying) {
+        if (numeroRuoteSgommano == 0 && suonoSgommata.isPlaying) {
 
-            skidSound.Stop();
+            suonoSgommata.Stop();
         }
     }
-*/
+
 
     /**
      * Questo metodo permette di gestire l'accelerazione, la sterzata e la frenata delle ruote appartenenti alla macchina

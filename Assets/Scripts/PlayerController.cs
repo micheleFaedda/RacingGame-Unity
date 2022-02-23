@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     /*Mi occorre gestire il funzionamento delle ruote e quindi recupero il CarController*/
     CarController carController; 
     
+    
     //float lastTimeMoving = 0.0f;
     //Vector3 lastPosition;
     //Quaternion lastRotation;
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour {
             */
         carController.Move(accelerazione, sterzata, frenata);
  
-        //carController.CheckForSkid();
+        carController.CheckSgommata();
         //carController.CalculateEngineSound();*/
     }
 }
