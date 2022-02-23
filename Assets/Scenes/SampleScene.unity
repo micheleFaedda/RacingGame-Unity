@@ -123,6 +123,100 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &213322289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 213322290}
+  - component: {fileID: 213322291}
+  m_Layer: 0
+  m_Name: LuceFrenataDX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &213322290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213322289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.899, y: 0.894, z: -2.114}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2549190818210835043}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &213322291
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213322289}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 0.51
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &266571961
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +326,7 @@ GameObject:
   - component: {fileID: 442731298}
   - component: {fileID: 442731299}
   m_Layer: 0
-  m_Name: Luci Frenata
+  m_Name: LuceFrenataSX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442731297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.035, z: -2.234}
+  m_LocalPosition: {x: -1.042, y: 0.893, z: -2.147}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -265,7 +359,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 2.5
+  m_Intensity: 0.76
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -274,10 +368,10 @@ Light:
     m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Strength: 0.596
+    m_Bias: 0
+    m_NormalBias: 1.93
+    m_NearPlane: 3.64
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -656,37 +750,10 @@ Transform:
   m_Children:
   - {fileID: 5419519000573625308}
   - {fileID: 442731298}
+  - {fileID: 213322290}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2549190818210835044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2555538657543936841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2cdbb4bd316349e39decd423fce245e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalInput: 0
-  verticalInput: 0
-  currentSteerAngle: 0
-  currentbreakForce: 0
-  isBreaking: 0
-  motorForce: 1000
-  breakForce: 3000
-  maxSteerAngle: 30
-  frontLeftWheelCollider: {fileID: 5419519001400127187}
-  frontRightWheelCollider: {fileID: 5419519000766992842}
-  rearLeftWheelCollider: {fileID: 5419519001300621541}
-  rearRightWheelCollider: {fileID: 5419519000293213417}
-  frontLeftWheelTransform: {fileID: 1664075135896868212}
-  frontRightWheeTransform: {fileID: 3361816182166003539}
-  rearLeftWheelTransform: {fileID: 6508548119624694971}
-  rearRightWheelTransform: {fileID: 3995999277544777620}
 --- !u!54 &2549190818210835045
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -714,7 +781,6 @@ GameObject:
   - component: {fileID: 2549190818210835043}
   - component: {fileID: 2549190818210835045}
   - component: {fileID: 2549190818210835042}
-  - component: {fileID: 2549190818210835044}
   - component: {fileID: 2555538657543936842}
   - component: {fileID: 2555538657543936843}
   - component: {fileID: 2555538657543936844}
@@ -767,7 +833,9 @@ MonoBehaviour:
   suonoSgommata: {fileID: 2555538657543936845}
   tracciaSgommata: {fileID: 6263019319587640702, guid: 6105fce1cb0d949b183564b851dfbe6d, type: 3}
   fumoPrefab: {fileID: 2615917374358886429, guid: 13b6ce8de928a4c37bf59c99e6609cd9, type: 3}
-  luciFrenata: {fileID: 442731297}
+  luciFrenata:
+  - {fileID: 442731297}
+  - {fileID: 213322289}
   rb: {fileID: 0}
   "velocit\xE0Massima": 200
 --- !u!114 &2555538657543936844

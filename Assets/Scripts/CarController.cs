@@ -50,7 +50,7 @@ public class CarController : MonoBehaviour {
     public ParticleSystem fumoPrefab;
     ParticleSystem[] fumoRuote = new ParticleSystem[4];
 
-    public GameObject luciFrenata;
+    public GameObject[] luciFrenata;
 
     public Rigidbody rb;
   //  public float gearLength = 3.0f;
@@ -131,7 +131,8 @@ public class CarController : MonoBehaviour {
              fumoRuote[i].Stop();
          }
  
-         luciFrenata.SetActive(false);
+         luciFrenata[0].SetActive(false);
+         luciFrenata[1].SetActive(false);
          
         // GameObject playerName = Instantiate(playerNamePrefab);
         //playerName.GetComponent<NameUIController>().target = rb.gameObject.transform;
@@ -244,10 +245,12 @@ public class CarController : MonoBehaviour {
         if (frenata != 0.0f)
         {
             //attivo lo stop
-            luciFrenata.SetActive(true); 
+            luciFrenata[0].SetActive(true); 
+            luciFrenata[1].SetActive(true); 
         } else {
             //disattivo lo stop
-            luciFrenata.SetActive(false);
+            luciFrenata[0].SetActive(false);
+            luciFrenata[1].SetActive(false);
         }
         
         /*occorre avere una forza corretta in base all'accelerazione che è stata corretta in precedenza*/
