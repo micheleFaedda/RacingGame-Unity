@@ -15,6 +15,12 @@ using UnityEngine.UI;
  * skidSound -> suonoSgommata
  * wheelHit -> ruotaHit
  * checkForSkid -> CheckSgommata
+ * skidTrailPrefab -> tracciaSgommata
+ * skidTrails -> sgommataRuote
+ * startSkidTrail -> inizioSgommata
+ * smokePrefab -> fumo
+ * skidSmoke -> sgommataRuote
+ * breakeLight -> luciFrenata
  */
 public class CarController : MonoBehaviour {
     
@@ -38,13 +44,13 @@ public class CarController : MonoBehaviour {
     public AudioSource suonoSgommata;
     //public AudioSource highAccel;
 
-    //public Transform skidTrailPrefab;
-    //Transform[] skidTrails = new Transform[4];
+    public Transform tracciaSgommata;
+    Transform[] sgommataRuote = new Transform[4];
 
-    //public ParticleSystem smokePrefab;
-    //ParticleSystem[] skidSmoke = new ParticleSystem[4];
+    public ParticleSystem fumoPrefab;
+    ParticleSystem[] fumoRuote = new ParticleSystem[4];
 
-    //public GameObject brakeLight;
+    public GameObject luciFrenata;
 
     public Rigidbody rb;
   //  public float gearLength = 3.0f;
@@ -64,42 +70,69 @@ public class CarController : MonoBehaviour {
 
    // string[] aiNames = { "Adrian", "Lee", "Penny", "Merlin", "Tabytha", "Pauline", "John", "Kia", "Chloe", "Fiona", "Mathew" };
 
-    /*public void StartSkidTrail(int i) {
+   
+    /**
+     * Metodo che si occupa di segnare sul terreno la traccia della sgommata
+     */
+    public void InizioSgommata(int i) {
+        
+        //inizializzo la traccia della ruota se non ancora presente per la ruota passata come parametro (indice)
+        if (sgommataRuote[i] == null) {
 
-        if (skidTrails[i] == null) {
-
-            skidTrails[i] = Instantiate(skidTrailPrefab);
+            sgommataRuote[i] = Instantiate(tracciaSgommata);
         }
+        
+        //Rilevo chi è il parent della sgommata che è esattamente la ruota
+        sgommataRuote[i].parent = collidersRuote[i].transform;
 
-        skidTrails[i].parent = collidersRuote[i].transform;
-        skidTrails[i].localPosition = -Vector3.up * collidersRuote[i].radius;
-    }*/
-
-    /*public void EndSkidTrail(int i) {
-
-        if (skidTrails[i] == null) return;
-
-        Transform holder = skidTrails[i];
-        skidTrails[i] = null;
-        holder.parent = null;
-        Destroy(holder.gameObject, 30);
-    }*/
-
+        sgommataRuote[i].localRotation = Quaternion.Euler(90, 0, 0);
+        //Metto la sgommata esattamente sotto la ruota che lo genera tramite la sua posizione
+        sgommataRuote[i].localPosition = -Vector3.up * collidersRuote[i].radius;
+    }
+   
+    /**
+     * Metodo che si occupa di terminare sul terreno la traccia della sgommata
+    */
+    public void FineSgommata(int i) {
+        
+        //se è null vuol dire che è già terminata
+        if (sgommataRuote[i] == null) 
+            return;
+        
+        //rilevo la vecchia sgommata della ruota
+        Transform vecchiaSgommata = sgommataRuote[i];
+        
+        //setto a null la sgommata per la ruota
+        sgommataRuote[i] = null;
+        
+        //anche al parent della vecchia sgommata
+        vecchiaSgommata.parent = null;
+        
+        vecchiaSgommata.rotation = Quaternion.Euler(90, 0, 0);
+        
+        //la sgommata viene eliminata al termine di 40 secondi
+        Destroy(vecchiaSgommata.gameObject, 40);
+    }
+     
+     
     // Start is called before the first frame update
     void Start()
     {   
         /*recupero il rigidbody*/
         rb = this.GetComponent<Rigidbody>();
         
-        /*
+        
          for (int i = 0; i < 4; ++i) {
- 
-             skidSmoke[i] = Instantiate(smokePrefab);
-             skidSmoke[i].Stop();
+         
+             /*istanzio il fumo per la ruota*/
+             fumoRuote[i] = Instantiate(fumoPrefab);
+             
+             /*lo fermo perchè deve comparire solo quando si ha la sgommata*/
+             fumoRuote[i].Stop();
          }
  
-         brakeLight.SetActive(false);
-         */
+         luciFrenata.SetActive(false);
+         
         // GameObject playerName = Instantiate(playerNamePrefab);
         //playerName.GetComponent<NameUIController>().target = rb.gameObject.transform;
 /*
@@ -173,12 +206,14 @@ public class CarController : MonoBehaviour {
                 if (!suonoSgommata.isPlaying) {
                     suonoSgommata.Play();
                 }
-                // StartSkidTrail(i);
-                //skidSmoke[i].transform.position = collidersRuote[i].transform.position - collidersRuote[i].transform.up * collidersRuote[i].radius;
-                //skidSmoke[i].Emit(1);
+                /*inzio della sgommata per la ruota a video (traccia)*/
+                 InizioSgommata(i);
+                
+                 fumoRuote[i].transform.position = collidersRuote[i].transform.position - collidersRuote[i].transform.up * collidersRuote[i].radius;
+                 fumoRuote[i].Emit(1);
             } else {
 
-                 //EndSkidTrail(i);
+                 FineSgommata(i);
             }
         }
         if (numeroRuoteSgommano == 0 && suonoSgommata.isPlaying) {
@@ -206,15 +241,15 @@ public class CarController : MonoBehaviour {
        
         
         /*sezione per le luci, se è diverso da 0 allora attiva le luci di stop*/
-        /*
-         if (frenata != 0.0f) {
-
-            brakeLight.SetActive(true);
-      
+        if (frenata != 0.0f)
+        {
+            //attivo lo stop
+            luciFrenata.SetActive(true); 
         } else {
-            brakeLight.SetActive(false);
+            //disattivo lo stop
+            luciFrenata.SetActive(false);
         }
-        */
+        
         /*occorre avere una forza corretta in base all'accelerazione che è stata corretta in precedenza*/
         float forzaEffettiva = 0.0f;
         
