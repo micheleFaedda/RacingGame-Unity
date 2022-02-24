@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 /**COSE CHE STIAMO RINOMINANDO (DA TOGLIERE):
  * torque -> forza
  * a -> accellerazione
@@ -21,29 +22,46 @@ using UnityEngine.UI;
  * smokePrefab -> fumo
  * skidSmoke -> sgommataRuote
  * breakeLight -> luciFrenata
+ * highAccel -> audioAccelerazione
+ * gearLength -> lunghezzaMarcia
+ * currentSpeed -> velocitaCorrente
+ * lowPitch -> altezzaMinSuono
+ * highPitch -> altezzaMaxSuono
+ * numGears -> numeroMarce
+ * currentGear -> marciaCorrente
+ * currentGearPerc ->percentualeMarciaCorrente
  */
-public class CarController : MonoBehaviour {
-    
+public class CarController : MonoBehaviour
+{
+
     /*Array di GameObjects per le ruote*/
     public GameObject[] ruote;
-    
+
     /*Array di WheelColliders per il colliders delle ruote*/
     public WheelCollider[] collidersRuote;
-    
+
     /*Forza che agisce sulla sfera della ruota, ovvero il punto in cui agisce la forza per ruotare la ruota*/
     public float forza = 200;
-    
+
+   
     /*Massima forza per la frenata*/
     public float massimaFrenata = 500.0f;
-    
+
     /*Angolo massimo di rotazione della ruota (Sterzata)*/
     public float angoloMassimoSterzata = 30.0f;
-    
-    
+    public float isFermo = 0.0f;
+
     /*dichiaro un oggetto AudioSource per l'audio della sgommata*/
     public AudioSource suonoSgommata;
-    //public AudioSource highAccel;
 
+    /*dichiaro un oggetto AudioSource per l'audio dell'accelerazione*/
+    public AudioSource audioAccelerazione;
+    
+    /*dichiaro un oggetto AudioSource per l'audio dell'accelerazione*/
+    public AudioSource audioFrenata;
+
+    public AudioSource audioIdle; 
+    
     public Transform tracciaSgommata;
     Transform[] sgommataRuote = new Transform[4];
 
@@ -53,35 +71,44 @@ public class CarController : MonoBehaviour {
     public GameObject[] luciFrenata;
 
     public Rigidbody rb;
-  //  public float gearLength = 3.0f;
-   // public float currentSpeed { get { return rb.velocity.magnitude * gearLength; } }
-    //public float lowPitch = 1.0f;
-    //public float highPitch = 6.0f;
-    //public int numGears = 5;
-    //float rpm;
-    //int currentGear = 1;
-    //float currentGearPerc;
-    public float velocitàMassima = 200.0f;
-
+    
+    public float velocitaCorrente
+    {
+        get { return rb.velocity.magnitude * 3; }
+    }
+   public float velocitàMassima = 200.0f;
+    /*lunghezza della marcia per effettuare modifiche al suono
+    public float lunghezzaMarcia = 3.0f;
+   
+    public float altezzaMinSuono = 1.0f;
+    public float altezzaMaxSuono = 6.0f;
+    public int numeroMarce = 5;
+    float rpm;
+    int marciaCorrente = 1;
+    float percentualeMarciaCorrente;
+ 
+*/
     //public GameObject playerNamePrefab;
     //public Renderer jeepMesh;
 
     //public string networkName = "";
 
-   // string[] aiNames = { "Adrian", "Lee", "Penny", "Merlin", "Tabytha", "Pauline", "John", "Kia", "Chloe", "Fiona", "Mathew" };
+    // string[] aiNames = { "Adrian", "Lee", "Penny", "Merlin", "Tabytha", "Pauline", "John", "Kia", "Chloe", "Fiona", "Mathew" };
 
-   
+
     /**
      * Metodo che si occupa di segnare sul terreno la traccia della sgommata
      */
-    public void InizioSgommata(int i) {
-        
+    public void InizioSgommata(int i)
+    {
+
         //inizializzo la traccia della ruota se non ancora presente per la ruota passata come parametro (indice)
-        if (sgommataRuote[i] == null) {
+        if (sgommataRuote[i] == null)
+        {
 
             sgommataRuote[i] = Instantiate(tracciaSgommata);
         }
-        
+
         //Rilevo chi è il parent della sgommata che è esattamente la ruota
         sgommataRuote[i].parent = collidersRuote[i].transform;
 
@@ -89,51 +116,53 @@ public class CarController : MonoBehaviour {
         //Metto la sgommata esattamente sotto la ruota che lo genera tramite la sua posizione
         sgommataRuote[i].localPosition = -Vector3.up * collidersRuote[i].radius;
     }
-   
+
     /**
      * Metodo che si occupa di terminare sul terreno la traccia della sgommata
     */
-    public void FineSgommata(int i) {
-        
+    public void FineSgommata(int i)
+    {
+
         //se è null vuol dire che è già terminata
-        if (sgommataRuote[i] == null) 
+        if (sgommataRuote[i] == null)
             return;
-        
+
         //rilevo la vecchia sgommata della ruota
         Transform vecchiaSgommata = sgommataRuote[i];
-        
+
         //setto a null la sgommata per la ruota
         sgommataRuote[i] = null;
-        
+
         //anche al parent della vecchia sgommata
         vecchiaSgommata.parent = null;
-        
+
         vecchiaSgommata.rotation = Quaternion.Euler(90, 0, 0);
-        
+
         //la sgommata viene eliminata al termine di 40 secondi
         Destroy(vecchiaSgommata.gameObject, 40);
     }
-     
-     
+
+
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         /*recupero il rigidbody*/
         rb = this.GetComponent<Rigidbody>();
-        
-        
-         for (int i = 0; i < 4; ++i) {
-         
-             /*istanzio il fumo per la ruota*/
-             fumoRuote[i] = Instantiate(fumoPrefab);
-             
-             /*lo fermo perchè deve comparire solo quando si ha la sgommata*/
-             fumoRuote[i].Stop();
-         }
- 
-         luciFrenata[0].SetActive(false);
-         luciFrenata[1].SetActive(false);
-         
+
+
+        for (int i = 0; i < 4; ++i)
+        {
+
+            /*istanzio il fumo per la ruota*/
+            fumoRuote[i] = Instantiate(fumoPrefab);
+
+            /*lo fermo perchè deve comparire solo quando si ha la sgommata*/
+            fumoRuote[i].Stop();
+        }
+
+        luciFrenata[0].SetActive(false);
+        luciFrenata[1].SetActive(false);
+
         // GameObject playerName = Instantiate(playerNamePrefab);
         //playerName.GetComponent<NameUIController>().target = rb.gameObject.transform;
 /*
@@ -148,37 +177,50 @@ public class CarController : MonoBehaviour {
         playerName.GetComponent<NameUIController>().carRend = jeepMesh;
  */
     }
+
+
+  
+
+
+
+   
+
+
+
+// Audio
+
+    
 /*
-    public void CalculateEngineSound() {
+    public void CalcolaSuonoMotore() {
 
-        float gearPercentage = (1 / (float)numGears);
-        float targetGearFactor = Mathf.InverseLerp(gearPercentage * currentGear, gearPercentage * (currentGear + 1),
-            Mathf.Abs(currentSpeed / maxSpeed));
+        float gearPercentage = (1 / (float)numeroMarce);
+        float targetGearFactor = Mathf.InverseLerp(gearPercentage * marciaCorrente, gearPercentage * (marciaCorrente + 1),
+            Mathf.Abs(velocitaCorrente / velocitàMassima));
 
-        currentGearPerc = Mathf.Lerp(currentGearPerc, targetGearFactor, Time.deltaTime * 5.0f);
+        percentualeMarciaCorrente = Mathf.Lerp(percentualeMarciaCorrente, targetGearFactor, Time.deltaTime * 5.0f);
 
-        var gearNumFactor = currentGear / (float)numGears;
-        rpm = Mathf.Lerp(gearNumFactor, 1, currentGearPerc);
+        var gearNumFactor = marciaCorrente / (float)numeroMarce;
+        rpm = Mathf.Lerp(gearNumFactor, 1, percentualeMarciaCorrente);
 
-        float speedPercentage = Mathf.Abs(currentSpeed / maxSpeed);
-        float upperGearMax = (1 / (float)numGears) * (currentGear + 1);
-        float downGearMax = (1 / (float)numGears) * currentGear;
+        float speedPercentage = Mathf.Abs(velocitaCorrente / velocitàMassima);
+        float upperGearMax = (1 / (float)numeroMarce) * (marciaCorrente + 1);
+        float downGearMax = (1 / (float)numeroMarce) * marciaCorrente;
 
-        if (currentGear > 0 && speedPercentage < downGearMax) {
+        if (marciaCorrente > 0 && speedPercentage < downGearMax) {
 
-            currentGear--;
+            marciaCorrente--;
         }
 
-        if (speedPercentage > upperGearMax && (currentGear < (numGears - 1))) {
+        if (speedPercentage > upperGearMax && (marciaCorrente < (numeroMarce - 1))) {
 
-            currentGear++;
+            marciaCorrente++;
         }
 
-        float pitch = Mathf.Lerp(lowPitch, highPitch, rpm);
-        highAccel.pitch = Mathf.Min(highPitch, pitch) * 0.25f;
+        float pitch = Mathf.Lerp(altezzaMinSuono, altezzaMaxSuono, rpm);
+        audioAccelerazione.pitch = Mathf.Min(altezzaMaxSuono, pitch) * 0.25f;
 
-    }
-*/
+    }*/
+
   
     /*Quando una ruota entra in collisione questa restituisce un oggetto WheelHit che rappresenta il colpo che subisce la ruota
      *inoltre riproduce anche il suono della sgommata*/
@@ -243,11 +285,12 @@ public class CarController : MonoBehaviour {
         
         /*sezione per le luci, se è diverso da 0 allora attiva le luci di stop*/
         if (frenata != 0.0f)
-        {
+        {  // audioFrenata.Play();
             //attivo lo stop
             luciFrenata[0].SetActive(true); 
             luciFrenata[1].SetActive(true); 
         } else {
+//            audioFrenata.Stop();
             //disattivo lo stop
             luciFrenata[0].SetActive(false);
             luciFrenata[1].SetActive(false);
@@ -257,10 +300,25 @@ public class CarController : MonoBehaviour {
         float forzaEffettiva = 0.0f;
         
         
-        //if (currentSpeed < velocitàMassima) {
+        if (velocitaCorrente < velocitàMassima) {
+           
             forzaEffettiva = accelerazione * forza;
-        //}
+        }
+
+        if (velocitaCorrente <= isFermo)
+        {
+            audioIdle.Play();
+            audioAccelerazione.Stop();
+        }
+        else
+        {   
+            audioIdle.Stop();
+            audioAccelerazione.Play();
+            
+        }
+        audioAccelerazione.pitch = (velocitaCorrente / velocitàMassima) + 0.5f;
         
+         Debug.Log(velocitaCorrente.ToString());
         /*for che permette di applicare le corrispettive forze a tutte le ruote (wheelCollider)*/
         for (int i = 0; i < collidersRuote.Length; ++i) {
             
