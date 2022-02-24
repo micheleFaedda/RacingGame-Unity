@@ -183,7 +183,7 @@ public class CarController : MonoBehaviour
 
     public void CalcolaSuonoMotore()
     {
-        if (velocitaCorrente <= 1.0f)
+        if (velocitaCorrente <= 2.0f)
         {
             if(!audioIdle.isPlaying)
                 audioIdle.Play();
