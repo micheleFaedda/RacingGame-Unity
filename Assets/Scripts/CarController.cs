@@ -76,7 +76,7 @@ public class CarController : MonoBehaviour
     {
         get { return rb.velocity.magnitude * 3; }
     }
-   public float velocitàMassima = 200.0f;
+   public float velocitaMassima = 200.0f;
     /*lunghezza della marcia per effettuare modifiche al suono
     public float lunghezzaMarcia = 3.0f;
    
@@ -319,13 +319,13 @@ public class CarController : MonoBehaviour
         float forzaEffettiva = 0.0f;
         
         
-        if (velocitaCorrente < velocitàMassima) {
+        if (velocitaCorrente < velocitaMassima) {
            
             forzaEffettiva = accelerazione * forza;
         }
 
         
-        audioAccelerazione.pitch = (velocitaCorrente / velocitàMassima) + 0.5f;
+        audioAccelerazione.pitch = (velocitaCorrente / velocitaMassima) + 0.5f;
         
          Debug.Log(velocitaCorrente.ToString());
         /*for che permette di applicare le corrispettive forze a tutte le ruote (wheelCollider)*/
