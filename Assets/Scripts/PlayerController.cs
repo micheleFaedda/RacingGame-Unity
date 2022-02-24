@@ -96,6 +96,6 @@ public class PlayerController : MonoBehaviour {
         carController.Move(accelerazione, sterzata, frenata);
  
         carController.CheckSgommata();
-        //carController.CalcolaSuonoMotore();
+        carController.CalcolaSuonoMotore();
     }
 }

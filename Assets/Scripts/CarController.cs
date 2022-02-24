@@ -49,7 +49,7 @@ public class CarController : MonoBehaviour
 
     /*Angolo massimo di rotazione della ruota (Sterzata)*/
     public float angoloMassimoSterzata = 30.0f;
-    public float isFermo = 0.0f;
+    
 
     /*dichiaro un oggetto AudioSource per l'audio della sgommata*/
     public AudioSource suonoSgommata;
@@ -179,11 +179,28 @@ public class CarController : MonoBehaviour
     }
 
 
-  
 
 
+    public void CalcolaSuonoMotore()
+    {
+        if (velocitaCorrente <= 1.0f)
+        {
+            if(!audioIdle.isPlaying)
+                audioIdle.Play();
+            
+            audioAccelerazione.Stop();
+        }
+        else
+        {   
+            audioIdle.Stop();
+            
+            if(!audioAccelerazione.isPlaying)
+                audioAccelerazione.Play();
+            
+        }
+    }
 
-   
+
 
 
 
@@ -259,7 +276,7 @@ public class CarController : MonoBehaviour
                  FineSgommata(i);
             }
         }
-        if (numeroRuoteSgommano == 0 && suonoSgommata.isPlaying) {
+        if (numeroRuoteSgommano == 0 ) {
 
             suonoSgommata.Stop();
         }
@@ -285,12 +302,14 @@ public class CarController : MonoBehaviour
         
         /*sezione per le luci, se è diverso da 0 allora attiva le luci di stop*/
         if (frenata != 0.0f)
-        {  // audioFrenata.Play();
+        {  if(!audioFrenata.isPlaying && velocitaCorrente > 1)
+                audioFrenata.Play();
             //attivo lo stop
             luciFrenata[0].SetActive(true); 
             luciFrenata[1].SetActive(true); 
         } else {
-//            audioFrenata.Stop();
+            if(audioFrenata.isPlaying && velocitaCorrente <= 1)
+                audioFrenata.Stop();
             //disattivo lo stop
             luciFrenata[0].SetActive(false);
             luciFrenata[1].SetActive(false);
@@ -305,17 +324,7 @@ public class CarController : MonoBehaviour
             forzaEffettiva = accelerazione * forza;
         }
 
-        if (velocitaCorrente <= isFermo)
-        {
-            audioIdle.Play();
-            audioAccelerazione.Stop();
-        }
-        else
-        {   
-            audioIdle.Stop();
-            audioAccelerazione.Play();
-            
-        }
+        
         audioAccelerazione.pitch = (velocitaCorrente / velocitàMassima) + 0.5f;
         
          Debug.Log(velocitaCorrente.ToString());
