@@ -16,10 +16,10 @@ public class AIController : MonoBehaviour
     //float totalDistanceToTarget;
 
     //GameObject tracker;
-    int currentTrackerWP = 0;
+    //int currentTrackerWP = 0;
     //public float lookAhead = 10;
 
-    float lastTimeMoving = 0.0f;
+    //float lastTimeMoving = 0.0f;
 
     //CheckpointManager cpm;
     float finishSteer;
@@ -48,9 +48,14 @@ public class AIController : MonoBehaviour
         float accel = 0.5f;
         float brake = 0;
 
+        if(distanceToTarget < 5){
+            brake = 0.8f;
+            accel = 0.1f;
+        }
+
         ds.Move(accel, steer, brake);
 
-        if(distanceToTarget < 2){
+        if(distanceToTarget < 4){
             currentWP++;
             if(currentWP >= circuit.waypoints.Length)
                 currentWP=0;
