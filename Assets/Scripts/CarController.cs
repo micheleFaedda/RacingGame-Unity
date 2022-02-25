@@ -324,16 +324,16 @@ public class CarController : MonoBehaviour
             forzaEffettiva = accelerazione * forza;
         }
 
-        
         audioAccelerazione.pitch = (velocitaCorrente / velocitaMassima) + 0.5f;
         
-         Debug.Log(velocitaCorrente.ToString());
+        //Debug.Log(velocitaCorrente.ToString());
         /*for che permette di applicare le corrispettive forze a tutte le ruote (wheelCollider)*/
         for (int i = 0; i < collidersRuote.Length; ++i) {
             
             
             /*motorTorque è un'attributo che pemette di simulare la forza motrice della macchina */
             collidersRuote[i].motorTorque = forzaEffettiva;
+            Debug.Log(collidersRuote[i].motorTorque );
             
             /*se sono le prime ruote allora sono quelle anteriori e quindi devono sterzare*/
             if (i < 2) {

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
 
+
+
+
 /**COSE CHE STIAMO RINOMINANDO (DA TOGLIERE):
  * b -> frenata
  * a -> accellerazione
@@ -8,26 +11,30 @@
  * ds -> carController
  * Drive -> CarController
  */
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+
+
+{
     /*Mi occorre gestire il funzionamento delle ruote e quindi recupero il CarController*/
-    CarController carController; 
-    
-    
+    CarController carController;
+
+
     //float lastTimeMoving = 0.0f;
     //Vector3 lastPosition;
     //Quaternion lastRotation;
 
-   //CheckpointManager cpm;
+    //CheckpointManager cpm;
     //float finishSteer;
 
-  /*  void ResetLayer() {
+    /*  void ResetLayer() {
 
-        ds.rb.gameObject.layer = 0;
-        this.GetComponent<Ghost>().enabled = false;
-    }
-    */
+          ds.rb.gameObject.layer = 0;
+          this.GetComponent<Ghost>().enabled = false;
+      }
+      */
 
-    void Start() {
+    void Start()
+    {
 
         carController = this.GetComponent<CarController>();
         //this.GetComponent<Ghost>().enabled = false;
@@ -36,14 +43,15 @@ public class PlayerController : MonoBehaviour {
         //finishSteer = Random.Range(-1.0f, 1.0f);
     }
 
-    void Update() {
+    void Update()
+    {
         /*
         if (cpm == null) {
 
             cpm = ds.rb.GetComponent<CheckpointManager>();
         }
         */
-        
+
         /*
         if (cpm.lap == RaceMonitor.totalLaps + 1) {
 
@@ -51,16 +59,16 @@ public class PlayerController : MonoBehaviour {
             ds.Go(0.0f, finishSteer, 0.0f);
         }
         */
-        
+
         /*Rilevo la pressione dei tasti per andare avanti/indietro per l'accelerazione*/
         float accelerazione = Input.GetAxis("Vertical");
-        
+
         /*Rilevo la pressione dei tasti per il movimento orizzontale per la sterzata*/
         float sterzata = Input.GetAxis("Horizontal");
-        
+
         /*Rilevo la pressione della barra spaziatrice per la frenata*/
         float frenata = Input.GetAxis("Jump");
-        
+
         /*
         if (ds.rb.velocity.magnitude > 1.0f || !RaceMonitor.racing) {
 
@@ -88,13 +96,20 @@ public class PlayerController : MonoBehaviour {
             //this.GetComponent<Ghost>().enabled = true;
             Invoke("ResetLayer", 3);
         }*/
+
+
+        /*if (!RaceMonitor.racing) 
+              a = 0.0f;
+              */
+
+        GameObject tac = GameObject.FindGameObjectWithTag("Tachimetro");  
+        tac.GetComponent<Tachimetro>().ShowSpeed(carController.velocitaCorrente, 0f, carController.velocitaMassima); 
+
         
-       
-      /*if (!RaceMonitor.racing) 
-            a = 0.0f;
-            */
+
+
         carController.Move(accelerazione, sterzata, frenata);
- 
+
         carController.CheckSgommata();
         carController.CalcolaSuonoMotore();
     }
