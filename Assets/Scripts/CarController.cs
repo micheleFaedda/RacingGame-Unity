@@ -43,14 +43,12 @@ public class CarController : MonoBehaviour
     /*Forza che agisce sulla sfera della ruota, ovvero il punto in cui agisce la forza per ruotare la ruota*/
     public float forza = 200;
 
-   
     /*Massima forza per la frenata*/
     public float massimaFrenata = 500.0f;
 
     /*Angolo massimo di rotazione della ruota (Sterzata)*/
     public float angoloMassimoSterzata = 30.0f;
     
-
     /*dichiaro un oggetto AudioSource per l'audio della sgommata*/
     public AudioSource suonoSgommata;
 
@@ -77,17 +75,7 @@ public class CarController : MonoBehaviour
         get { return rb.velocity.magnitude * 3; }
     }
    public float velocitaMassima = 200.0f;
-    /*lunghezza della marcia per effettuare modifiche al suono
-    public float lunghezzaMarcia = 3.0f;
-   
-    public float altezzaMinSuono = 1.0f;
-    public float altezzaMaxSuono = 6.0f;
-    public int numeroMarce = 5;
-    float rpm;
-    int marciaCorrente = 1;
-    float percentualeMarciaCorrente;
- 
-*/
+
     //public GameObject playerNamePrefab;
     //public Renderer jeepMesh;
 
@@ -105,7 +93,6 @@ public class CarController : MonoBehaviour
         //inizializzo la traccia della ruota se non ancora presente per la ruota passata come parametro (indice)
         if (sgommataRuote[i] == null)
         {
-
             sgommataRuote[i] = Instantiate(tracciaSgommata);
         }
 
@@ -179,8 +166,6 @@ public class CarController : MonoBehaviour
     }
 
 
-
-
     public void CalcolaSuonoMotore()
     {
         if (velocitaCorrente <= 2.0f)
@@ -200,43 +185,6 @@ public class CarController : MonoBehaviour
         }
     }
 
-
-
-
-
-// Audio
-
-    
-/*
-    public void CalcolaSuonoMotore() {
-
-        float gearPercentage = (1 / (float)numeroMarce);
-        float targetGearFactor = Mathf.InverseLerp(gearPercentage * marciaCorrente, gearPercentage * (marciaCorrente + 1),
-            Mathf.Abs(velocitaCorrente / velocitàMassima));
-
-        percentualeMarciaCorrente = Mathf.Lerp(percentualeMarciaCorrente, targetGearFactor, Time.deltaTime * 5.0f);
-
-        var gearNumFactor = marciaCorrente / (float)numeroMarce;
-        rpm = Mathf.Lerp(gearNumFactor, 1, percentualeMarciaCorrente);
-
-        float speedPercentage = Mathf.Abs(velocitaCorrente / velocitàMassima);
-        float upperGearMax = (1 / (float)numeroMarce) * (marciaCorrente + 1);
-        float downGearMax = (1 / (float)numeroMarce) * marciaCorrente;
-
-        if (marciaCorrente > 0 && speedPercentage < downGearMax) {
-
-            marciaCorrente--;
-        }
-
-        if (speedPercentage > upperGearMax && (marciaCorrente < (numeroMarce - 1))) {
-
-            marciaCorrente++;
-        }
-
-        float pitch = Mathf.Lerp(altezzaMinSuono, altezzaMaxSuono, rpm);
-        audioAccelerazione.pitch = Mathf.Min(altezzaMaxSuono, pitch) * 0.25f;
-
-    }*/
 
   
     /*Quando una ruota entra in collisione questa restituisce un oggetto WheelHit che rappresenta il colpo che subisce la ruota
