@@ -30,6 +30,8 @@ using UnityEngine.UI;
  * numGears -> numeroMarce
  * currentGear -> marciaCorrente
  * currentGearPerc ->percentualeMarciaCorrente
+ playerNamePrefab -> prefabNomeGiocatore
+ playerName -> nomeGiocatore
  */
 public class CarController : MonoBehaviour
 {
@@ -48,18 +50,18 @@ public class CarController : MonoBehaviour
 
     /*Angolo massimo di rotazione della ruota (Sterzata)*/
     public float angoloMassimoSterzata = 30.0f;
-    
+
     /*dichiaro un oggetto AudioSource per l'audio della sgommata*/
     public AudioSource suonoSgommata;
 
     /*dichiaro un oggetto AudioSource per l'audio dell'accelerazione*/
     public AudioSource audioAccelerazione;
-    
+
     /*dichiaro un oggetto AudioSource per l'audio dell'accelerazione*/
     public AudioSource audioFrenata;
 
-    public AudioSource audioIdle; 
-    
+    public AudioSource audioIdle;
+
     public Transform tracciaSgommata;
     Transform[] sgommataRuote = new Transform[4];
 
@@ -69,12 +71,21 @@ public class CarController : MonoBehaviour
     public GameObject[] luciFrenata;
 
     public Rigidbody rb;
-    
+
+    public GameObject prefabNomeGiocatore;
+
+
+
+
+
+
+
+
     public float velocitaCorrente
     {
         get { return rb.velocity.magnitude * 3; }
     }
-   public float velocitaMassima = 200.0f;
+    public float velocitaMassima = 200.0f;
 
     //public GameObject playerNamePrefab;
     //public Renderer jeepMesh;
@@ -150,19 +161,20 @@ public class CarController : MonoBehaviour
         luciFrenata[0].SetActive(false);
         luciFrenata[1].SetActive(false);
 
-        // GameObject playerName = Instantiate(playerNamePrefab);
-        //playerName.GetComponent<NameUIController>().target = rb.gameObject.transform;
-/*
-        if (this.GetComponent<AIController>().enabled)
-            if (networkName != "")
-                playerName.GetComponent<Text>().text = networkName;
-            else
-                playerName.GetComponent<Text>().text = aiNames[Random.Range(0, aiNames.Length)];
-        else
-            playerName.GetComponent<Text>().text = PlayerPrefs.GetString("PlayerName");
+       // GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
+        //nomeGiocatore.GetComponent<TextController>().target = rb.gameObject.transform;
+        /*
+                if (this.GetComponent<AIController>().enabled)
+                    if (networkName != "")
+                        nomeGiocatore.GetComponent<Text>().text = networkName;
+                    else
+                        nomeGiocatore.GetComponent<Text>().text = aiNames[Random.Range(0, aiNames.Length)];
+                else
+                    nomeGiocatore.GetComponent<Text>().text = PlayerPrefs.GetString("PlayerName");
 
-        playerName.GetComponent<NameUIController>().carRend = jeepMesh;
- */
+
+         */
+       // nomeGiocatore.GetComponent<Text>().text = "sssss";
     }
 
 
@@ -170,61 +182,68 @@ public class CarController : MonoBehaviour
     {
         if (velocitaCorrente <= 2.0f)
         {
-            if(!audioIdle.isPlaying)
+            if (!audioIdle.isPlaying)
                 audioIdle.Play();
-            
+
             audioAccelerazione.Stop();
         }
         else
-        {   
+        {
             audioIdle.Stop();
-            
-            if(!audioAccelerazione.isPlaying)
+
+            if (!audioAccelerazione.isPlaying)
                 audioAccelerazione.Play();
-            
+
         }
     }
 
 
-  
+
     /*Quando una ruota entra in collisione questa restituisce un oggetto WheelHit che rappresenta il colpo che subisce la ruota
      *inoltre riproduce anche il suono della sgommata*/
-   public void CheckSgommata() {
-        
-        
+    public void CheckSgommata()
+    {
+
+
         int numeroRuoteSgommano = 0;
-        
+
         /**
          * Per ogni ruota gestico gli hit che riceve la ruota e gestisco il suono e il suo effetto sgommata
          */
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; ++i)
+        {
 
             WheelHit ruotaHit;
-            
+
             /*ottengo l'hit della ruota corrispondente al collider*/
             collidersRuote[i].GetGroundHit(out ruotaHit);
-            
+
             /*Accedo allo slittamento su entrambi gli assi e controllo che sia effettivamente abbastanza grande, se questo
              *valore è alto allora sta sgommando. Lo metto in valore assoluto perche gestisco solamente lo slittamento in
              *accellerazione e non in decellerazione.*/
-            if (Mathf.Abs(ruotaHit.forwardSlip) >= 0.4f || Mathf.Abs(ruotaHit.sidewaysSlip) >= 0.4f) {
+            if (Mathf.Abs(ruotaHit.forwardSlip) >= 0.4f || Mathf.Abs(ruotaHit.sidewaysSlip) >= 0.4f)
+            {
 
                 numeroRuoteSgommano++;
-                
-                if (!suonoSgommata.isPlaying) {
+
+                if (!suonoSgommata.isPlaying)
+                {
                     suonoSgommata.Play();
                 }
                 /*inzio della sgommata per la ruota a video (traccia)*/
-                 InizioSgommata(i);
-                
-                 fumoRuote[i].transform.position = collidersRuote[i].transform.position - collidersRuote[i].transform.up * collidersRuote[i].radius;
-                 fumoRuote[i].Emit(1);
-            } else {
+                InizioSgommata(i);
 
-                 FineSgommata(i);
+                fumoRuote[i].transform.position = collidersRuote[i].transform.position - collidersRuote[i].transform.up * collidersRuote[i].radius;
+                fumoRuote[i].Emit(1);
+            }
+            else
+            {
+
+                FineSgommata(i);
             }
         }
-        if (numeroRuoteSgommano == 0 ) {
+        if (numeroRuoteSgommano == 0)
+        {
 
             suonoSgommata.Stop();
         }
@@ -236,80 +255,89 @@ public class CarController : MonoBehaviour
      * Si occupa anche del movimento delle mesh tramite quaternioni per evitare artefatti dati dall'interpolazione
      * di rotazioni.
      */
-    public void Move(float accelerazione, float sterzata, float frenata) {
-        
+    public void Move(float accelerazione, float sterzata, float frenata)
+    {
+
         /*stabiliamo la percentuale di accelerazione, questo per andare avanti e indietro*/
-        accelerazione = Mathf.Clamp(accelerazione, -1, 1);  
-        
+        accelerazione = Mathf.Clamp(accelerazione, -1, 1);
+
         /*stabiliamo la percentuale di frenata che viene moltiplicata per la massima forza di frenata applicabile*/
         frenata = Mathf.Clamp(frenata, 0, 1) * massimaFrenata;
 
         /*stabiliamo la percentuale di sterzata che viene moltiplicato per l'angolo massimo*/
         sterzata = Mathf.Clamp(sterzata, -1, 1) * angoloMassimoSterzata;
-       
-        
+
+
         /*sezione per le luci, se è diverso da 0 allora attiva le luci di stop*/
         if (frenata != 0.0f)
-        {  if(!audioFrenata.isPlaying && velocitaCorrente > 1)
+        {
+            if (!audioFrenata.isPlaying && velocitaCorrente > 1)
                 audioFrenata.Play();
             //attivo lo stop
-            luciFrenata[0].SetActive(true); 
-            luciFrenata[1].SetActive(true); 
-        } else {
-            if(audioFrenata.isPlaying && velocitaCorrente <= 1)
+            luciFrenata[0].SetActive(true);
+            luciFrenata[1].SetActive(true);
+        }
+        else
+        {
+            if (audioFrenata.isPlaying && velocitaCorrente <= 1)
                 audioFrenata.Stop();
             //disattivo lo stop
             luciFrenata[0].SetActive(false);
             luciFrenata[1].SetActive(false);
         }
-        
+
         /*occorre avere una forza corretta in base all'accelerazione che è stata corretta in precedenza*/
         float forzaEffettiva = 0.0f;
-        
-        
-        if (velocitaCorrente < velocitaMassima) {
-           
+
+
+        if (velocitaCorrente < velocitaMassima)
+        {
+
             forzaEffettiva = accelerazione * forza;
         }
 
         audioAccelerazione.pitch = (velocitaCorrente / velocitaMassima) + 0.5f;
-        
+
         //Debug.Log(velocitaCorrente.ToString());
         /*for che permette di applicare le corrispettive forze a tutte le ruote (wheelCollider)*/
-        for (int i = 0; i < collidersRuote.Length; ++i) {
-            
-            
+        for (int i = 0; i < collidersRuote.Length; ++i)
+        {
+
+
             /*motorTorque è un'attributo che pemette di simulare la forza motrice della macchina */
             collidersRuote[i].motorTorque = forzaEffettiva;
-            Debug.Log(collidersRuote[i].motorTorque );
-            
+            Debug.Log(collidersRuote[i].motorTorque);
+
             /*se sono le prime ruote allora sono quelle anteriori e quindi devono sterzare*/
-            if (i < 2) {
+            if (i < 2)
+            {
                 /*motorTorque è un'attributo che pemette di simulare la sterzata della macchina */
                 collidersRuote[i].steerAngle = sterzata;
-            } else {
-                
+            }
+            else
+            {
+
                 /*brakeTorque è un'attributo che pemette di simulare la frenata della macchina*/
                 collidersRuote[i].brakeTorque = frenata;
             }
-            
+
             /*Quaternione che rende plausibile la rotazione*/
             Quaternion quaternione;
-            
+
             Vector3 posizione;
-            
+
             /*Le strutture precedenti vengono passate per riferimento, questo per poter salvare il valore aggiornato
              *dato dalla scena*/
             collidersRuote[i].GetWorldPose(out posizione, out quaternione);
-            
+
             /*Applico all'attributo rotation della transform, la rotazione tramite il quaternione anche alla mesh per
              * poter avere coerenza tra movimento del collider e la mesh dato che sono scomposti*/
             ruote[i].transform.rotation = quaternione;
-            
+
             /*Applico all'attributo position della transform la rotazione tramite il quaternione anche alla mesh per
              * poter avere coerenza tra movimento del collider e la mesh dato che sono scomposti*/
             ruote[i].transform.position = posizione;
 
-}
-}
+        }
+    }
 }

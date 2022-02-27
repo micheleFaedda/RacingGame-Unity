@@ -9,6 +9,7 @@ TagManager:
   - Tachimetro
   - velocita
   - npc
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
