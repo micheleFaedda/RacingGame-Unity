@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/trackMichi2.unity
+    guid: b767dae5a7e184395a3ac7ece9bdc25f
   m_configObjects: {}
