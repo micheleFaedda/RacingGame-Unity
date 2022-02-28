@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 {
     /*Mi occorre gestire il funzionamento delle ruote e quindi recupero il CarController*/
     CarController carController;
-    public GameObject prefabNomeGiocatore;
+    
 
     //float lastTimeMoving = 0.0f;
     //Vector3 lastPosition;
@@ -37,9 +37,8 @@ public class PlayerController : MonoBehaviour
     {
 
         carController = this.GetComponent<CarController>();
-        GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
-        nomeGiocatore.GetComponent<TextController>().target = this.gameObject.transform;
-        nomeGiocatore.GetComponent<Text>().text = "Lap: 0";
+        
+        //nomeGiocatore.GetComponent<Text>().text = "Lap: 0";
         //this.GetComponent<Ghost>().enabled = false;
         //lastPosition = ds.rb.gameObject.transform.position;
         //lastRotation = ds.rb.gameObject.transform.rotation;

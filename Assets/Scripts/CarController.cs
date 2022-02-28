@@ -68,6 +68,8 @@ public class CarController : MonoBehaviour
     ParticleSystem[] fumoRuote = new ParticleSystem[4];
 
     public GameObject[] luciFrenata;
+    
+    public GameObject prefabNomeGiocatore;
 
     public Rigidbody rb;
 
@@ -121,14 +123,12 @@ public class CarController : MonoBehaviour
         Destroy(vecchiaSgommata.gameObject, 40);
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
         /*recupero il rigidbody*/
         rb = this.GetComponent<Rigidbody>();
-
-
+        
         for (int i = 0; i < 4; ++i)
         {
             /*istanzio il fumo per la ruota*/
@@ -137,13 +137,15 @@ public class CarController : MonoBehaviour
             /*lo fermo perchè deve comparire solo quando si ha la sgommata*/
             fumoRuote[i].Stop();
         }
+        
+        GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
+        nomeGiocatore.GetComponent<TextController>().target = this.gameObject.transform;
 
         luciFrenata[0].SetActive(false);
         luciFrenata[1].SetActive(false);
 
     }
-
-
+    
     public void CalcolaSuonoMotore()
     {
         if (velocitaCorrente <= 2.0f)

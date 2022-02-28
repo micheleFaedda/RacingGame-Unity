@@ -40,7 +40,7 @@ public class AIController : MonoBehaviour
             if(currentWP >= circuit.waypoints.Length)
                 currentWP=0;
             
-            Debug.Log("waypoint " +currentWP);
+            //Debug.Log("waypoint " +currentWP);
             target = circuit.waypoints[currentWP].transform.position;
         }
 

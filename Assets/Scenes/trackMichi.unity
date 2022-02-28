@@ -500,6 +500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 1302020268046637957, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1302020268046637961, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
       propertyPath: circuit
       value: 
@@ -1787,6 +1791,7 @@ MonoBehaviour:
   luciFrenata:
   - {fileID: 3043344754091515887}
   - {fileID: 3043344752246468005}
+  prefabNomeGiocatore: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
   rb: {fileID: 0}
   velocitaMassima: 100
 --- !u!1 &3043344752944180236
@@ -1810,6 +1815,7 @@ GameObject:
   - component: {fileID: 3043344752944180225}
   - component: {fileID: 3043344752944180238}
   - component: {fileID: 3043344752944180239}
+  - component: {fileID: 3043344752944180252}
   m_Layer: 0
   m_Name: NPC (2)
   m_TagString: Untagged
@@ -1829,7 +1835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9029ca25816140eeb2d5c0c39ed28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabNomeGiocatore: {fileID: 0}
 --- !u!114 &3043344752944180239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1893,6 +1898,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -87.765, z: 0}
+--- !u!114 &3043344752944180252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3043344752944180236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giro: 0
+  checkPoint: -1
+  timeEntered: 0
+  checkPointPred: {fileID: 0}
 --- !u!4 &3043344752976602404
 Transform:
   m_ObjectHideFlags: 0
@@ -3039,7 +3060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9029ca25816140eeb2d5c0c39ed28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabNomeGiocatore: {fileID: 0}
 --- !u!114 &3043344754014800945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3079,6 +3099,7 @@ GameObject:
   - component: {fileID: 3043344754014800959}
   - component: {fileID: 3043344754014800944}
   - component: {fileID: 3043344754014800945}
+  - component: {fileID: 3043344754014800960}
   m_Layer: 0
   m_Name: NPC (1)
   m_TagString: Untagged
@@ -3133,6 +3154,7 @@ MonoBehaviour:
   luciFrenata:
   - {fileID: 3043344753023057873}
   - {fileID: 3043344753323380123}
+  prefabNomeGiocatore: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
   rb: {fileID: 0}
   velocitaMassima: 100
 --- !u!82 &3043344754014800954
@@ -3545,6 +3567,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d5c911f55c349c39c7c9beadd15514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3043344754014800960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3043344754014800946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giro: 0
+  checkPoint: -1
+  timeEntered: 0
+  checkPointPred: {fileID: 0}
 --- !u!1 &3043344754053514502
 GameObject:
   m_ObjectHideFlags: 0

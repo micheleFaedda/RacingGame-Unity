@@ -2,51 +2,35 @@
 using UnityEngine.UI;
 
 public class TextController : MonoBehaviour {
-    public Text playerName;
-    //public Text lapDisplay;
+    public Text playerText;
+    
     public Transform target;
-    //CanvasGroup canvasGroup;
-    //public Renderer carRend;
-    //CheckpointManager cpManager;
+    CheckpointManager cpManager;
 
-    //int carRego;
-    //bool regoSet = false;
+    int carRego;
+    bool regoSet = false;
 
     void Start() {
-
         this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
-        playerName = this.GetComponent<Text>();
-        //canvasGroup = this.GetComponent<CanvasGroup>();
+        playerText = this.GetComponent<Text>();
     }
 
-    void LateUpdate() {
+    void Update() {
 
-        /*if (!RaceMonitor.racing) {
-
-            canvasGroup.alpha = 0;
-            return;
-        }*/
-
-        /*if (!regoSet) {
-            carRego = Leaderboard.RegisterCar(playerName.text);
+        if (!regoSet) {
+            carRego = Leaderboard.RegisterCar(playerText.text);
             regoSet = true;
             return;
-        }*/
+        }
 
-        //if (carRend == null) return;
-
-        //Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-        //bool carInView = GeometryUtility.TestPlanesAABB(planes, carRend.bounds);
-        //canvasGroup.alpha = carInView ? 1 : 0;
-        this.transform.position = Camera.main.WorldToScreenPoint(target.position + Vector3.up * 1.5f);
-
-        /*if (cpManager == null) {
+        this.transform.position = Camera.main.WorldToScreenPoint(target.position + Vector3.up * 1.7f);
+        if (cpManager == null) {
             cpManager = target.GetComponent<CheckpointManager>();
-        }*/
+        }
 
-        //Leaderboard.SetPosition(carRego, cpManager.lap, cpManager.checkPoint, cpManager.timeEntered);
-        //string position = Leaderboard.GetPosition(carRego);
+        Leaderboard.SetPosition(carRego, cpManager.giro, cpManager.checkPoint, cpManager.timeEntered);
+        string position = Leaderboard.GetPosition(carRego);
 
-        //lapDisplay.text = position + " " + cpManager.lap + " (" + cpManager.checkPoint + ")";
+        playerText.text = position + " " + cpManager.giro + " (" + cpManager.checkPoint + ")";
     }
 }

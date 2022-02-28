@@ -49,7 +49,7 @@ public class CheckpointManager : MonoBehaviour {
 
                 if (checkPoint == 0) 
                     giro++;
-                
+                                
                 checkPointSucc++;
                 
                 if (checkPointSucc >= checkPointCount)
