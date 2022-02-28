@@ -71,21 +71,12 @@ public class CarController : MonoBehaviour
 
     public Rigidbody rb;
 
-    public GameObject prefabNomeGiocatore;
-
     public float velocitaCorrente
     {
         get { return rb.velocity.magnitude * 3; }
     }
 
     public float velocitaMassima = 200.0f;
-
-    //public Renderer jeepMesh;
-
-    //public string networkName = "";
-
-    string[] aiNames = {"Vincezo", "Michele", "Enrico"};
-
 
     /**
      * Metodo che si occupa di segnare sul terreno la traccia della sgommata
@@ -150,22 +141,6 @@ public class CarController : MonoBehaviour
         luciFrenata[0].SetActive(false);
         luciFrenata[1].SetActive(false);
 
-     GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
-        nomeGiocatore.GetComponent<TextController>().target = rb.gameObject.transform;
-
-       /* if (this.GetComponent<AIController>().enabled)
-        {
-            //if (networkName != "")
-            //nomeGiocatore.GetComponent<Text>().text = networkName;
-            nomeGiocatore.GetComponent<Text>().text = "Umano";
-            //else
-            //nomeGiocatore.GetComponent<Text>().text = aiNames[Random.Range(0, aiNames.Length)];
-        }
-        else
-            nomeGiocatore.GetComponent<Text>().text = PlayerPrefs.GetString("PlayerName");
-*/
-
-        nomeGiocatore.GetComponent<Text>().text = "sssss";
     }
 
 
@@ -288,7 +263,7 @@ public class CarController : MonoBehaviour
         {
             /*motorTorque è un'attributo che pemette di simulare la forza motrice della macchina */
             collidersRuote[i].motorTorque = forzaEffettiva;
-           // Debug.Log(collidersRuote[i].motorTorque);
+            // Debug.Log(collidersRuote[i].motorTorque);
 
             /*se sono le prime ruote allora sono quelle anteriori e quindi devono sterzare*/
             if (i < 2)

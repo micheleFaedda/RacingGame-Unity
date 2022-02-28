@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
 lap -> giro 
@@ -39,19 +40,18 @@ public class CheckpointManager : MonoBehaviour {
         if (other.gameObject.tag == "CheckPoint") {
 
             int numeroCheckPointCorrente = int.Parse(other.gameObject.name);
+            
             if (numeroCheckPointCorrente == checkPointSucc) {
-
+                
                 checkPointPred = other.gameObject;
                 checkPoint = numeroCheckPointCorrente;
                 timeEntered = Time.time;
 
                 if (checkPoint == 0) 
                     giro++;
-
-               
-
+                
                 checkPointSucc++;
-
+                
                 if (checkPointSucc >= checkPointCount)
                     checkPointSucc = 0;
             }

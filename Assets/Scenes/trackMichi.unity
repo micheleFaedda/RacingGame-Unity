@@ -510,7 +510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1302020268046637970, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.34169
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1302020268046637970, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1788,7 +1788,6 @@ MonoBehaviour:
   - {fileID: 3043344754091515887}
   - {fileID: 3043344752246468005}
   rb: {fileID: 0}
-  prefabNomeGiocatore: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
   velocitaMassima: 100
 --- !u!1 &3043344752944180236
 GameObject:
@@ -1830,6 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9029ca25816140eeb2d5c0c39ed28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabNomeGiocatore: {fileID: 0}
 --- !u!114 &3043344752944180239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3039,6 +3039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9029ca25816140eeb2d5c0c39ed28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabNomeGiocatore: {fileID: 0}
 --- !u!114 &3043344754014800945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3133,7 +3134,6 @@ MonoBehaviour:
   - {fileID: 3043344753023057873}
   - {fileID: 3043344753323380123}
   rb: {fileID: 0}
-  prefabNomeGiocatore: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
   velocitaMassima: 100
 --- !u!82 &3043344754014800954
 AudioSource:
@@ -3956,6 +3956,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5082635144187436527, guid: 367980a5ae9da44c2b6b2c3f4cc2ede1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -173.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5082635144677289718, guid: 367980a5ae9da44c2b6b2c3f4cc2ede1, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -4006,6 +4010,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367980a5ae9da44c2b6b2c3f4cc2ede1, type: 3}
+--- !u!1 &3908934778692446687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1302020268046637957, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
+  m_PrefabInstance: {fileID: 2607276258872357466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3908934778692446688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3908934778692446687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giro: 0
+  checkPoint: -1
+  timeEntered: 0
+  checkPointPred: {fileID: 0}
 --- !u!1001 &4199398232532257634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4013,6 +4038,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4199398230898225189, guid: 89d363eef8c784740af25bcb629106df, type: 3}
+      propertyPath: prefabNomeGiocatore
+      value: 
+      objectReference: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
     - target: {fileID: 4199398230898225191, guid: 89d363eef8c784740af25bcb629106df, type: 3}
       propertyPath: m_Name
       value: Car4
