@@ -38,7 +38,7 @@ public class TextController : MonoBehaviour {
         //Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
         //bool carInView = GeometryUtility.TestPlanesAABB(planes, carRend.bounds);
         //canvasGroup.alpha = carInView ? 1 : 0;
-        this.transform.position = Camera.main.WorldToScreenPoint(target.position + Vector3.up * 1.2f);
+        this.transform.position = Camera.main.WorldToScreenPoint(target.position + Vector3.up * 1.5f);
 
         /*if (cpManager == null) {
             cpManager = target.GetComponent<CheckpointManager>();

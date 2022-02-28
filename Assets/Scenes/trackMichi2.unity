@@ -12362,6 +12362,10 @@ PrefabInstance:
       propertyPath: circuit
       value: 
       objectReference: {fileID: 426925225}
+    - target: {fileID: 3043344753870322765, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
+      propertyPath: prefabNomeGiocatore
+      value: 
+      objectReference: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
     - target: {fileID: 3043344753870322769, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
       propertyPath: m_RootOrder
       value: 7
