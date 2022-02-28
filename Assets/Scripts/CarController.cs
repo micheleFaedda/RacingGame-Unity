@@ -48,7 +48,7 @@ public class CarController : MonoBehaviour
     public float massimaFrenata = 500.0f;
 
     /*Angolo massimo di rotazione della ruota (Sterzata)*/
-    public float angoloMassimoSterzata = 30.0f;
+    public float angoloMassimoSterzata = 40.0f;
 
     /*dichiaro un oggetto AudioSource per l'audio della sgommata*/
     public AudioSource suonoSgommata;
@@ -288,7 +288,7 @@ public class CarController : MonoBehaviour
         {
             /*motorTorque è un'attributo che pemette di simulare la forza motrice della macchina */
             collidersRuote[i].motorTorque = forzaEffettiva;
-            Debug.Log(collidersRuote[i].motorTorque);
+           // Debug.Log(collidersRuote[i].motorTorque);
 
             /*se sono le prime ruote allora sono quelle anteriori e quindi devono sterzare*/
             if (i < 2)

@@ -24,7 +24,7 @@ public class Tachimetro : MonoBehaviour
     {
         float speed_prop = (speed * 180)/max;
 
-         Debug.Log(speed);
+    //     Debug.Log(speed);
         float ang = Mathf.Lerp(minAngle, maxAngle, Mathf.InverseLerp(max, min,  speed));
         thisRPM.transform.eulerAngles = new Vector3(0, 0, ang);
 
