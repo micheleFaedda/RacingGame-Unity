@@ -150,10 +150,10 @@ public class CarController : MonoBehaviour
         luciFrenata[0].SetActive(false);
         luciFrenata[1].SetActive(false);
 
-       /* GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
+     GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
         nomeGiocatore.GetComponent<TextController>().target = rb.gameObject.transform;
 
-        if (this.GetComponent<AIController>().enabled)
+       /* if (this.GetComponent<AIController>().enabled)
         {
             //if (networkName != "")
             //nomeGiocatore.GetComponent<Text>().text = networkName;
@@ -163,9 +163,9 @@ public class CarController : MonoBehaviour
         }
         else
             nomeGiocatore.GetComponent<Text>().text = PlayerPrefs.GetString("PlayerName");
+*/
 
-
-        nomeGiocatore.GetComponent<Text>().text = "sssss";*/
+        nomeGiocatore.GetComponent<Text>().text = "sssss";
     }
 
 
