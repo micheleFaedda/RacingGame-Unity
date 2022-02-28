@@ -514,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1302020268046637970, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5
+      value: 35.69
       objectReference: {fileID: 0}
     - target: {fileID: 1302020268046637970, guid: 64a90add306814f36a9d9a3953d9a784, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1791,7 +1791,6 @@ MonoBehaviour:
   luciFrenata:
   - {fileID: 3043344754091515887}
   - {fileID: 3043344752246468005}
-  prefabNomeGiocatore: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
   rb: {fileID: 0}
   velocitaMassima: 100
 --- !u!1 &3043344752944180236
@@ -1835,6 +1834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9029ca25816140eeb2d5c0c39ed28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabNomeGiocatore: {fileID: 0}
 --- !u!114 &3043344752944180239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,7 +1890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3043344752944180236}
   m_LocalRotation: {x: -0, y: -0.6931828, z: -0, w: 0.72076184}
-  m_LocalPosition: {x: 25.88, y: -0.11201811, z: 230.01}
+  m_LocalPosition: {x: 20.81, y: -0.11201811, z: 236.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1914,6 +1914,8 @@ MonoBehaviour:
   checkPoint: -1
   timeEntered: 0
   checkPointPred: {fileID: 0}
+  playerName: c
+  position: 
 --- !u!4 &3043344752976602404
 Transform:
   m_ObjectHideFlags: 0
@@ -3011,7 +3013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3043344754014800946}
   m_LocalRotation: {x: -0, y: -0.6931828, z: -0, w: 0.72076184}
-  m_LocalPosition: {x: 8.65, y: -0.11201811, z: 241.14}
+  m_LocalPosition: {x: 29.91, y: -0.11201811, z: 244.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3060,6 +3062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9029ca25816140eeb2d5c0c39ed28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabNomeGiocatore: {fileID: 0}
 --- !u!114 &3043344754014800945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3154,7 +3157,6 @@ MonoBehaviour:
   luciFrenata:
   - {fileID: 3043344753023057873}
   - {fileID: 3043344753323380123}
-  prefabNomeGiocatore: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
   rb: {fileID: 0}
   velocitaMassima: 100
 --- !u!82 &3043344754014800954
@@ -3583,6 +3585,8 @@ MonoBehaviour:
   checkPoint: -1
   timeEntered: 0
   checkPointPred: {fileID: 0}
+  playerName: b
+  position: 
 --- !u!1 &3043344754053514502
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,6 +4073,8 @@ MonoBehaviour:
   checkPoint: -1
   timeEntered: 0
   checkPointPred: {fileID: 0}
+  playerName: a
+  position: 
 --- !u!1001 &4199398232532257634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4090,7 +4096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4199398230898225200, guid: 89d363eef8c784740af25bcb629106df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.400803
+      value: 3.28
       objectReference: {fileID: 0}
     - target: {fileID: 4199398230898225200, guid: 89d363eef8c784740af25bcb629106df, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4127,6 +4133,10 @@ PrefabInstance:
     - target: {fileID: 4199398230898225200, guid: 89d363eef8c784740af25bcb629106df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199398230898225213, guid: 89d363eef8c784740af25bcb629106df, type: 3}
+      propertyPath: playerName
+      value: d
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89d363eef8c784740af25bcb629106df, type: 3}
