@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcadda69f962b4032a37f53ad16b1599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0.1, y: 2.64, z: -6}
+  offset: {x: 0, y: 3.3, z: -6.5}
   target: {fileID: 2137701202}
   translateSpeed: 10
   rotationSpeed: 10
@@ -12341,6 +12341,10 @@ PrefabInstance:
       propertyPath: circuit
       value: 
       objectReference: {fileID: 426925225}
+    - target: {fileID: 1337530636209097374, guid: 89d363eef8c784740af25bcb629106df, type: 3}
+      propertyPath: prefabNomeGiocatore
+      value: 
+      objectReference: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89d363eef8c784740af25bcb629106df, type: 3}
 --- !u!1001 &2018583043901429145

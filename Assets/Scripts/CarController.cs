@@ -73,21 +73,13 @@ public class CarController : MonoBehaviour
     public Rigidbody rb;
 
     public GameObject prefabNomeGiocatore;
-
-
-
-
-
-
-
-
+    
     public float velocitaCorrente
     {
         get { return rb.velocity.magnitude * 3; }
     }
     public float velocitaMassima = 200.0f;
-
-    //public GameObject playerNamePrefab;
+    
     //public Renderer jeepMesh;
 
     //public string networkName = "";
@@ -161,8 +153,8 @@ public class CarController : MonoBehaviour
         luciFrenata[0].SetActive(false);
         luciFrenata[1].SetActive(false);
 
-       // GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
-        //nomeGiocatore.GetComponent<TextController>().target = rb.gameObject.transform;
+       GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
+       nomeGiocatore.GetComponent<TextController>().target = rb.gameObject.transform;
         /*
                 if (this.GetComponent<AIController>().enabled)
                     if (networkName != "")
@@ -174,7 +166,7 @@ public class CarController : MonoBehaviour
 
 
          */
-       // nomeGiocatore.GetComponent<Text>().text = "sssss";
+        nomeGiocatore.GetComponent<Text>().text = "sssss";
     }
 
 
