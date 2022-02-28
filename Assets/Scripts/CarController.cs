@@ -68,8 +68,6 @@ public class CarController : MonoBehaviour
     ParticleSystem[] fumoRuote = new ParticleSystem[4];
 
     public GameObject[] luciFrenata;
-    
-    public GameObject prefabNomeGiocatore;
 
     public Rigidbody rb;
 
@@ -138,9 +136,6 @@ public class CarController : MonoBehaviour
             fumoRuote[i].Stop();
         }
         
-        GameObject nomeGiocatore = Instantiate(prefabNomeGiocatore);
-        nomeGiocatore.GetComponent<TextController>().target = this.gameObject.transform;
-
         luciFrenata[0].SetActive(false);
         luciFrenata[1].SetActive(false);
 

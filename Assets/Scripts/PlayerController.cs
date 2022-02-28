@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
 {
     /*Mi occorre gestire il funzionamento delle ruote e quindi recupero il CarController*/
     CarController carController;
-    
+    public GameObject prefabNomeGiocatore;
+    private GameObject testoPlayer; 
 
     //float lastTimeMoving = 0.0f;
     //Vector3 lastPosition;
@@ -37,7 +38,10 @@ public class PlayerController : MonoBehaviour
     {
 
         carController = this.GetComponent<CarController>();
-        
+        testoPlayer = Instantiate(prefabNomeGiocatore);
+        testoPlayer.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>());
+        testoPlayer.GetComponent<Text>().fontSize = 70;
+
         //nomeGiocatore.GetComponent<Text>().text = "Lap: 0";
         //this.GetComponent<Ghost>().enabled = false;
         //lastPosition = ds.rb.gameObject.transform.position;
@@ -61,6 +65,9 @@ public class PlayerController : MonoBehaviour
             ds.Go(0.0f, finishSteer, 0.0f);
         }
         */
+        
+        testoPlayer.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 1.7f);
+        testoPlayer.GetComponent<Text>().text = this.GetComponent<CheckpointManager>().position + "\nLap: " + this.GetComponent<CheckpointManager>().giro;
 
         /*Rilevo la pressione dei tasti per andare avanti/indietro per l'accelerazione*/
         float accelerazione = Input.GetAxis("Vertical");
@@ -105,8 +112,8 @@ public class PlayerController : MonoBehaviour
               */
 
         GameObject tac = GameObject.FindGameObjectWithTag("Tachimetro");  
-        tac.GetComponent<Tachimetro>().ShowSpeed(carController.velocitaCorrente, 0f, carController.velocitaMassima); 
-        
+        tac.GetComponent<Tachimetro>().ShowSpeed(carController.velocitaCorrente, 0f, carController.velocitaMassima);
+
         carController.Move(accelerazione, sterzata, frenata);
         carController.CheckSgommata();
         carController.CalcolaSuonoMotore();

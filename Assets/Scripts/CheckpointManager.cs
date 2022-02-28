@@ -20,6 +20,10 @@ public class CheckpointManager : MonoBehaviour {
     int checkPointCount;
     int checkPointSucc;
     public GameObject checkPointPred;
+    int carRego;
+    private bool regoSet;
+    public string playerName;
+    public string position;
 
     void Start() {
 
@@ -34,6 +38,19 @@ public class CheckpointManager : MonoBehaviour {
         }
     }
 
+    void Update() {
+
+        if (!regoSet) {
+            carRego = Leaderboard.RegisterCar(playerName);
+            regoSet = true;
+            return;
+        }
+        
+        Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
+        position = Leaderboard.GetPosition(carRego);
+
+    }
+    
     /*Quando entriamo in un trigger controlliamo se è un checkpoint*/
     private void OnTriggerEnter(Collider other) {
 
