@@ -8,8 +8,12 @@ public class AIController : MonoBehaviour
     CarController ds;
     Vector3 target;
     int currentWP = 0;
+    
 
     float finishSteer;
+    
+    float lastTimeMoving = 0.0f;
+    CheckpointManager cpm;
 
     void Start()
     {    
@@ -19,6 +23,14 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
+        
+        
+        if (cpm == null)
+        {
+
+            cpm = ds.rb.GetComponent<CheckpointManager>();
+        }
+        
         Vector3 localTarget = ds.rb.gameObject.transform.InverseTransformPoint(target);
         float distanceToTarget = Vector3.Distance(target, ds.rb.transform.position);
 
@@ -32,6 +44,8 @@ public class AIController : MonoBehaviour
             brake = 0.8f;
             accel = 0.1f;
         }
+        
+        
 
         ds.Move(accel, steer, brake);
 
