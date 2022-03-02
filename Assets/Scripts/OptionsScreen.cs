@@ -84,7 +84,7 @@ public class OptionsScreen : MonoBehaviour
             + resultions[selectedResolution].horizontal.ToString();
     }
 
-    public void applyChanges()
+    public void ApplyChangesGraph()
     {
         
         if (vsync.isOn)

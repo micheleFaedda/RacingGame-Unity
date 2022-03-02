@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public string firstLevel;
-    public GameObject optionScreen;
+    public GameObject resOption;
+    public GameObject option;
+    public GameObject audioOption;
+   // public GameObject audioOption;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,14 +28,29 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(firstLevel);
     }
 
-    public void Options()
+    public void ResolutionOption()
     {
-        optionScreen.SetActive(true);
+        resOption.SetActive(true);
+        option.SetActive(false);
     }
 
-    public void closeOptions()
+    public void AudioOption()
     {
-        optionScreen.SetActive(false);
+        audioOption.SetActive(true);
+        option.SetActive(false);
+    }
+    public void Options()
+    {
+        option.SetActive(true);
+    }
+
+
+    public void CloseOptions()
+    {
+        resOption.SetActive(false);
+        option.SetActive(false);
+        audioOption.SetActive(false);
+        
     }
 
     public void QuitGame()
