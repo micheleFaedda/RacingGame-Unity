@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
+
+
+
 /*
 lap -> giro 
 checkPoint ->
@@ -55,7 +58,7 @@ public class CheckpointManager : MonoBehaviour {
             regoSet = true;
             return;
         }
-        Debug.Log(timeGosted + ".." + 5 +Time.time);
+       Debug.Log(timeGosted + ".." + 5 +Time.time);
         if (checkPointSucc > 0)
         {
             if (Time.time > 20 + timeEntered && timeGosted  + 20 < Time.time )

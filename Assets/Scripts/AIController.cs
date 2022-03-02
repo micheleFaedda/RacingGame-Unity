@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
-
+using System.Collections;
 public class AIController : MonoBehaviour
 {
 
     public Circuit circuit;
     public float steeringSensitivity = 0.01f;
     CarController ds;
-    Vector3 target;
+    Vector3 targetSucc;
+    Vector3 targetPrec;
+  
     int currentWP = 0;
+    int precWP = 0;
+    private IEnumerator corutine;
     
 
     float finishSteer;
@@ -18,7 +22,16 @@ public class AIController : MonoBehaviour
     void Start()
     {    
         ds = this.GetComponent<CarController>();
-        target = circuit.waypoints[currentWP].transform.position;
+        targetSucc = circuit.waypoints[currentWP].transform.position;
+        
+        
+        /*CODICE PER RIPOSIZIONAMENTO MICHI*/
+        corutine = WaitAndRepositioning(5f);
+        StartCoroutine(corutine);
+        
+        /**********************************/
+     
+
     }
 
     void Update()
@@ -31,8 +44,8 @@ public class AIController : MonoBehaviour
             cpm = ds.rb.GetComponent<CheckpointManager>();
         }
         
-        Vector3 localTarget = ds.rb.gameObject.transform.InverseTransformPoint(target);
-        float distanceToTarget = Vector3.Distance(target, ds.rb.transform.position);
+        Vector3 localTarget = ds.rb.gameObject.transform.InverseTransformPoint(targetSucc);
+        float distanceToTarget = Vector3.Distance(targetSucc, ds.rb.transform.position);
 
         float targetAngle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
 
@@ -54,12 +67,38 @@ public class AIController : MonoBehaviour
             if(currentWP >= circuit.waypoints.Length)
                 currentWP=0;
             
-            //Debug.Log("waypoint " +currentWP);
-            target = circuit.waypoints[currentWP].transform.position;
-        }
+            targetSucc = circuit.waypoints[currentWP].transform.position;
+            
+   
 
+        }
         ds.CheckSgommata();
         ds.CalcolaSuonoMotore();
     }
+    /*********NUOVA COROUTINE MICHI**************/
+    private IEnumerator WaitAndRepositioning(float t)
+    {
+        while (true)
+        {
+            targetPrec = targetSucc;
+            yield return new WaitForSeconds(t);
+           
+
+            Debug.Log("Punto:" + targetSucc );
+            Debug.Log("PuntoSucc:" + targetPrec );
+          
+            if (targetPrec == targetSucc && currentWP > 0)
+                
+            {
+                this.transform.position =  circuit.waypoints[currentWP].transform.position + Vector3.up * 2.0f;
+                this.transform.rotation = circuit.waypoints[currentWP].transform.rotation;
+                targetPrec = circuit.waypoints[currentWP].transform.position;
+             
+                
+            }
+        }
+    }
+
+    
 
 }
