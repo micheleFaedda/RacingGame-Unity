@@ -59,7 +59,7 @@ public class CheckpointManager : MonoBehaviour {
             return;
         }
        Debug.Log(timeGosted + ".." + 5 +Time.time);
-        if (checkPointSucc > 0)
+        /*if (checkPointSucc > 0)
         {
             if (Time.time > 20 + timeEntered && timeGosted  + 20 < Time.time )
             {
@@ -74,7 +74,7 @@ public class CheckpointManager : MonoBehaviour {
                 //this.GetComponent<Ghost>().enabled = true;
                 //Invoke("ResetLayer", 3);
             }
-        }
+        }*/
         
         Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
         position = Leaderboard.GetPosition(carRego);

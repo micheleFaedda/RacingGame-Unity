@@ -6,17 +6,14 @@ public class AIController : MonoBehaviour
     public Circuit circuit;
     public float steeringSensitivity = 0.01f;
     CarController ds;
-    Vector3 targetSucc;
-    Vector3 targetPrec;
-  
-    int currentWP = 0;
-    int precWP = 0;
+     public Vector3 targetSucc;
+    public Vector3 targetPrec;
+
+    public int currentWP = 0;
     private IEnumerator corutine;
-    
 
     float finishSteer;
     
-    float lastTimeMoving = 0.0f;
     CheckpointManager cpm;
 
     void Start()
@@ -45,6 +42,7 @@ public class AIController : MonoBehaviour
         }
         
         Vector3 localTarget = ds.rb.gameObject.transform.InverseTransformPoint(targetSucc);
+
         float distanceToTarget = Vector3.Distance(targetSucc, ds.rb.transform.position);
 
         float targetAngle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
@@ -75,7 +73,7 @@ public class AIController : MonoBehaviour
         ds.CheckSgommata();
         ds.CalcolaSuonoMotore();
     }
-    /*********NUOVA COROUTINE MICHI**************/
+    /*********NUOVA COROUTINE MICHI*************/
     private IEnumerator WaitAndRepositioning(float t)
     {
         while (true)
@@ -90,11 +88,11 @@ public class AIController : MonoBehaviour
             if (targetPrec == targetSucc && currentWP > 0)
                 
             {
-                this.transform.position =  circuit.waypoints[currentWP].transform.position + Vector3.up * 2.0f;
-                this.transform.rotation = circuit.waypoints[currentWP].transform.rotation;
-                targetPrec = circuit.waypoints[currentWP].transform.position;
-             
-                
+                this.transform.position =  circuit.waypoints[currentWP-1].transform.position + Vector3.up * 2.0f;
+                this.transform.rotation = circuit.waypoints[currentWP-1].transform.rotation;
+                targetPrec = circuit.waypoints[currentWP-1].transform.position;
+                currentWP--;
+
             }
         }
     }
