@@ -10,6 +10,7 @@ TagManager:
   - velocita
   - npc
   - CheckPoint
+  - marcia
   layers:
   - Default
   - TransparentFX

@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour {
 
         GameObject tac = GameObject.FindGameObjectWithTag("Tachimetro");  
         tac.GetComponent<Tachimetro>().ShowSpeed(carController.velocitaCorrente, 0f, carController.velocitaMassima);
-
+        tac.GetComponent<Tachimetro>().MostraMarcia();
+        
+       
         carController.Move(accelerazione, sterzata, frenata);
         carController.CheckSgommata();
         carController.CalcolaSuonoMotore();
