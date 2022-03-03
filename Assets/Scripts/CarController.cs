@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 /**COSE CHE STIAMO RINOMINANDO (DA TOGLIERE):
  * torque -> forza
@@ -120,8 +119,7 @@ public class CarController : MonoBehaviour
         //la sgommata viene eliminata al termine di 40 secondi
         Destroy(vecchiaSgommata.gameObject, 40);
     }
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         /*recupero il rigidbody*/
@@ -223,8 +221,7 @@ public class CarController : MonoBehaviour
 
         /*stabiliamo la percentuale di sterzata che viene moltiplicato per l'angolo massimo*/
         sterzata = Mathf.Clamp(sterzata, -1, 1) * angoloMassimoSterzata;
-
-
+        
         /*sezione per le luci, se è diverso da 0 allora attiva le luci di stop*/
         if (frenata != 0.0f)
         {

@@ -2,11 +2,7 @@
 
 public class Circuit : MonoBehaviour
 {
-
-
-    //public GameObject[] waypoints;
     public Transform[] waypoints;
-
 
     private void Start()
     {
@@ -16,7 +12,8 @@ public class Circuit : MonoBehaviour
             waypoints[i] = transform.GetChild(i);
         }
     }
-
+    
+    //Da qui in poi questa roba si puo anche togliliere e cercare di integrare questo script in AI controller
     private void OnDrawGizmos()
     {
 

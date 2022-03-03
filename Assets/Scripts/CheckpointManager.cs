@@ -1,10 +1,4 @@
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
-
-
-
 
 /*
 lap -> giro 
@@ -21,7 +15,6 @@ public class CheckpointManager : MonoBehaviour {
     public int giro = 0;
     public int checkPoint = -1;
     public float timeEntered = 0.0f;
-    private float timeGosted = 0.0f;
     int checkPointCount;
     int checkPointSucc;
     public GameObject checkPointSucc_go;
@@ -29,9 +22,8 @@ public class CheckpointManager : MonoBehaviour {
     private bool regoSet;
     public string playerName;
     public string position;
-    private bool gostato = false;
 
-    private CarController ds;
+    private CarController carController;
 
     void Start() {
 
@@ -48,9 +40,9 @@ public class CheckpointManager : MonoBehaviour {
 
     void Update() {
 
-        if (ds == null)
+        if (carController == null)
         {
-            ds = this.GetComponent<CarController>();
+            carController = this.GetComponent<CarController>();
         }
 
         if (!regoSet) {
@@ -58,7 +50,7 @@ public class CheckpointManager : MonoBehaviour {
             regoSet = true;
             return;
         }
-       Debug.Log(timeGosted + ".." + 5 +Time.time);
+        
         /*if (checkPointSucc > 0)
         {
             if (Time.time > 20 + timeEntered && timeGosted  + 20 < Time.time )
