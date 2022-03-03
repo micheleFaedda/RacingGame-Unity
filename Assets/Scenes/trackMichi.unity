@@ -16261,9 +16261,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3056925493043819271}
     m_Modifications:
+    - target: {fileID: 843827669814058496, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 470a77b58fe894c69a708b9f5413d59a, type: 3}
+    - target: {fileID: 843827669814058498, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 843827669814058498, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -68.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 843827669814058498, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 843827669814058511, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_Name
+      value: Marcia
+      objectReference: {fileID: 0}
     - target: {fileID: 843827669814058511, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
       propertyPath: m_TagString
       value: marcia
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: bfdc146c23a393e4299b78dac8c4ca27, type: 3}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723297952384041404, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
+      propertyPath: m_FontData.m_LineSpacing
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6840302103428719893, guid: c7de3e433517e497c8abd4842337e2f8, type: 3}
       propertyPath: marcia
