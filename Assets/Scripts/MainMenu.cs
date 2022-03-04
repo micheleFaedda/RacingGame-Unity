@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public string firstLevel;
+    public string chooseCar;
     public GameObject resOption;
     public GameObject option;
     public GameObject audioOption;
@@ -23,10 +23,12 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void StartGame()
+    public void ChooseCar()
     {
-        SceneManager.LoadScene(firstLevel);
+        SceneManager.LoadScene(chooseCar);
     }
+
+  
 
     public void ResolutionOption()
     {
