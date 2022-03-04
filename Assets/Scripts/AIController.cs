@@ -64,7 +64,7 @@ public class AIController : MonoBehaviour
 
             if (targetPrec == targetSucc && wpDaRaggiungere > 0)
             {
-                this.transform.position =  circuito.waypoints[wpDaRaggiungere-1].transform.position + Vector3.up * 2.0f;
+                this.transform.position =  circuito.waypoints[wpDaRaggiungere-1].transform.position + Vector3.up * 1.2f;
                 this.transform.rotation = circuito.waypoints[wpDaRaggiungere-1].transform.rotation;
                 targetPrec = circuito.waypoints[wpDaRaggiungere-1].transform.position;
             }

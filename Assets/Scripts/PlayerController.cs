@@ -37,9 +37,10 @@ public class PlayerController : MonoBehaviour {
         /*Rilevo la pressione della barra spaziatrice per la frenata*/
         float frenata = Input.GetAxis("Jump");
 
-        GameObject tac = GameObject.FindGameObjectWithTag("Tachimetro");  
-        tac.GetComponent<Tachimetro>().ShowSpeed(carController.velocitaCorrente, 0f, carController.velocitaMassima);
-        tac.GetComponent<Tachimetro>().MostraMarcia();
+        //Parte con il tachimetro viecchio
+        //GameObject tac = GameObject.FindGameObjectWithTag("Tachimetro");  
+        //tac.GetComponent<Tachimetro>().ShowSpeed(carController.velocitaCorrente, 0f, carController.velocitaMassima);
+        //tac.GetComponent<Tachimetro>().MostraMarcia();
         
        
         carController.Move(accelerazione, sterzata, frenata);
