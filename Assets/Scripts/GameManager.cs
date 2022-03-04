@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
             item.SetActive(true);
             yield return new WaitForSeconds(1);
             item.SetActive(false);
+            if(item == countDownElements.Last()) start = true;
         }
     }
 

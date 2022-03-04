@@ -25,6 +25,7 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.start) return;
 
         Vector3 localTarget = carController.rb.gameObject.transform.InverseTransformPoint(targetSucc);
 

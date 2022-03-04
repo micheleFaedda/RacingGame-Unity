@@ -116,8 +116,8 @@ public class CarController : MonoBehaviour
 
         vecchiaSgommata.rotation = Quaternion.Euler(90, 0, 0);
 
-        //la sgommata viene eliminata al termine di 40 secondi
-        Destroy(vecchiaSgommata.gameObject, 40);
+        //la sgommata viene eliminata al termine di 20 secondi
+        Destroy(vecchiaSgommata.gameObject, 20);
     }
     
     void Start()
