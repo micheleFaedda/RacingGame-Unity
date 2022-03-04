@@ -11,6 +11,14 @@ TagManager:
   - npc
   - CheckPoint
   - marcia
+  - Classifica
+  - Primo
+  - Secondo
+  - Terzo
+  - Quarto
+  - NPC1
+  - NPC2
+  - NPC3
   layers:
   - Default
   - TransparentFX

@@ -22,12 +22,25 @@ public class CheckpointManager : MonoBehaviour {
     private bool regoSet;
     public string playerName;
     public string position;
-
+    
+    /*************CLASSIFICA MICHI*********************************************/
+    private GameObject primoClassifica;
+    private GameObject secondoClassifica;
+    private GameObject terzoClassifica;
+    private GameObject quartoClassifica;
+    /************************************************************************/
     private CarController carController;
 
     void Start() {
 
         GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
+        
+        /*************CLASSIFICA MICHI*********************************************/
+         primoClassifica = GameObject.FindGameObjectWithTag("Primo");
+         secondoClassifica = GameObject.FindGameObjectWithTag("Secondo");
+         terzoClassifica = GameObject.FindGameObjectWithTag("Terzo");
+         quartoClassifica = GameObject.FindGameObjectWithTag("Quarto");
+         /************************************************************************/
         checkPointCount = checkPoints.Length;
         foreach (GameObject c in checkPoints) {
 
@@ -70,6 +83,9 @@ public class CheckpointManager : MonoBehaviour {
         
         Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
         position = Leaderboard.GetPosition(carRego);
+        
+        /*************CLASSIFICA MICHI***********/
+        setClassifica(position);
 
     }
     
@@ -96,4 +112,25 @@ public class CheckpointManager : MonoBehaviour {
             }
         }
     }
+    /*************CLASSIFICA MICHI*******************************************************/
+    private void setClassifica(string position)
+    {
+        switch (position)
+        {
+            case "First":
+                primoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                break;
+            case "Second":
+                secondoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                break;
+            case "Third":
+                terzoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                break;
+            case "Fourth":
+                quartoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                break;
+        }
+        
+    }
+    /************************************************************************/
 }
