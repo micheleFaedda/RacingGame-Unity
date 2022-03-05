@@ -55,13 +55,13 @@ public class CheckpointManager : MonoBehaviour {
          
          
          /*************CODICE TIMER MICHI*********************************************/
-       /*  
+         
            timer = GameObject.FindGameObjectWithTag("Timer");
            if (gameObject.CompareTag("Player"))
            {
                stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
            }
-*/
+
            /********************************************************/
         checkPointCount = checkPoints.Length;
         foreach (GameObject c in checkPoints) {
@@ -108,7 +108,7 @@ public class CheckpointManager : MonoBehaviour {
         
         /*************CLASSIFICA MICHI***********/
         setClassifica(position);
-        //currentTimer();
+        currentTimer();
        
 
     }
@@ -125,7 +125,7 @@ public class CheckpointManager : MonoBehaviour {
                 checkPointSucc_go = other.gameObject;
                 checkPoint = numeroCheckPointCorrente;
                 timeEntered = Time.time;
-/*
+
                 if (checkPoint == 0)
                 {
                     giro++;
@@ -142,7 +142,7 @@ public class CheckpointManager : MonoBehaviour {
                     }
                     
                    
-                }************************/
+                }
 
                 checkPointSucc++;
                 
@@ -154,7 +154,7 @@ public class CheckpointManager : MonoBehaviour {
     /*************CLASSIFICA MICHI*******************************************************/
     private void setClassifica(string position)
     {
-        /*switch (position)
+        switch (position)
         {
             case "First":
                 primoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
@@ -168,7 +168,7 @@ public class CheckpointManager : MonoBehaviour {
             case "Fourth":
                 quartoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
                 break;
-        }*/
+        }
         
     }
     /************************************************************************/

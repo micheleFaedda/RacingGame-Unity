@@ -20,6 +20,7 @@ TagManager:
   - NPC2
   - NPC3
   - Timer
+  - Coins
   layers:
   - Default
   - TransparentFX
