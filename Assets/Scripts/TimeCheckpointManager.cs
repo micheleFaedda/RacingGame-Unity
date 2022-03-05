@@ -1,20 +1,8 @@
 using System;
 using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
-/*
-lap -> giro 
-checkPoint ->
-checkPointCount ->
-nextCheckPoint -> checkPointSucc
-cps -> checkPoints
-lastCP -> checkPointPred
-thisCPNumber -> numeroCheckPointCorrente
-*/
-
-public class CheckpointManager : MonoBehaviour {
+public class TimeCheckpointManager : MonoBehaviour {
 
     public int giro = 0;
     public int checkPoint = -1;
@@ -22,42 +10,48 @@ public class CheckpointManager : MonoBehaviour {
     int checkPointCount;
     int checkPointSucc;
     public GameObject checkPointSucc_go;
-    int carRego;
-    private bool regoSet;
-    public string playerName;
-    public string position;
+    private Color normalTimerColor = new Color32(253,158, 0, 255);
+    //int carRego;
+    //private bool regoSet;
+    //public string playerName;
+    //public string position;
     
     /*************CLASSIFICA MICHI*********************************************/
-    private GameObject primoClassifica;
-    private GameObject secondoClassifica;
-    private GameObject terzoClassifica;
-    private GameObject quartoClassifica;
+    //private GameObject primoClassifica;
+    //private GameObject secondoClassifica;
+    //private GameObject terzoClassifica;
+    //private GameObject quartoClassifica;
     /************************************************************************/
    
     /*************timer MICHI*********************************************/
     private GameObject timer;
-    private Stopwatch stopWatch;
-    private string elapsedTime;
+    //private Stopwatch stopWatch;
+    //private string elapsedTime;
  /********************************************************/
+
+    private float currentTime = 0f;
+    private float startingTime = 10f;
     
     private CarController carController;
 
-    void Start() {
+    void Start()
+    {
 
+        currentTime = startingTime;
         GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         
         /*************CLASSIFICA MICHI*********************************************/
-         primoClassifica = GameObject.FindGameObjectWithTag("Primo");
-         secondoClassifica = GameObject.FindGameObjectWithTag("Secondo");
-         terzoClassifica = GameObject.FindGameObjectWithTag("Terzo");
-         quartoClassifica = GameObject.FindGameObjectWithTag("Quarto");
+         //primoClassifica = GameObject.FindGameObjectWithTag("Primo");
+         //secondoClassifica = GameObject.FindGameObjectWithTag("Secondo");
+         //terzoClassifica = GameObject.FindGameObjectWithTag("Terzo");
+         //quartoClassifica = GameObject.FindGameObjectWithTag("Quarto");
          /************************************************************************/
          
          
          /*************CODICE TIMER MICHI*********************************************/
-       /*  
-           timer = GameObject.FindGameObjectWithTag("Timer");
-           if (gameObject.CompareTag("Player"))
+         
+           timer = GameObject.FindGameObjectWithTag("Timer"); //Questo mi serve
+       /*    if (gameObject.CompareTag("Player"))
            {
                stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
            }
@@ -73,18 +67,38 @@ public class CheckpointManager : MonoBehaviour {
         }
     }
 
-    void Update() {
-
+    void Update()
+    {
         if (carController == null)
         {
             carController = this.GetComponent<CarController>();
         }
 
-        if (!regoSet) {
+        if (GameManager.start)
+        {
+            currentTime -= 1 * Time.deltaTime;
+            timer.GetComponent<UnityEngine.UI.Text>().text = currentTime.ToString("0");
+
+            if (currentTime < 5)
+            {
+                timer.GetComponent<UnityEngine.UI.Text>().color = Color.red;//Non è un errore (stronzo bastardo)
+            }
+            else
+            {
+                timer.GetComponent<UnityEngine.UI.Text>().color = normalTimerColor;
+            }
+
+            if (currentTime <= 0)
+            {
+                currentTime = 0;
+            }
+        }
+
+        /*if (!regoSet) {
             carRego = Leaderboard.RegisterCar(playerName);
             regoSet = true;
             return;
-        }
+        }*/
         
         /*if (checkPointSucc > 0)
         {
@@ -103,11 +117,11 @@ public class CheckpointManager : MonoBehaviour {
             }
         }*/
         
-        Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
-        position = Leaderboard.GetPosition(carRego);
+        //Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
+        //position = Leaderboard.GetPosition(carRego);
         
         /*************CLASSIFICA MICHI***********/
-        setClassifica(position);
+        //setClassifica(position);
         //currentTimer();
        
 
@@ -125,6 +139,7 @@ public class CheckpointManager : MonoBehaviour {
                 checkPointSucc_go = other.gameObject;
                 checkPoint = numeroCheckPointCorrente;
                 timeEntered = Time.time;
+                currentTime += 15;
 /*
                 if (checkPoint == 0)
                 {
@@ -175,7 +190,7 @@ public class CheckpointManager : MonoBehaviour {
     
     
     /************CODICE TIMER MICHI **********************/
-    private void startTimer()
+    /*private void startTimer()
     {   
         
         stopWatch.Start(); //lo faccio partire 
@@ -187,7 +202,8 @@ public class CheckpointManager : MonoBehaviour {
               
                
         timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime +""; //stampo nella UI
-    }
+    }*/
+    /*
     private void currentTimer() //stessa cosa di sopra solo che viene stampato il tempo corrente
     {
         if (stopWatch != null)
@@ -202,7 +218,7 @@ public class CheckpointManager : MonoBehaviour {
             timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime ;
         }
         
-    }
+    }*/
     
     /*********************************************************/
 }

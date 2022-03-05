@@ -25,8 +25,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-//        Debug.Log(GameManager.start);
-        
+
         if (!GameManager.start) return;
         
         testoPlayer.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 1.7f);
