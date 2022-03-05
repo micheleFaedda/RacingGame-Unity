@@ -199,7 +199,7 @@ public class CheckpointManager : MonoBehaviour {
                 ts.Milliseconds / 10);
 
 
-            timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime + "";
+            timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime ;
         }
         
     }
