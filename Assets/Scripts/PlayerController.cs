@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log(GameManager.start);
+//        Debug.Log(GameManager.start);
         
         if (!GameManager.start) return;
         
