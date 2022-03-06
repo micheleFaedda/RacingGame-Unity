@@ -2,18 +2,13 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/**COSE CHE STIAMO RINOMINANDO (DA TOGLIERE):
- * b -> frenata
- * a -> accellerazione
- * s -> sterzata
- * ds -> carController
- * Drive -> CarController
- */
 public class PlayerController : MonoBehaviour {
     
-    /*Mi occorre gestire il funzionamento delle ruote e quindi recupero il CarController*/
     CarController carController;
+    
     public GameObject prefabNomeGiocatore;
+    
+    //testo che verra visualizzato sopra la macchina del player (numero di giri e la posizione in classifica)
     private GameObject testoPlayer;
 
     void Start()
@@ -27,13 +22,14 @@ public class PlayerController : MonoBehaviour {
     void Update()
     {
 
-        if (!GameManager.start) return;
-
         string text;
         testoPlayer.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 1.7f);
         
         //Debug.Log(SceneManager.GetActiveScene().name);
-        //Il testo che viene stampato dipenda dalla modalita nella quali si gioca
+        
+        /*Il testo che viene stampato dipenda dalla modalita nella quali si gioca
+         In modalità Time viene visualizzato solo il numero di giri, nella modalità racing anche la posizione in classifica
+         */
         if (SceneManager.GetActiveScene().name.Equals("Time"))
         {
             text = "Lap: " + this.GetComponent<TimeCheckpointManager>().giro;
@@ -46,21 +42,18 @@ public class PlayerController : MonoBehaviour {
         
         testoPlayer.GetComponent<Text>().text = text;
 
-        /*Rilevo la pressione dei tasti per andare avanti/indietro per l'accelerazione*/
+        //Rilevo la pressione dei tasti per andare avanti/indietro per l'accelerazione
         float accelerazione = Input.GetAxis("Vertical");
 
-        /*Rilevo la pressione dei tasti per il movimento orizzontale per la sterzata*/
+        //Rilevo la pressione dei tasti per il movimento orizzontale per la sterzata
         float sterzata = Input.GetAxis("Horizontal");
 
-        /*Rilevo la pressione della barra spaziatrice per la frenata*/
+        //Rilevo la pressione della barra spaziatrice per la frenata
         float frenata = Input.GetAxis("Jump");
-
-        //Parte con il tachimetro viecchio
-        //GameObject tac = GameObject.FindGameObjectWithTag("Tachimetro");  
-        //tac.GetComponent<Tachimetro>().ShowSpeed(carController.velocitaCorrente, 0f, carController.velocitaMassima);
-        //tac.GetComponent<Tachimetro>().MostraMarcia();
         
-       
+        /*
+         * La macchina viene mossa dal CarController in funzione dei tasti premuti dal giocatore
+         */
         carController.Move(accelerazione, sterzata, frenata);
         carController.CheckSgommata();
         carController.CalcolaSuonoMotore();

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 public class AIController : MonoBehaviour
 {
 
@@ -25,7 +26,6 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.start) return;
 
         Vector3 localTarget = carController.rb.gameObject.transform.InverseTransformPoint(targetSucc);
 
@@ -33,7 +33,7 @@ public class AIController : MonoBehaviour
 
         float targetAngle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
 
-        float steer = Mathf.Clamp(targetAngle * steeringSensitivity, -1.0f, 1.0f) * Mathf.Sign(carController.velocitaCorrente);
+        float steer = Mathf.Clamp(targetAngle * steeringSensitivity, -1.0f, 1.0f) * Mathf.Sign(carController.VelocitaCorrente());
         float accel = 1f;
         float brake = 0;
 
