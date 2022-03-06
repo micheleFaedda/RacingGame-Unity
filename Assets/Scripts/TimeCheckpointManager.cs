@@ -19,7 +19,7 @@ public class TimeCheckpointManager : MonoBehaviour {
     private GameObject coins;
 
     private float currentTime = 0f;
-    private float startingTime = 10f;
+    private float startingTime = 70f;
     
     private CarController carController;
 
@@ -49,6 +49,8 @@ public class TimeCheckpointManager : MonoBehaviour {
         {
             carController = this.GetComponent<CarController>();
         }
+
+        Debug.Log(giro);
 
         if (GameManager.start)
         {
@@ -80,12 +82,16 @@ public class TimeCheckpointManager : MonoBehaviour {
             int numeroCheckPointCorrente = int.Parse(other.gameObject.name);
             
             if (numeroCheckPointCorrente == checkPointSucc) {
-                
                 checkPointSucc_go = other.gameObject;
                 checkPoint = numeroCheckPointCorrente;
                 timeEntered = Time.time;
                 currentTime += 10;
 
+                if (checkPoint == 0)
+                {
+                    giro++;
+                }
+                
                 checkPointSucc++;
 
                 numCoins += (1+int.Parse(other.gameObject.name)) * (giro+1);

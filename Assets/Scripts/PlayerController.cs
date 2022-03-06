@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /**COSE CHE STIAMO RINOMINANDO (DA TOGLIERE):
@@ -27,9 +28,23 @@ public class PlayerController : MonoBehaviour {
     {
 
         if (!GameManager.start) return;
-        
+
+        string text;
         testoPlayer.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 1.7f);
-        testoPlayer.GetComponent<Text>().text = this.GetComponent<CheckpointManager>().position + "\nLap: " + this.GetComponent<CheckpointManager>().giro;
+        
+        //Debug.Log(SceneManager.GetActiveScene().name);
+        //Il testo che viene stampato dipenda dalla modalita nella quali si gioca
+        if (SceneManager.GetActiveScene().name.Equals("Time"))
+        {
+            text = "Lap: " + this.GetComponent<TimeCheckpointManager>().giro;
+        }
+        else
+        {
+            text = this.GetComponent<CheckpointManager>().position + "\nLap: " +
+                   this.GetComponent<CheckpointManager>().giro;
+        }
+        
+        testoPlayer.GetComponent<Text>().text = text;
 
         /*Rilevo la pressione dei tasti per andare avanti/indietro per l'accelerazione*/
         float accelerazione = Input.GetAxis("Vertical");
