@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 /*
 lap -> giro 
@@ -25,32 +27,42 @@ public class CheckpointManager : MonoBehaviour {
     public string playerName;
     public string position;
     
+    /*************CLASSIFICA MICHI*********************************************/
     private GameObject primoClassifica;
     private GameObject secondoClassifica;
     private GameObject terzoClassifica;
     private GameObject quartoClassifica;
-
+    /************************************************************************/
+   
+    /*************timer MICHI*********************************************/
     private GameObject timer;
     private Stopwatch stopWatch;
     private string elapsedTime;
-
+ /********************************************************/
+    
     private CarController carController;
 
     void Start() {
 
         GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         
-        primoClassifica = GameObject.FindGameObjectWithTag("Primo");
+        /*************CLASSIFICA MICHI*********************************************/
+         primoClassifica = GameObject.FindGameObjectWithTag("Primo");
          secondoClassifica = GameObject.FindGameObjectWithTag("Secondo");
          terzoClassifica = GameObject.FindGameObjectWithTag("Terzo");
          quartoClassifica = GameObject.FindGameObjectWithTag("Quarto");
-
-         timer = GameObject.FindGameObjectWithTag("Timer");
+         /************************************************************************/
+         
+         
+         /*************CODICE TIMER MICHI*********************************************/
+         
+           timer = GameObject.FindGameObjectWithTag("Timer");
            if (gameObject.CompareTag("Player"))
            {
                stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
            }
-           
+
+           /********************************************************/
         checkPointCount = checkPoints.Length;
         foreach (GameObject c in checkPoints) {
 
@@ -69,7 +81,7 @@ public class CheckpointManager : MonoBehaviour {
         }
 
         if (!regoSet) {
-            carRego = Classifica.RegisterCar(playerName);
+            carRego = Leaderboard.RegisterCar(playerName);
             regoSet = true;
             return;
         }
@@ -91,9 +103,10 @@ public class CheckpointManager : MonoBehaviour {
             }
         }*/
         
-        Classifica.SetPosition(carRego, giro, checkPoint, timeEntered);
-        position = Classifica.GetPosition(carRego);
+        Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
+        position = Leaderboard.GetPosition(carRego);
         
+        /*************CLASSIFICA MICHI***********/
         setClassifica(position);
         currentTimer();
        
@@ -117,6 +130,7 @@ public class CheckpointManager : MonoBehaviour {
                 {
                     giro++;
                     
+                    //CODICE TIMER MICHI
                     if (gameObject.CompareTag("Player"))
                     {    //Se questo è il player allora faccio scattare il timer
                         if (!stopWatch.IsRunning)
@@ -137,7 +151,7 @@ public class CheckpointManager : MonoBehaviour {
             }
         }
     }
-
+    /*************CLASSIFICA MICHI*******************************************************/
     private void setClassifica(string position)
     {
         switch (position)
@@ -157,7 +171,10 @@ public class CheckpointManager : MonoBehaviour {
         }
         
     }
- 
+    /************************************************************************/
+    
+    
+    /************CODICE TIMER MICHI **********************/
     private void startTimer()
     {   
         
@@ -171,7 +188,6 @@ public class CheckpointManager : MonoBehaviour {
                
         timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime +""; //stampo nella UI
     }
-
     private void currentTimer() //stessa cosa di sopra solo che viene stampato il tempo corrente
     {
         if (stopWatch != null)
@@ -183,8 +199,10 @@ public class CheckpointManager : MonoBehaviour {
                 ts.Milliseconds / 10);
 
 
-            timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime;
+            timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime ;
         }
+        
     }
-}
     
+    /*********************************************************/
+}

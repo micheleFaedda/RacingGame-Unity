@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/*
- * Gestione degli NPC attraverso una serie di waypoints.
- *  Passa i parametri di accelerazione, fretata e starzata
- *  al CarController della macchina NPC (metodo Move(float, float, float))
- */
-public class NPController : MonoBehaviour
+public class AIController : MonoBehaviour
 {
-    
-    private CarController carController;
+
+   private CarController carController;
     
     public float steeringSensitivity = 0.01f;
 
