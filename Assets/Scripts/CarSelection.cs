@@ -10,7 +10,9 @@ public class CarSelection : MonoBehaviour
     [SerializeField] private Button previousButton;
     [SerializeField] private Button nextButton;
     private int currentCar;
-    public string firstLevel;
+    public string race;
+    public string time;
+    public GameObject chooseCarScreen;
 
     private void Start()
     {
@@ -18,11 +20,20 @@ public class CarSelection : MonoBehaviour
         SelectCar(currentCar);
     }
 
-    public void StartGame()
+
+    public void GoToChooseMode()
     {
-        SceneManager.LoadScene(firstLevel);
+        chooseCarScreen.SetActive(true);
+    }
+    public void StartRaceGame()
+    {
+        SceneManager.LoadScene(race);
     }
 
+    public void StartTimeGame()
+    {
+        SceneManager.LoadScene(time);
+    }
     private void SelectCar(int _index)
     {
         previousButton.interactable = (_index != 0);
