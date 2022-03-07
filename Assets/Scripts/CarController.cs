@@ -152,7 +152,7 @@ public class CarController : MonoBehaviour
 
             /*Accedo allo slittamento delle 4 ruote su entrambi gli assi e controllo che sia effettivamente abbastanza grande, se questo
              *valore è alto allora sta sgommando. Il controllo viene fatto è sia in avanti, sia laterale*/
-            if (Mathf.Abs(ruotaHit.forwardSlip) >= 0.4f || Mathf.Abs(ruotaHit.sidewaysSlip) >= 0.4f)
+            if (Mathf.Abs(ruotaHit.forwardSlip) >= 0.5f || Mathf.Abs(ruotaHit.sidewaysSlip) >= 0.5f)
             {
                 numeroRuoteSgommano++;
                 
