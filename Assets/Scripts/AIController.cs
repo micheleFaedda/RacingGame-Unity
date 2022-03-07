@@ -53,7 +53,7 @@ public class AIController : MonoBehaviour
         }
         
         carController.CheckSgommata();
-        carController.CalcolaSuonoMotore();
+        carController.SuonoMotore();
     }
     
     private IEnumerator WaitAndRepositioning(float t)

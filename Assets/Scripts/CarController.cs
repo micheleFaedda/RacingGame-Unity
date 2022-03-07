@@ -36,19 +36,19 @@ public class CarController : MonoBehaviour
     //Prefab della traccia che verra isatanzaiata per ogni ruota
     public Transform tracciaSgommata;
     
+    //ogni ruota ha una suo traccia quando slitta
     private Transform[] sgommateRuote = new Transform[4];
 
     //Prefab del fumo che verra isatanzaiato per ogni ruota
     public ParticleSystem fumoPrefab;
     
+    //Ogni ruota quando slitta produce un efetto particellare
     private ParticleSystem[] fumiRuote = new ParticleSystem[4];
 
     //Le due luci di stop della macchina
     public GameObject[] luciFrenata;
 
     public Rigidbody rb;
-    
-    public float velocitaMassima = 200.0f;
 
     void Start()
     {
@@ -72,7 +72,7 @@ public class CarController : MonoBehaviour
     }
 
     /**
-     * Metodo che si occupa di segnare sul terreno la traccia della sgommata
+     * Metodo che si occupa di segnare sul terreno la traccia della sgommata per la ruota con indice 'i'
      */
     public void InizioSgommata(int i)
     {
@@ -82,20 +82,21 @@ public class CarController : MonoBehaviour
             sgommateRuote[i] = Instantiate(tracciaSgommata);
         }
 
-        //Rilevo chi è il parent della sgommata che è esattamente la ruota
+        //Assegno come parent della traccia della routa 'i' il collider di quella ruota
         sgommateRuote[i].parent = collidersRuote[i].transform;
 
         sgommateRuote[i].localRotation = Quaternion.Euler(90, 0, 0);
+        
         //Metto la sgommata esattamente sotto la ruota che lo genera tramite la sua posizione
         sgommateRuote[i].localPosition = -Vector3.up * collidersRuote[i].radius;
     }
 
     /**
-     * Metodo che si occupa di terminare sul terreno la traccia della sgommata
+     * Metodo che si occupa di terminare sul terreno la traccia della sgommata  per la ruota con indice 'i'
     */
     public void FineSgommata(int i)
     {
-        //se è null vuol dire che è già terminata
+        //se è null vuol dire che la sgommata a questa ruota non è stata neanche assegnata e quindi per evitare errore esco direttamente
         if (sgommateRuote[i] == null)
             return;
 
@@ -114,7 +115,10 @@ public class CarController : MonoBehaviour
         Destroy(vecchiaSgommata.gameObject, 20);
     }
 
-    public void CalcolaSuonoMotore()
+    /*
+     * Attiviamo il suono di Idle o il suono di accelerazione in funzione della velocità della macchina
+     */
+    public void SuonoMotore()
     {
         if (VelocitaCorrente() <= 2.0f)
         {
@@ -146,23 +150,25 @@ public class CarController : MonoBehaviour
             //ottengo l'hit della ruota corrispondente al collider
             collidersRuote[i].GetGroundHit(out ruotaHit);
 
-            /*Accedo allo slittamento su entrambi gli assi e controllo che sia effettivamente abbastanza grande, se questo
-             *valore è alto allora sta sgommando. Lo metto in valore assoluto perche gestisco solamente lo slittamento in
-             *accellerazione e non in decellerazione.*/
+            /*Accedo allo slittamento delle 4 ruote su entrambi gli assi e controllo che sia effettivamente abbastanza grande, se questo
+             *valore è alto allora sta sgommando. Il controllo viene fatto è sia in avanti, sia laterale*/
             if (Mathf.Abs(ruotaHit.forwardSlip) >= 0.4f || Mathf.Abs(ruotaHit.sidewaysSlip) >= 0.4f)
             {
                 numeroRuoteSgommano++;
-
+                
+                //Visto che è stato rilevato lo slittamento nel caso il suono non fosse ancora attivo, allora lo rendo attivo
                 if (!suonoSgommata.isPlaying)
                 {
                     suonoSgommata.Play();
                 }
 
-                //inzio della sgommata per la ruota a video (traccia)
+                //inzio della sgommata per la ruota 'i' a video (traccia)
                 InizioSgommata(i);
 
                 fumiRuote[i].transform.position = collidersRuote[i].transform.position -
                                                   collidersRuote[i].transform.up * collidersRuote[i].radius;
+                
+                // 1 -> numero particelle ogni volta che si entra in questa funzione
                 fumiRuote[i].Emit(1);
             }
             else
@@ -170,7 +176,8 @@ public class CarController : MonoBehaviour
                 FineSgommata(i);
             }
         }
-
+        
+        //Attiviamo il suono della sgommata solo quando le ruote che stanno sgommando sono piu di 1 se no lo disattiviamo
         if (numeroRuoteSgommano == 0)
         {
             suonoSgommata.Stop();
@@ -194,25 +201,29 @@ public class CarController : MonoBehaviour
         //blocco il valore di sterzata tra -1 e 1
         sterzata = Mathf.Clamp(sterzata, -1, 1) * angoloMassimoSterzata;
 
-        //snel caso la macchina stia frenando vengono attivate le luci di stop
+        
         if (frenata != 0.0f)
         {
+            //nel caso la macchina stia frenando vengono attivate le luci di stop e l'audio di frenata
             if (!audioFrenata.isPlaying && VelocitaCorrente() > 1)
                 audioFrenata.Play();
+            
             luciFrenata[0].SetActive(true);
             luciFrenata[1].SetActive(true);
         }
         else
         {
+            //nel caso la macchina non stia frenando vengono disattivate le luci di stop e l'audio di frenata
             if (audioFrenata.isPlaying && VelocitaCorrente() <= 1)
                 audioFrenata.Stop();
+            
             luciFrenata[0].SetActive(false);
             luciFrenata[1].SetActive(false);
         }
 
-        audioAccelerazione.pitch = (VelocitaCorrente() / velocitaMassima) + 0.5f;
-
-        //Debug.Log(velocitaCorrente);
+        //Modifichiamo l'altezza del suono di accelerazione in funzione della velocità della macchina
+        // +0.5f perche se no è roppo basso
+        audioAccelerazione.pitch = (VelocitaCorrente() / 200.0f) + 0.5f;
 
         //applicchiamo la forza a tutte le ruote (wheelCollider)
         for (int i = 0; i < collidersRuote.Length; ++i)
