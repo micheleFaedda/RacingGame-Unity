@@ -2,11 +2,17 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/*
+ * Gestisce solo la macchina del Player
+ * Rileva la pressione dei tasti e passa i parametri di accelerazione, fretata e starzata
+ * al CarController della macchina del giocatore (metodo Move(float, float, float))
+ */
 public class PlayerController : MonoBehaviour {
     
-    CarController carController;
+    private CarController carController;
     
-    public GameObject prefabNomeGiocatore;
+    //Prefab del testo che verra visualizzato sopra la macchina del player
+    public GameObject prefabtestoGiocatore;
     
     //testo che verra visualizzato sopra la macchina del player (numero di giri e la posizione in classifica)
     private GameObject testoPlayer;
@@ -14,7 +20,8 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         carController = this.GetComponent<CarController>();
-        testoPlayer = Instantiate(prefabNomeGiocatore);
+        
+        testoPlayer = Instantiate(prefabtestoGiocatore);
         testoPlayer.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>());
         testoPlayer.GetComponent<Text>().fontSize = 70;
     }
@@ -51,9 +58,7 @@ public class PlayerController : MonoBehaviour {
         //Rilevo la pressione della barra spaziatrice per la frenata
         float frenata = Input.GetAxis("Jump");
         
-        /*
-         * La macchina viene mossa dal CarController in funzione dei tasti premuti dal giocatore
-         */
+        //La macchina viene mossa dal CarController in funzione dei tasti premuti dal giocatore
         carController.Move(accelerazione, sterzata, frenata);
         carController.CheckSgommata();
         carController.SuonoMotore();
