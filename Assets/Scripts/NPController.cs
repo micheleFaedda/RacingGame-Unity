@@ -1,24 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIController : MonoBehaviour
+public class NPController : MonoBehaviour
 {
-
-    //public Circuit circuito;
+    
     private CarController carController;
     
     public float steeringSensitivity = 0.01f;
 
-    private IEnumerator corutine;
-    
     public Vector3 targetSucc;
     public Vector3 targetPrec;
 
     public int wpDaRaggiungere = 0;
 
+    //Pardre dei waypoint nella scena
     public GameObject circuito;
+    
+    //Array di waypoint preso dal GameObject circuito
     private Transform[] waypoints;
     
+    private IEnumerator corutine;
     
     void Start()
     {    

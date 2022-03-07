@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcadda69f962b4032a37f53ad16b1599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0.1, y: 2.64, z: -6}
+  offset: {x: 0.1, y: 2.64, z: -7}
   target: {fileID: 2137701202}
   translateSpeed: 10
   rotationSpeed: 10

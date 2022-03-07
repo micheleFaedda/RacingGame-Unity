@@ -25,42 +25,32 @@ public class CheckpointManager : MonoBehaviour {
     public string playerName;
     public string position;
     
-    /*************CLASSIFICA MICHI*********************************************/
     private GameObject primoClassifica;
     private GameObject secondoClassifica;
     private GameObject terzoClassifica;
     private GameObject quartoClassifica;
-    /************************************************************************/
-   
-    /*************timer MICHI*********************************************/
+
     private GameObject timer;
     private Stopwatch stopWatch;
     private string elapsedTime;
- /********************************************************/
-    
+
     private CarController carController;
 
     void Start() {
 
         GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         
-        /*************CLASSIFICA MICHI*********************************************/
-         primoClassifica = GameObject.FindGameObjectWithTag("Primo");
+        primoClassifica = GameObject.FindGameObjectWithTag("Primo");
          secondoClassifica = GameObject.FindGameObjectWithTag("Secondo");
          terzoClassifica = GameObject.FindGameObjectWithTag("Terzo");
          quartoClassifica = GameObject.FindGameObjectWithTag("Quarto");
-         /************************************************************************/
-         
-         
-         /*************CODICE TIMER MICHI*********************************************/
-         
-           timer = GameObject.FindGameObjectWithTag("Timer");
+
+         timer = GameObject.FindGameObjectWithTag("Timer");
            if (gameObject.CompareTag("Player"))
            {
                stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
            }
-
-           /********************************************************/
+           
         checkPointCount = checkPoints.Length;
         foreach (GameObject c in checkPoints) {
 
@@ -79,7 +69,7 @@ public class CheckpointManager : MonoBehaviour {
         }
 
         if (!regoSet) {
-            carRego = Leaderboard.RegisterCar(playerName);
+            carRego = Classifica.RegisterCar(playerName);
             regoSet = true;
             return;
         }
@@ -101,8 +91,8 @@ public class CheckpointManager : MonoBehaviour {
             }
         }*/
         
-        Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
-        position = Leaderboard.GetPosition(carRego);
+        Classifica.SetPosition(carRego, giro, checkPoint, timeEntered);
+        position = Classifica.GetPosition(carRego);
         
         setClassifica(position);
         currentTimer();

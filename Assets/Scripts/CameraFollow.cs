@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Vector3 offset;
-    [SerializeField] private Transform target;
-    [SerializeField] private float translateSpeed;
-    [SerializeField] private float rotationSpeed;
+    //Il punto nel quale si deve posizionare rispetto alla macchina
+    public Vector3 offset;
+    
+    //La macchina che deve seguire
+    public Transform target;
+    
+    public float translateSpeed;
+    
+    public float rotationSpeed;
 
     private void FixedUpdate()
     {

@@ -14,7 +14,7 @@ struct PlayerStats {
     }
 }
 
-public class Leaderboard {
+public class Classifica {
 
     static Dictionary<int, PlayerStats> lb = new Dictionary<int, PlayerStats>();
     static int carsRegistered = -1;

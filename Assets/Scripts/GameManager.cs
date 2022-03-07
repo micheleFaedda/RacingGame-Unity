@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] countDownElements;
+    
+    //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
     
     void Start()
