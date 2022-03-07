@@ -4,7 +4,7 @@ using System.Collections;
 public class AIController : MonoBehaviour
 {
 
-    public Circuit circuito;
+    //public Circuit circuito;
     private CarController carController;
     
     public float steeringSensitivity = 0.01f;
@@ -15,11 +15,22 @@ public class AIController : MonoBehaviour
     public Vector3 targetPrec;
 
     public int wpDaRaggiungere = 0;
+
+    public GameObject circuito;
+    private Transform[] waypoints;
+    
     
     void Start()
     {    
+        
+        waypoints = new Transform[circuito.transform.childCount];
+        for (int i = 0; i < circuito.transform.childCount; i++)
+        {
+            waypoints[i] = circuito.transform.GetChild(i);
+        }
+        
         carController = this.GetComponent<CarController>();
-        targetSucc = circuito.waypoints[wpDaRaggiungere].transform.position;
+        targetSucc = waypoints[wpDaRaggiungere].transform.position;
         corutine = WaitAndRepositioning(5f);
         StartCoroutine(corutine);
     }
@@ -46,10 +57,10 @@ public class AIController : MonoBehaviour
 
         if(distanceToTarget < 4){
             wpDaRaggiungere++;
-            if(wpDaRaggiungere >= circuito.waypoints.Length)
+            if(wpDaRaggiungere >= waypoints.Length)
                 wpDaRaggiungere=0;
             
-            targetSucc = circuito.waypoints[wpDaRaggiungere].transform.position;
+            targetSucc = waypoints[wpDaRaggiungere].transform.position;
         }
         
         carController.CheckSgommata();
@@ -65,9 +76,9 @@ public class AIController : MonoBehaviour
 
             if (targetPrec == targetSucc && wpDaRaggiungere > 0)
             {
-                this.transform.position =  circuito.waypoints[wpDaRaggiungere-1].transform.position + Vector3.up * 1.2f;
-                this.transform.rotation = circuito.waypoints[wpDaRaggiungere-1].transform.rotation;
-                targetPrec = circuito.waypoints[wpDaRaggiungere-1].transform.position;
+                this.transform.position =  waypoints[wpDaRaggiungere-1].transform.position + Vector3.up * 1.2f;
+                this.transform.rotation = waypoints[wpDaRaggiungere-1].transform.rotation;
+                targetPrec = waypoints[wpDaRaggiungere-1].transform.position;
             }
         }
     }

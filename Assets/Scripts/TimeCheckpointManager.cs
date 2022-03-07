@@ -50,7 +50,7 @@ public class TimeCheckpointManager : MonoBehaviour {
             carController = this.GetComponent<CarController>();
         }
 
-        Debug.Log(giro);
+        //Debug.Log(giro);
 
         if (GameManager.start)
         {

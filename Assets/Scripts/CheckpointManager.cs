@@ -1,8 +1,6 @@
 using System;
 using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 /*
 lap -> giro 
@@ -106,7 +104,6 @@ public class CheckpointManager : MonoBehaviour {
         Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
         position = Leaderboard.GetPosition(carRego);
         
-        /*************CLASSIFICA MICHI***********/
         setClassifica(position);
         currentTimer();
        
@@ -130,7 +127,6 @@ public class CheckpointManager : MonoBehaviour {
                 {
                     giro++;
                     
-                    //CODICE TIMER MICHI
                     if (gameObject.CompareTag("Player"))
                     {    //Se questo è il player allora faccio scattare il timer
                         if (!stopWatch.IsRunning)
@@ -151,7 +147,7 @@ public class CheckpointManager : MonoBehaviour {
             }
         }
     }
-    /*************CLASSIFICA MICHI*******************************************************/
+
     private void setClassifica(string position)
     {
         switch (position)
@@ -171,10 +167,7 @@ public class CheckpointManager : MonoBehaviour {
         }
         
     }
-    /************************************************************************/
-    
-    
-    /************CODICE TIMER MICHI **********************/
+ 
     private void startTimer()
     {   
         
@@ -188,6 +181,7 @@ public class CheckpointManager : MonoBehaviour {
                
         timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime +""; //stampo nella UI
     }
+
     private void currentTimer() //stessa cosa di sopra solo che viene stampato il tempo corrente
     {
         if (stopWatch != null)
@@ -199,10 +193,8 @@ public class CheckpointManager : MonoBehaviour {
                 ts.Milliseconds / 10);
 
 
-            timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime ;
+            timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime;
         }
-        
     }
-    
-    /*********************************************************/
 }
+    
