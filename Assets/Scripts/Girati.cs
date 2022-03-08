@@ -25,7 +25,7 @@ public class Girati : MonoBehaviour {
             tempoOk = Time.time;
         }
         //Debug.Log(transform.up.y);
-        Debug.Log(transform.forward);
+        //Debug.Log(transform.forward);
         
         /*Se è trascorso troppo tempo allora mettiamo la macchina in posizione giusta*/
         if (Time.time > tempoOk + 3.0f) {

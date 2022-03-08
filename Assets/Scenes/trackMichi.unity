@@ -29871,6 +29871,7 @@ MonoBehaviour:
   - {fileID: 3043344754091515887}
   - {fileID: 3043344752246468005}
   rb: {fileID: 0}
+  velocitaMassima: 200
 --- !u!1 &3043344752944180236
 GameObject:
   m_ObjectHideFlags: 0
@@ -31208,6 +31209,7 @@ MonoBehaviour:
   - {fileID: 3043344753023057873}
   - {fileID: 3043344753323380123}
   rb: {fileID: 0}
+  velocitaMassima: 200
 --- !u!82 &3043344754014800954
 AudioSource:
   m_ObjectHideFlags: 0
@@ -34217,6 +34219,10 @@ PrefabInstance:
     - target: {fileID: 4199398230898225191, guid: 89d363eef8c784740af25bcb629106df, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199398230898225196, guid: 89d363eef8c784740af25bcb629106df, type: 3}
+      propertyPath: forza
+      value: 71.75
       objectReference: {fileID: 0}
     - target: {fileID: 4199398230898225200, guid: 89d363eef8c784740af25bcb629106df, type: 3}
       propertyPath: m_RootOrder

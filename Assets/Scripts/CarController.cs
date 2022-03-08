@@ -50,6 +50,8 @@ public class CarController : MonoBehaviour
 
     public Rigidbody rb;
 
+    public float velocitaMassima = 200.0f;
+
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -223,7 +225,7 @@ public class CarController : MonoBehaviour
 
         //Modifichiamo l'altezza del suono di accelerazione in funzione della velocità della macchina
         // +0.5f perche se no è roppo basso
-        audioAccelerazione.pitch = (VelocitaCorrente() / 200.0f) + 0.5f;
+        audioAccelerazione.pitch = (VelocitaCorrente() / velocitaMassima) + 0.5f;
 
         //applicchiamo la forza a tutte le ruote (wheelCollider)
         for (int i = 0; i < collidersRuote.Length; ++i)
