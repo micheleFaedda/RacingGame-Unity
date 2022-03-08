@@ -12,8 +12,8 @@ public class AntiRollio : MonoBehaviour {
 
     void Start() {
 
-        rb = this.GetComponent<Rigidbody>();
-        rb.centerOfMass = centroMassa.transform.localPosition;
+        rb = this.GetComponent<Rigidbody>(); 
+        rb.centerOfMass = centroMassa.transform.localPosition;//Se non usiamo questo script questo si puo portare in car controller
     }
 
     void GroundWheels(WheelCollider colliderSX, WheelCollider colliderDX) {

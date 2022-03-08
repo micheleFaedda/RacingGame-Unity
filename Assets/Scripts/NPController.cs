@@ -10,6 +10,8 @@ public class NPController : MonoBehaviour
 
     //Posizione del wayPoint che la macchina non ha ancora raggiunto
     public Vector3 targetSucc;
+
+    //private float distanzaTotale;
     
     //Posizione dell'ultimo wayPoint che la macchina non ha raggiunto (serve solo per la coroutine)
     public Vector3 targeSucctOld;
@@ -50,28 +52,28 @@ public class NPController : MonoBehaviour
 
         Vector3 localTarget = carController.rb.gameObject.transform.InverseTransformPoint(targetSucc);
 
-        float distanceToTarget = Vector3.Distance(targetSucc, carController.rb.transform.position);
+        float distanzaCorrente = Vector3.Distance(targetSucc, carController.rb.transform.position);
 
         float targetAngle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
 
         //blocco il valore di starzata tra -1 e 1
-        float steer = Mathf.Clamp(targetAngle * steeringSensitivity, -1.0f, 1.0f) * Mathf.Sign(carController.VelocitaCorrente());
+        float sterzata = Mathf.Clamp(targetAngle * steeringSensitivity, -1.0f, 1.0f) * Mathf.Sign(carController.VelocitaCorrente());
         
         //Nel caso stia per raggiungere il waypoint accelerazione e frenata cambiano nell'if successivo
-        float accel = 1f;
-        float brake = 0;
+        float accelerazione = 1f;
+        float frenata = 0;
 
         //Nel caso stia per raggiungere il waypoint si frena per non mancare quello successivo
-        if(distanceToTarget < 5){
-            brake = 0.8f;
-            accel = 0.1f;
+        if(distanzaCorrente < 5){
+            frenata = 0.8f;
+            accelerazione = 0.1f;
         }
         
-        carController.Move(accel, steer, brake);
+        carController.Move(accelerazione, sterzata, frenata);
 
         //Due if separati per non far frenare le macchine troppo tardi
         //NPC non deve per forza prendere il wapoint in modo preciso, basta che si aviccii abastanza
-        if(distanceToTarget < 4){
+        if(distanzaCorrente < 4){
             wpDaRaggiungere++;
             
             //Nel caso abbia fatto un ggiro completo il target diventa di nuovo il primo waypoint
@@ -80,6 +82,7 @@ public class NPController : MonoBehaviour
             
             //Setto la posizione del prossimo wp da raggiungere
             targetSucc = waypoints[wpDaRaggiungere].transform.position;
+            
         }
         
         carController.CheckSgommata();

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
 /*
- * Gestiamo un possibile capovolgimento della macchina
+ * Dopo numerose prove abbiamo visto che la macchina non si capovolge facilmente.
+ * Può però essere fatto di proposito (per esempio in discesa dal ponte).
+ * Gestiamo un possibile capovolgimento della macchina con questo script.
  */
 public class Girati : MonoBehaviour {
 
