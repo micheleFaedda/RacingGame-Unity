@@ -3,7 +3,7 @@
 /*
  * Gestiamo un possibile capovolgimento della macchina
  */
-public class FlipCar : MonoBehaviour {
+public class Girati : MonoBehaviour {
 
     private CarController carController;
     
@@ -23,6 +23,7 @@ public class FlipCar : MonoBehaviour {
             tempoOk = Time.time;
         }
         //Debug.Log(transform.up.y);
+        Debug.Log(transform.forward);
         
         /*Se è trascorso troppo tempo allora mettiamo la macchina in posizione giusta*/
         if (Time.time > tempoOk + 3.0f) {
