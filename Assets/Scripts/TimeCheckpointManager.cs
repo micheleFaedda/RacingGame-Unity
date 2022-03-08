@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
@@ -19,7 +17,7 @@ public class TimeCheckpointManager : MonoBehaviour {
     private GameObject coins;
 
     private float currentTime = 0f;
-    private float startingTime = 10f;
+    private float startingTime = 1000f;
     
     private CarController carController;
 
@@ -50,7 +48,7 @@ public class TimeCheckpointManager : MonoBehaviour {
             carController = this.GetComponent<CarController>();
         }
 
-        Debug.Log(giro);
+        //Debug.Log(giro);
 
         if (GameManager.start)
         {

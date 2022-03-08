@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIController : MonoBehaviour
+public class NPController : MonoBehaviour
 {
 
    private CarController carController;
