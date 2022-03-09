@@ -3,15 +3,13 @@ using System.Collections;
 
 public class NPController : MonoBehaviour
 {
-
-   private CarController carController;
+    
+    private CarController carController;
     
     public float steeringSensitivity = 0.01f;
 
     //Posizione del wayPoint che la macchina non ha ancora raggiunto
     public Vector3 targetSucc;
-
-    //private float distanzaTotale;
     
     //Posizione dell'ultimo wayPoint che la macchina non ha raggiunto (serve solo per la coroutine)
     public Vector3 targeSucctOld;

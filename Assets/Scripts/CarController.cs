@@ -51,10 +51,13 @@ public class CarController : MonoBehaviour
     public Rigidbody rb;
 
     public float velocitaMassima = 200.0f;
+    
+    public GameObject centroMassa;
 
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
+        rb.centerOfMass = centroMassa.transform.localPosition;
 
         for (int i = 0; i < 4; ++i)
         {

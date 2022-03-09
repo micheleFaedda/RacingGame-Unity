@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 /*
  * Nel gioco non ci dovrebbero essere punti dove la macchina potrebbe uscire dal piano.
- * Abbiamo preferito comunque di gestire questo (gameOver)
+ * Abbiamo comunque preferito di gestire questo caso.
  */
 public class WorldLimit : MonoBehaviour
 {

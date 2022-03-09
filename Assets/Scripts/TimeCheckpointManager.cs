@@ -11,7 +11,6 @@ public class TimeCheckpointManager : MonoBehaviour {
     int checkPointSucc;
     public GameObject checkPointSucc_go;
     private GameObject[] timePoints;
-    public GameObject timePointFaser; 
     private Color normalTimerColor = new Color32(253,158, 0, 255);
     private int numCoins;
     
@@ -29,14 +28,10 @@ public class TimeCheckpointManager : MonoBehaviour {
         numCoins = 0;
         currentTime = startingTime;
         
-        
         GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
-        
         
         timePoints = GameObject.FindGameObjectsWithTag("TimePoint");
         
-        
-       
         timer = GameObject.FindGameObjectWithTag("Timer"); //Questo mi serve
         coins = GameObject.FindGameObjectWithTag("Coins"); //Questo mi serve
 
@@ -92,47 +87,34 @@ public class TimeCheckpointManager : MonoBehaviour {
                 checkPointSucc_go = other.gameObject;
                 checkPoint = numeroCheckPointCorrente;
                 timeEntered = Time.time;
-                
-
                 if (checkPoint == 0)
                 {   
                     giro++;
                     
                     enableAll();
                 }
-                
                 checkPointSucc++;
-
-               
                 //Debug.Log("" +numCoins);
-             
-                
                 if (checkPointSucc >= checkPointCount)
                     checkPointSucc = 0;
             }
         }
         
         if (other.gameObject.tag == "TimePoint") {
-
-               
-                //timeEntered = Time.time;
-                currentTime += 10;
-
+            currentTime += 10;
                 numCoins += (1+int.Parse(other.gameObject.name)) * (giro+1);
-                Debug.Log("" +numCoins);
+                //Debug.Log("" +numCoins);
                 coins.GetComponent<UnityEngine.UI.Text>().text = "Coins: " + numCoins;
-                other.gameObject.SetActive(false); 
-
-
+                other.gameObject.SetActive(false);
         }
     }
 
+    /*Funzione che abilita tutti i timepoints*/
     private void enableAll()
     {
         foreach(GameObject cube in timePoints){
             cube.SetActive(true);
         }
-
     }
 
 }
