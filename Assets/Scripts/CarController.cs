@@ -71,11 +71,15 @@ public class CarController : MonoBehaviour
         {
             this.GetComponent<PlayerController>().enabled = true;
             this.GetComponent<NPController>().enabled = false;
+            //audioAccelerazione.volume = ;
+            //suonoSgommata.volume = ;
         }
         else
         {
             this.GetComponent<PlayerController>().enabled = false;
             this.GetComponent<NPController>().enabled = true;
+            audioAccelerazione.volume = 0.35f;
+            suonoSgommata.volume = 0.1f;
         }
     }
 
@@ -165,6 +169,7 @@ public class CarController : MonoBehaviour
 
             /*Accedo allo slittamento delle 4 ruote su entrambi gli assi e controllo che sia effettivamente abbastanza grande, se questo
              *valore è alto allora sta sgommando. Il controllo viene fatto è sia in avanti, sia laterale*/
+            //Debug.Log(this.transform.position.y);
             if (Mathf.Abs(ruotaHit.forwardSlip) >= 0.5f || Mathf.Abs(ruotaHit.sidewaysSlip) >= 0.5f)
             {
                 numeroRuoteSgommano++;

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Tachimetro : MonoBehaviour
@@ -13,11 +15,14 @@ public class Tachimetro : MonoBehaviour
 
     private float velocita = 0.0f;
 
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+    }
+
     private void Update()
     {
         velocita = target.velocity.magnitude * 3.6f;
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
-
         testoVelocita.text = ((int) velocita) + "";
 
         //Modifichamo la rotazione sull'asse z
