@@ -20,7 +20,9 @@ public class CheckpointManager : MonoBehaviour
     public float tempoEntrata = 0.0f;
     
     int carRego;
-    private bool regoSet;
+    
+    //Flag se la macchina è stata registrata nella classifica
+    private bool macchinaRegistrata;
     
     //Posizione in classifica
     public string position;
@@ -50,15 +52,15 @@ public class CheckpointManager : MonoBehaviour
             carController = this.GetComponent<CarController>();
         }
 
-        if (!regoSet)
+        if (!macchinaRegistrata)
         {
-            carRego = Leaderboard.RegisterCar(playerName);
-            regoSet = true;
+            carRego = Classifica.RegisteraMacchina(playerName);
+            macchinaRegistrata = true;
             return;
         }
 
-        Leaderboard.SetPosition(carRego, giro, checkPoint, tempoEntrata);
-        position = Leaderboard.GetPosition(carRego);
+        Classifica.setPosizione(carRego, giro, checkPoint, tempoEntrata);
+        position = Classifica.GetPosizione(carRego);
 
         setClassifica(position);
 
