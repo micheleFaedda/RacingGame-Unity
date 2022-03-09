@@ -27,9 +27,6 @@ public class CarController : MonoBehaviour
     //L'audio dell'accelerazione
     public AudioSource audioAccelerazione;
 
-    //L'audio dell'accelerazione
-    public AudioSource audioFrenata;
-
     //L'audio per quando non è in movimento
     public AudioSource audioIdle;
 
@@ -209,19 +206,11 @@ public class CarController : MonoBehaviour
         
         if (frenata != 0.0f)
         {
-            //nel caso la macchina stia frenando vengono attivate le luci di stop e l'audio di frenata
-            if (!audioFrenata.isPlaying && VelocitaCorrente() > 1)
-                audioFrenata.Play();
-            
             luciFrenata[0].SetActive(true);
             luciFrenata[1].SetActive(true);
         }
         else
         {
-            //nel caso la macchina non stia frenando vengono disattivate le luci di stop e l'audio di frenata
-            if (audioFrenata.isPlaying && VelocitaCorrente() <= 1)
-                audioFrenata.Stop();
-            
             luciFrenata[0].SetActive(false);
             luciFrenata[1].SetActive(false);
         }
