@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Vector3 offset;
-    [SerializeField] private Transform target;
-    [SerializeField] private float translateSpeed;
-    [SerializeField] private float rotationSpeed;
+    public Vector3 offset;
+    public Transform target;
+    public float translateSpeed;
+    public float rotationSpeed;
 
     private void FixedUpdate()
     {
