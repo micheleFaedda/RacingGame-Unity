@@ -19,7 +19,8 @@ public class CheckpointManager : MonoBehaviour
     //Il tempo di quando è entrata nell'ultimo checkPoint
     public float tempoEntrata = 0.0f;
     
-    int carRego;
+    //Numero della macchina 
+    int idMacchina;
     
     //Flag se la macchina è stata registrata nella classifica
     private bool macchinaRegistrata;
@@ -52,15 +53,16 @@ public class CheckpointManager : MonoBehaviour
             carController = this.GetComponent<CarController>();
         }
 
+        //se la macchina non è stata registrata la registo e prendo il suo id
         if (!macchinaRegistrata)
         {
-            carRego = Classifica.RegisteraMacchina(playerName);
+            idMacchina = Classifica.RegisteraMacchina(playerName);
             macchinaRegistrata = true;
             return;
         }
 
-        Classifica.setPosizione(carRego, giro, checkPoint, tempoEntrata);
-        position = Classifica.GetPosizione(carRego);
+        Classifica.setPosizione(idMacchina, giro, checkPoint, tempoEntrata);
+        position = Classifica.GetPosizione(idMacchina);
 
         setClassifica(position);
 

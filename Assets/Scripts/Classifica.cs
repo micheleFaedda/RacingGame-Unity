@@ -20,24 +20,22 @@ public class Classifica {
     static Dictionary<int, InfoMacchina> infoMacchine = new Dictionary<int, InfoMacchina>();
     static int numMacchineRegistrate = -1;
 
-    public static int RegisteraMacchina(string name) {
+    public static int RegisteraMacchina(string nome) {
         numMacchineRegistrate++;
-        infoMacchine.Add(numMacchineRegistrate, new InfoMacchina(name, 0, 0.0f));
+        infoMacchine.Add(numMacchineRegistrate, new InfoMacchina(nome, 0, 0.0f));
         return numMacchineRegistrate;
     }
 
-    public static void setPosizione(int rego, int lap, int checkpoint, float time) {
-
-        int position = lap * 1000 + checkpoint;
-        infoMacchine[rego] = new InfoMacchina(infoMacchine[rego].nome, position, time);
+    public static void setPosizione(int id, int giro, int checkpoint, float t) {
+        int posizione = giro * 1000 + checkpoint;
+        infoMacchine[id] = new InfoMacchina(infoMacchine[id].nome, posizione, t);
     }
 
-    public static string GetPosizione(int rego) {
-
+    public static string GetPosizione(int id) {
         int index = 0;
         foreach (KeyValuePair<int, InfoMacchina> pos in infoMacchine.OrderByDescending(key => key.Value.posizione).ThenBy(key => key.Value.tempo)) {
             index++;
-            if (pos.Key == rego) {
+            if (pos.Key == id) {
                 switch (index) {
                     case 1: return "First";
                     case 2: return "Second";
