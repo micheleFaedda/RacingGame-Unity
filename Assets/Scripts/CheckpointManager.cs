@@ -1,60 +1,42 @@
-using System;
-using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
-
-/*
-lap -> giro 
-checkPoint ->
-checkPointCount ->
-nextCheckPoint -> checkPointSucc
-cps -> checkPoints
-lastCP -> checkPointPred
-thisCPNumber -> numeroCheckPointCorrente
-*/
 
 public class CheckpointManager : MonoBehaviour
 {
+    private CarController carController;
+    
+    //Nome del giocatore
+    public string playerName;
 
+    //Il numero di giro che la macchina sta facendo
     public int giro = 0;
+    
+    //Indice del checkPoint raggiunto
     public int checkPoint = -1;
+    
+    //Indice del ckeckPoint non ancora raggiunto
+    public int checkPointSucc;
+    
     public float timeEntered = 0.0f;
-    int checkPointCount;
-    int checkPointSucc;
-    public GameObject checkPointSucc_go;
+    
     int carRego;
     private bool regoSet;
-    public string playerName;
     public string position;
 
     private GameObject primoClassifica;
     private GameObject secondoClassifica;
     private GameObject terzoClassifica;
     private GameObject quartoClassifica;
-
-    private CarController carController;
+    
+    //Array di checkPoints per tenere conto del numero di giri fatti
+    private GameObject[] checkPoints;
 
     void Start()
     {
-
-        GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
-
+        checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         primoClassifica = GameObject.FindGameObjectWithTag("Primo");
         secondoClassifica = GameObject.FindGameObjectWithTag("Secondo");
         terzoClassifica = GameObject.FindGameObjectWithTag("Terzo");
         quartoClassifica = GameObject.FindGameObjectWithTag("Quarto");
-
-        checkPointCount = checkPoints.Length;
-        foreach (GameObject c in checkPoints)
-        {
-
-            if (c.name == "0")
-            {
-                checkPointSucc_go = c;
-                break;
-            }
-        }
     }
 
     void Update()
@@ -78,8 +60,7 @@ public class CheckpointManager : MonoBehaviour
         setClassifica(position);
 
     }
-
-    /*Quando entriamo in un trigger controlliamo se è un checkpoint*/
+    
     private void OnTriggerEnter(Collider other)
     {
 
@@ -88,13 +69,14 @@ public class CheckpointManager : MonoBehaviour
 
             int numeroCheckPointCorrente = int.Parse(other.gameObject.name);
 
+            //Se la macchina ha raggiunto il checkpoint successivo allora aggiorniamo gli indici
             if (numeroCheckPointCorrente == checkPointSucc)
             {
 
-                checkPointSucc_go = other.gameObject;
                 checkPoint = numeroCheckPointCorrente;
                 timeEntered = Time.time;
 
+                //Se il checkPoint da raggiungere era il primo allora aggiorno il numero del giro
                 if (checkPoint == 0)
                 {
                     giro++;
@@ -102,7 +84,8 @@ public class CheckpointManager : MonoBehaviour
 
                 checkPointSucc++;
 
-                if (checkPointSucc >= checkPointCount)
+                //nel caso la macchina raggiunga l'ultimo checkPoint allora il checkpoint da raggiungere diventa il primo
+                if (checkPointSucc >= checkPoints.Length)
                     checkPointSucc = 0;
             }
         }

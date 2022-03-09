@@ -10181,11 +10181,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2137701229}
-  maxSpeed: 260
-  minSpeedArrowAngle: 7.6
-  maxSpeedArrowAngle: -180
-  speedLabel: {fileID: 1920918138}
-  arrow: {fileID: 876982778}
+  angoloMinimo: 0
+  angoloMassimo: 0
+  testoVelocita: {fileID: 1920918138}
+  freccia: {fileID: 876982778}
 --- !u!1 &1570265885
 GameObject:
   m_ObjectHideFlags: 0
@@ -29837,11 +29836,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: David
   giro: 0
   checkPoint: -1
+  checkPointSucc: 0
   timeEntered: 0
-  checkPointSucc_go: {fileID: 1088845228}
-  playerName: David
   position: 
 --- !u!4 &3043344752976602404
 Transform:
@@ -31479,11 +31478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: Anna
   giro: 0
   checkPoint: -1
+  checkPointSucc: 0
   timeEntered: 0
-  checkPointSucc_go: {fileID: 0}
-  playerName: Anna
   position: 
 --- !u!1 &3043344754053514502
 GameObject:
@@ -33786,11 +33785,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: Jack
   giro: 0
   checkPoint: -1
+  checkPointSucc: 0
   timeEntered: 0
-  checkPointSucc_go: {fileID: 1088845228}
-  playerName: Jack
   position: 
 --- !u!33 &3949596519758459899
 MeshFilter:

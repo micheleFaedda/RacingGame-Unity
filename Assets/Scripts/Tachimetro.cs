@@ -5,23 +5,22 @@ public class Tachimetro : MonoBehaviour
 {
     public Rigidbody target;
 
-    public float maxSpeed = 0.0f; // The maximum speed of the target ** IN KM/H **
+    public float angoloMinimo; //Angolo della freccia quando la velocita è minima
+    public float angoloMassimo; //Angolo della freccia quando la velocita è massima
 
-    public float minSpeedArrowAngle;
-    public float maxSpeedArrowAngle;//Angolo della freccia quando la velocita della macchina è massima
-    
-    public Text speedLabel; // The label that displays the speed;
-    public RectTransform arrow; // The arrow in the speedometer
+    public Text testoVelocita;
+    public RectTransform freccia;
 
-    private float speed = 0.0f;
+    private float velocita = 0.0f;
+
     private void Update()
     {
-        speed = target.velocity.magnitude * 3.6f;
+        velocita = target.velocity.magnitude * 3.6f;
 
-        if (speedLabel != null)
-            speedLabel.text = ((int)speed) + "";
-        if (arrow != null)
-            arrow.localEulerAngles =
-                new Vector3(0, 0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
+        testoVelocita.text = ((int) velocita) + "";
+
+        //Modifichamo la rotazione sull'asse z
+        freccia.localEulerAngles =
+            new Vector3(0, 0, Mathf.Lerp(angoloMinimo, angoloMassimo, velocita / 260));
     }
 }
