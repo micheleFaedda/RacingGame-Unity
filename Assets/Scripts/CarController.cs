@@ -252,8 +252,10 @@ public class CarController : MonoBehaviour
             else
             {
                 //brakeTorque è un'attributo che pemette di simulare la frenata della macchina
-                collidersRuote[i].brakeTorque = frenata;
+                //collidersRuote[i].brakeTorque = frenata;
             }
+            
+            collidersRuote[i].brakeTorque = frenata;
             
             Quaternion quaternione;
             Vector3 posizione;

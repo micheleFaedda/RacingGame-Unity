@@ -41,7 +41,7 @@ public class NPController : MonoBehaviour
         targetSucc = waypoints[wpDaRaggiungere].transform.position;
         
         //Start della coroutine che si occupa di correggere gli NPC
-        corutine = WaitAndRepositioning(5f);
+        corutine = WaitAndRepositioning(10f);
         StartCoroutine(corutine);
     }
 
@@ -62,9 +62,10 @@ public class NPController : MonoBehaviour
         float frenata = 0;
 
         //Nel caso stia per raggiungere il waypoint si frena per non mancare quello successivo
-        if(distanzaCorrente < 5){
+        if(distanzaCorrente < 5 && waypoints[wpDaRaggiungere].tag.Equals("frenata")){
             frenata = 0.8f;
-            accelerazione = 0.1f;
+            carController.rb.velocity -= carController.rb.velocity * 0.06f;
+            //accelerazione = 0.1f;
         }
         
         carController.Move(accelerazione, sterzata, frenata);
