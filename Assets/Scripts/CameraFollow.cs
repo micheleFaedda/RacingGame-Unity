@@ -3,12 +3,13 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Vector3 offset;
-    public Transform target;
+    private Transform target;
     public float translateSpeed;
     public float rotationSpeed;
 
     private void FixedUpdate()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         HandleTranslation();
         HandleRotation();
     }

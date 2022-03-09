@@ -16,6 +16,7 @@ public class Tachimetro : MonoBehaviour
     private void Update()
     {
         velocita = target.velocity.magnitude * 3.6f;
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
 
         testoVelocita.text = ((int) velocita) + "";
 

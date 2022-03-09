@@ -66,6 +66,17 @@ public class CarController : MonoBehaviour
         //inizialmente le luci di stop sono disattivate
         luciFrenata[0].SetActive(false);
         luciFrenata[1].SetActive(false);
+
+        if (this.gameObject.CompareTag("Player"))
+        {
+            this.GetComponent<PlayerController>().enabled = true;
+            this.GetComponent<NPController>().enabled = false;
+        }
+        else
+        {
+            this.GetComponent<PlayerController>().enabled = false;
+            this.GetComponent<NPController>().enabled = true;
+        }
     }
 
     public float VelocitaCorrente()

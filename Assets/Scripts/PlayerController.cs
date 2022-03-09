@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
     
     private CarController carController;
-    
+
     //Prefab del testo che verra visualizzato sopra la macchina del player
     public GameObject prefabtestoGiocatore;
     
@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
         testoPlayer = Instantiate(prefabtestoGiocatore);
         testoPlayer.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>());
         testoPlayer.GetComponent<Text>().fontSize = 70;
+
+        this.transform.Find("CameraRetro").gameObject.SetActive(true);
     }
 
     void Update()
