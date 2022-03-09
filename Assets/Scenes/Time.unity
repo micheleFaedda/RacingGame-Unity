@@ -4341,9 +4341,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3389625567042043170, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625567042043181, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3389625567135445918, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
       propertyPath: m_Name
-      value: CHECKPOINTS (1)
+      value: TimePoints
       objectReference: {fileID: 0}
     - target: {fileID: 3389625567135445919, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
       propertyPath: m_RootOrder
@@ -4388,6 +4396,86 @@ PrefabInstance:
     - target: {fileID: 3389625567135445919, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625567427668994, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625567427669005, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625567737865057, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625567737865068, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625567747249676, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625567747249679, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568391068168, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568391068173, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568429569372, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568429569375, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568531168882, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568531168893, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568545607658, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568545607663, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568580273346, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568580273357, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568786370041, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568786370046, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568866370929, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389625568866370934, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
+      propertyPath: m_TagString
+      value: TimePoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12cf0dc69077a4183a850c037ae52894, type: 3}
@@ -10678,6 +10766,7 @@ MonoBehaviour:
   checkPoint: -1
   timeEntered: 0
   checkPointSucc_go: {fileID: 0}
+  timePointFaser: {fileID: 0}
 --- !u!1 &2139145628
 GameObject:
   m_ObjectHideFlags: 0

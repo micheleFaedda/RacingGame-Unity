@@ -21,6 +21,7 @@ TagManager:
   - NPC3
   - Timer
   - Coins
+  - TimePoint
   layers:
   - Default
   - TransparentFX
