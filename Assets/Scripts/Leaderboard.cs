@@ -3,14 +3,14 @@ using System.Linq;
 
 struct PlayerStats {
 
-    public string name;
-    public int position;
-    public float time;
+    public string nome;
+    public int posizione;
+    public float tempo;
 
     public PlayerStats(string n, int p, float t) {
-        name = n;
-        position = p;
-        time = t;
+        nome = n;
+        posizione = p;
+        tempo = t;
     }
 }
 
@@ -35,13 +35,13 @@ public class Leaderboard {
     public static void SetPosition(int rego, int lap, int checkpoint, float time) {
 
         int position = lap * 1000 + checkpoint;
-        lb[rego] = new PlayerStats(lb[rego].name, position, time);
+        lb[rego] = new PlayerStats(lb[rego].nome, position, time);
     }
 
     public static string GetPosition(int rego) {
 
         int index = 0;
-        foreach (KeyValuePair<int, PlayerStats> pos in lb.OrderByDescending(key => key.Value.position).ThenBy(key => key.Value.time)) {
+        foreach (KeyValuePair<int, PlayerStats> pos in lb.OrderByDescending(key => key.Value.posizione).ThenBy(key => key.Value.tempo)) {
 
             index++;
             if (pos.Key == rego) {
@@ -59,9 +59,9 @@ public class Leaderboard {
 
         List<string> places = new List<string>();
 
-        foreach (KeyValuePair<int, PlayerStats> pos in lb.OrderByDescending(key => key.Value.position).ThenBy(key => key.Value.time)) {
+        foreach (KeyValuePair<int, PlayerStats> pos in lb.OrderByDescending(key => key.Value.posizione).ThenBy(key => key.Value.tempo)) {
 
-            places.Add(pos.Value.name);
+            places.Add(pos.Value.nome);
         }
         return places;
     }

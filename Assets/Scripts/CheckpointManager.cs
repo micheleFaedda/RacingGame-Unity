@@ -16,16 +16,19 @@ public class CheckpointManager : MonoBehaviour
     //Indice del ckeckPoint non ancora raggiunto
     public int checkPointSucc;
     
-    public float timeEntered = 0.0f;
+    //Il tempo di quando è entrata nell'ultimo checkPoint
+    public float tempoEntrata = 0.0f;
     
     int carRego;
     private bool regoSet;
+    
+    //Posizione in classifica
     public string position;
 
-    private GameObject primoClassifica;
-    private GameObject secondoClassifica;
-    private GameObject terzoClassifica;
-    private GameObject quartoClassifica;
+    private GameObject primoClassificaTesto;
+    private GameObject secondoClassificaTesto;
+    private GameObject terzoClassificaTesto;
+    private GameObject quartoClassificaTesto;
     
     //Array di checkPoints per tenere conto del numero di giri fatti
     private GameObject[] checkPoints;
@@ -33,10 +36,10 @@ public class CheckpointManager : MonoBehaviour
     void Start()
     {
         checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
-        primoClassifica = GameObject.FindGameObjectWithTag("Primo");
-        secondoClassifica = GameObject.FindGameObjectWithTag("Secondo");
-        terzoClassifica = GameObject.FindGameObjectWithTag("Terzo");
-        quartoClassifica = GameObject.FindGameObjectWithTag("Quarto");
+        primoClassificaTesto = GameObject.FindGameObjectWithTag("Primo");
+        secondoClassificaTesto = GameObject.FindGameObjectWithTag("Secondo");
+        terzoClassificaTesto = GameObject.FindGameObjectWithTag("Terzo");
+        quartoClassificaTesto = GameObject.FindGameObjectWithTag("Quarto");
     }
 
     void Update()
@@ -54,7 +57,7 @@ public class CheckpointManager : MonoBehaviour
             return;
         }
 
-        Leaderboard.SetPosition(carRego, giro, checkPoint, timeEntered);
+        Leaderboard.SetPosition(carRego, giro, checkPoint, tempoEntrata);
         position = Leaderboard.GetPosition(carRego);
 
         setClassifica(position);
@@ -74,7 +77,8 @@ public class CheckpointManager : MonoBehaviour
             {
 
                 checkPoint = numeroCheckPointCorrente;
-                timeEntered = Time.time;
+                
+                tempoEntrata = Time.time;
 
                 //Se il checkPoint da raggiungere era il primo allora aggiorno il numero del giro
                 if (checkPoint == 0)
@@ -96,16 +100,16 @@ public class CheckpointManager : MonoBehaviour
         switch (position)
         {
             case "First":
-                primoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                primoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
                 break;
             case "Second":
-                secondoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                secondoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
                 break;
             case "Third":
-                terzoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                terzoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
                 break;
             case "Fourth":
-                quartoClassifica.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                quartoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
                 break;
         }
 
