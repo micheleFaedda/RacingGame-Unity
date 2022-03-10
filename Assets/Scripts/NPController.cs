@@ -25,6 +25,7 @@ public class NPController : MonoBehaviour
     
     //Per risposizionare gli NPC
     private IEnumerator corutine;
+
     
     void Start()
     {    
@@ -45,7 +46,7 @@ public class NPController : MonoBehaviour
         StartCoroutine(corutine);
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         Vector3 localTarget = carController.rb.gameObject.transform.InverseTransformPoint(targetSucc);
@@ -57,15 +58,25 @@ public class NPController : MonoBehaviour
         //blocco il valore di starzata tra -1 e 1
         float sterzata = Mathf.Clamp(targetAngle * steeringSensitivity, -1.0f, 1.0f) * Mathf.Sign(carController.VelocitaCorrente());
         
+        
         //Nel caso stia per raggiungere il waypoint accelerazione e frenata cambiano nell'if successivo
         float accelerazione = 1f;
         float frenata = 0;
 
-        //Nel caso stia per raggiungere il waypoint si frena per non mancare quello successivo
-        if(distanzaCorrente < 5 && waypoints[wpDaRaggiungere].tag.Equals("frenata")){
+        //Nel caso stia per raggiungere il waypoint, la sua velocità sia abbastanza elevata
+        //e si incontra un punto di frenata, si frena per non mancare quello successivo
+        if(distanzaCorrente < 5 && carController.rb.velocity.magnitude > 9f  && waypoints[wpDaRaggiungere].tag.Equals("frenata"))
+        {
             frenata = 0.8f;
             carController.rb.velocity -= carController.rb.velocity * 0.06f;
-            //accelerazione = 0.1f;
+        }
+        
+        
+        //Nel caso abbia un'angolo elevato verso il prossimo target e una velocità elevata, allora diminuisco la sua velocità
+        if (Mathf.Abs(targetAngle) > 36f && carController.rb.velocity.magnitude > 14f)
+        {
+            frenata = 0.4f;
+            carController.rb.velocity -= carController.rb.velocity * 0.025f;
         }
         
         carController.Move(accelerazione, sterzata, frenata);
@@ -106,8 +117,12 @@ public class NPController : MonoBehaviour
                 //Per riposizionare la macchina non basta settare la posizione, serve anche la rotazione per metterlo nella direzone giusta
                 this.transform.position =  waypoints[wpDaRaggiungere-1].transform.position + Vector3.up * 1.2f;
                 this.transform.rotation = waypoints[wpDaRaggiungere-1].transform.rotation;
+                Debug.Log("DEBUG GIRATO: \nSONO LA MACCHINA: "+ carController.name);
                 //targeSucctOld = waypoints[wpDaRaggiungere-1].transform.position;
             }
         }
+        
+        
     }
+      
 }
