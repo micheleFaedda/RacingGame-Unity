@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
         /*Il testo che viene stampato dipenda dalla modalita nella quali si gioca
          In modalità Time viene visualizzato solo il numero di giri, nella modalità racing anche la posizione in classifica
          */
-        if (SceneManager.GetActiveScene().name.Equals("Time"))
+        if (PlayerPrefs.GetString("modalita").Equals("time"))
         {
             text = "Lap: " + this.GetComponent<TimeCheckpointManager>().giro;
         }

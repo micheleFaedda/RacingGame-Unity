@@ -65,7 +65,12 @@ public class CheckpointManager : MonoBehaviour
         terzoClassificaTesto = GameObject.FindGameObjectWithTag("Terzo");
         quartoClassificaTesto = GameObject.FindGameObjectWithTag("Quarto");
         timer = GameObject.FindGameObjectWithTag("Timer");
-        distanceCanvas = GameObject.FindGameObjectWithTag("Distance");
+        
+        if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+        {
+            distanceCanvas = GameObject.FindGameObjectWithTag("Distance");
+        }
+        
         
         
         if (gameObject.CompareTag("Player"))
@@ -76,8 +81,12 @@ public class CheckpointManager : MonoBehaviour
             carController = this.GetComponent<CarController>();//ottengo carController
             vecchiaPosizione = this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
             distance +=Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position)/ 1000f; //inizializzo la distanza
-            distanceCanvas.GetComponent<UnityEngine.UI.Text>().text = String.Format("{0:0.000}",distance) + " KM";//visualizzo a video
 
+            if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+            {
+                distanceCanvas.GetComponent<UnityEngine.UI.Text>().text = String.Format("{0:0.000}",distance) + " KM";//visualizzo a video
+            }
+            
         }
     }
 
@@ -105,8 +114,12 @@ public class CheckpointManager : MonoBehaviour
         {   
             if(timer != null)
                 CurrentTimer(); //visualizzo il tempo corrente
-            
-            CurrentDistance(); //visuallizzo la distanza corrente
+
+            if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+            {
+                CurrentDistance(); //visuallizzo la distanza corrente
+            }
+           
         }
 
     }

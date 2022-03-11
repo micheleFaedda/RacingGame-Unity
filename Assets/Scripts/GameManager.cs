@@ -8,49 +8,61 @@ public class GameManager : MonoBehaviour
     public GameObject[] countDownElements;
     public GameObject[] macchine;
     public GameObject[] wayPoints;
-    //private Transform[] posizioni_npc;
+    private Vector3[] posizioni_npc;
     public GameObject timePoints;
+    public GameObject distanza;
+    public GameObject coins;
 
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
 
     void Awake()
     {
+
         GameObject m;
         switch (PlayerPrefs.GetString("modalita"))
         {
             case "time":
                 GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
+                distanza.SetActive(false);
+                coins.SetActive(true);
+                timePoints.SetActive(true);
                 foreach (GameObject wp in wayPoints)
                 {
                     wp.SetActive(false);
                 }
                 timePoints.SetActive(true);
-                m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (1.528828f, 0, 240f), Quaternion.identity) as GameObject;
+                m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (1.528828f, 0, 240f), Quaternion.identity * Quaternion.Euler(0, -90, 0)) as GameObject;
                 m.tag = "Player";
                 m.AddComponent<TimeCheckpointManager>();
                 break;
             case "racing":
+                
+                posizioni_npc = new Vector3[3]{new Vector3(-2.92f,0,232), new Vector3(7.1f,0,241), new Vector3(13.7f,0,231.5f)};
+                
                 timePoints.SetActive(false);
-                m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (1.528828f, 0, 240f), Quaternion.identity) as GameObject;
+                coins.SetActive(false);
+                m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (22.7f, 0, 241f), Quaternion.identity * Quaternion.Euler(0, -90, 0)) as GameObject;
                 m.tag = "Player";
                 m.GetComponent<CheckpointManager>().enabled = true;
                 m.GetComponent<CheckpointManager>().playerName = PlayerPrefs.GetString("player_name");
 
-                int index_wp = 0;
+                int index_npc = 0;
                 for (int i = 0; i < macchine.Length; i++)
                 {
                     if (i != PlayerPrefs.GetInt("macchina_giocatore"))
                     {
-                        GameObject npc = Instantiate (macchine[i], new Vector3 (40f + i * 10, 0, 240f), Quaternion.identity) as GameObject;
+                        GameObject npc = Instantiate (macchine[i], posizioni_npc[index_npc], Quaternion.identity * Quaternion.Euler(0, -90, 0)) as GameObject;
                         npc.GetComponent<CheckpointManager>().enabled = true;
-                        npc.GetComponent<NPController>().circuito = wayPoints[index_wp];
-                        index_wp++;
+                        npc.GetComponent<NPController>().circuito = wayPoints[index_npc];
+                        index_npc++;
                     }
                 }
                 
                 break;
             case "multiplayer":
+                GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
+                coins.SetActive(false);
                 foreach (GameObject wp in wayPoints)
                 {
                     wp.SetActive(false);
