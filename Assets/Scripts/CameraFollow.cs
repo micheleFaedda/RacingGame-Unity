@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Photon.Pun;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -9,7 +11,30 @@ public class CameraFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        if (target == null)
+        {
+            if (PhotonNetwork.IsConnected)
+            {
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject player in players)
+                {
+                    if(PhotonView.Get(player).GetComponent<PlayerController>().view == null) return;
+                    if (PhotonView.Get(player).GetComponent<PlayerController>().view.IsMine)
+                    {
+                        this.target = player.transform;
+                        return;
+                    }
+                }
+
+                return;
+            }
+            else
+            {
+                target = GameObject.FindGameObjectWithTag("Player").transform;
+            }
+            
+        }
         HandleTranslation();
         HandleRotation();
     }

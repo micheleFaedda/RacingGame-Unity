@@ -1446,6 +1446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabtestoGiocatore: {fileID: 914072637217356706, guid: fbb01b1cdb7074896b1ce4fc1f9ded6d, type: 3}
+  view: {fileID: 0}
 --- !u!114 &2264407021658538421
 MonoBehaviour:
   m_ObjectHideFlags: 0

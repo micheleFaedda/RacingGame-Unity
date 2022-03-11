@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using Photon.Pun;
 using UnityEngine.UI;
 
 /*
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     
     //testo che verra visualizzato sopra la macchina del player (numero di giri e la posizione in classifica)
     private GameObject testoPlayer;
+    
+    public PhotonView view;
 
     void Start()
     {
@@ -26,10 +28,17 @@ public class PlayerController : MonoBehaviour {
         testoPlayer.GetComponent<Text>().fontSize = 70;
 
         this.transform.Find("CameraRetro").gameObject.SetActive(true);
+        
+        view = GetComponent<PhotonView>();
     }
 
     void Update()
     {
+
+        if (PhotonNetwork.IsConnected)
+        {
+            if (!view.IsMine) return;
+        }
 
         string text;
         testoPlayer.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 1.7f);

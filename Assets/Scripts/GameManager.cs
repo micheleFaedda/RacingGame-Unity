@@ -68,7 +68,10 @@ public class GameManager : MonoBehaviour
                     wp.SetActive(false);
                 }
                 timePoints.SetActive(false);
-                PhotonNetwork.Instantiate(macchine[PlayerPrefs.GetInt("macchina_giocatore")].name, new Vector3 (1.528828f, 0, 240f), Quaternion.identity * Quaternion.Euler(0, -90, 0)); 
+                m = PhotonNetwork.Instantiate(macchine[PlayerPrefs.GetInt("macchina_giocatore")].name, new Vector3 (1.528828f, 0, 240f), Quaternion.identity * Quaternion.Euler(0, -90, 0));
+                m.tag = "Player";
+                m.GetComponent<CheckpointManager>().playerName = PlayerPrefs.GetString("player_name");
+                m.GetComponent<CarController>().forza = PlayerPrefs.GetInt("forza");
                 break;
         }
         
