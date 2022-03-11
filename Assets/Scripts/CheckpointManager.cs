@@ -1,4 +1,9 @@
+using System;
+using System.Diagnostics;
+using System.Globalization;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -35,6 +40,21 @@ public class CheckpointManager : MonoBehaviour
     
     //Array di checkPoints per tenere conto del numero di giri fatti
     private GameObject[] checkPoints;
+    
+    
+    /*************timer MICHI*********************************************/
+    private GameObject timer;
+    private Stopwatch stopWatch;
+    private string elapsedTime;
+    /********************************************************/
+    
+    
+    /*********DISTANZA MICHI*********/
+    private GameObject distanceCanvas;
+    private float distance = 0.0f;
+    private Vector3 vecchiaPosizione;
+
+    /***********************/
 
     void Start()
     {
@@ -43,15 +63,30 @@ public class CheckpointManager : MonoBehaviour
         secondoClassificaTesto = GameObject.FindGameObjectWithTag("Secondo");
         terzoClassificaTesto = GameObject.FindGameObjectWithTag("Terzo");
         quartoClassificaTesto = GameObject.FindGameObjectWithTag("Quarto");
+        timer = GameObject.FindGameObjectWithTag("Timer");
+        distanceCanvas = GameObject.FindGameObjectWithTag("Distance");
+        
+        
+        if (gameObject.CompareTag("Player"))
+        {   
+            if(timer != null)
+                stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
+            
+            carController = this.GetComponent<CarController>();//ottengo carController
+            vecchiaPosizione = carController.rb.position; //inizializzo la vecchia posizione con quella di partenza 
+            distance +=Vector3.Distance(vecchiaPosizione, carController.rb.position)/ 1000f; //inizializzo la distanza
+            distanceCanvas.GetComponent<UnityEngine.UI.Text>().text = String.Format("{0:0.000}",distance) + " KM";//visualizzo a video
+
+        }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-
         if (carController == null)
         {
             carController = this.GetComponent<CarController>();
         }
+        
 
         //se la macchina non è stata registrata la registo e prendo il suo id
         if (!macchinaRegistrata)
@@ -65,6 +100,13 @@ public class CheckpointManager : MonoBehaviour
         position = Classifica.GetPosizione(idMacchina);
 
         setClassifica(position);
+        if (gameObject.CompareTag("Player"))
+        {   
+            if(timer != null)
+                CurrentTimer(); //visualizzo il tempo corrente
+            
+            CurrentDistance(); //visuallizzo la distanza corrente
+        }
 
     }
     
@@ -88,6 +130,18 @@ public class CheckpointManager : MonoBehaviour
                 if (checkPoint == 0)
                 {
                     giro++;
+                    
+         
+                    if (gameObject.CompareTag("Player") && timer != null)
+                    {    /*Se questo è il player allora faccio scattare il timer*/
+                        if (!stopWatch.IsRunning)
+                            startTimer();
+                        else 
+                            stopWatch.Restart();
+                        
+
+                    }
+            
                 }
 
                 checkPointSucc++;
@@ -117,5 +171,42 @@ public class CheckpointManager : MonoBehaviour
                 break;
         }
 
+    }
+    
+    private void startTimer()
+    {   
+        
+        stopWatch.Start(); //lo faccio partire 
+        TimeSpan ts = stopWatch.Elapsed; //prendo il suo tempo corrente e lo assegno ad un TimeSpan
+        
+        elapsedTime = String.Format("{1:00}:{2:00}:{3:00}",  
+            ts.Hours, ts.Minutes, ts.Seconds,
+            ts.Milliseconds / 10); //formatto il tempo corrente
+              
+               
+        timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime +""; //stampo nella UI
+    }
+    private void CurrentTimer() //stessa cosa di sopra solo che viene stampato il tempo corrente
+    {
+        if (stopWatch != null)
+        {
+            TimeSpan ts = stopWatch.Elapsed;
+            
+            elapsedTime = String.Format("{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+
+
+            timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime + "";
+        }
+        
+    }
+
+    /*Metodo che si occupa di calcolare la distanza percorsa a partire da quella vecchia*/
+    private void CurrentDistance() 
+    {
+        distance +=Vector3.Distance(vecchiaPosizione, carController.rb.position)/ 1000f; //calcolo la distanza percorsa
+        distanceCanvas.GetComponent<UnityEngine.UI.Text>().text = String.Format("{0:0.000}",distance) + " KM"; //stampo a video
+        vecchiaPosizione = carController.rb.position; //aggiorno la vecchia posizione 
     }
 }

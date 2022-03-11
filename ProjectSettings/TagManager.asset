@@ -22,6 +22,8 @@ TagManager:
   - Timer
   - Coins
   - TimePoint
+  - frenata
+  - Distance
   layers:
   - Default
   - TransparentFX
