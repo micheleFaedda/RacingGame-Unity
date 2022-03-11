@@ -58,6 +58,7 @@ public class CheckpointManager : MonoBehaviour
 
     void Start()
     {
+        
         checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         primoClassificaTesto = GameObject.FindGameObjectWithTag("Primo");
         secondoClassificaTesto = GameObject.FindGameObjectWithTag("Secondo");
@@ -73,8 +74,8 @@ public class CheckpointManager : MonoBehaviour
                 stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
             
             carController = this.GetComponent<CarController>();//ottengo carController
-            vecchiaPosizione = carController.rb.position; //inizializzo la vecchia posizione con quella di partenza 
-            distance +=Vector3.Distance(vecchiaPosizione, carController.rb.position)/ 1000f; //inizializzo la distanza
+            vecchiaPosizione = this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
+            distance +=Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position)/ 1000f; //inizializzo la distanza
             distanceCanvas.GetComponent<UnityEngine.UI.Text>().text = String.Format("{0:0.000}",distance) + " KM";//visualizzo a video
 
         }
@@ -113,7 +114,7 @@ public class CheckpointManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.tag == "CheckPoint")
+        if (other.gameObject.tag == "CheckPoint" && (PlayerPrefs.GetString("modalita").Equals("racing") || PlayerPrefs.GetString("modalita").Equals("multiplayer")))
         {
 
             int numeroCheckPointCorrente = int.Parse(other.gameObject.name);

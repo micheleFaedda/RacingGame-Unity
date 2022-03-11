@@ -1123,6 +1123,7 @@ GameObject:
   - component: {fileID: 6101254549117102402}
   - component: {fileID: 6101254549117103805}
   - component: {fileID: 6101254549117103804}
+  - component: {fileID: 6456861577503050988}
   m_Layer: 0
   m_Name: YellowCar
   m_TagString: Untagged
@@ -1556,6 +1557,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6456861577503050988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6101254549117103807}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: yellow car
+  giro: 0
+  checkPoint: -1
+  checkPointSucc: 0
+  tempoEntrata: 0
+  position: 
 --- !u!1 &7823304697136475742
 GameObject:
   m_ObjectHideFlags: 0

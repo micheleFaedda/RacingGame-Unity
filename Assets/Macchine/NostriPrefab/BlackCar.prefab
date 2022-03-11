@@ -1075,6 +1075,7 @@ GameObject:
   - component: {fileID: 2264407021658538418}
   - component: {fileID: 2264407021658538421}
   - component: {fileID: 2264407021658538420}
+  - component: {fileID: 9124533224853372080}
   m_Layer: 0
   m_Name: BlackCar
   m_TagString: Untagged
@@ -1508,6 +1509,24 @@ MonoBehaviour:
   rb: {fileID: 0}
   velocitaMassima: 200
   centroMassa: {fileID: 2264407020401680379}
+--- !u!114 &9124533224853372080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978194613698311365}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: blackCar
+  giro: 0
+  checkPoint: -1
+  checkPointSucc: 0
+  tempoEntrata: 0
+  position: 
 --- !u!1 &9107343218062262662
 GameObject:
   m_ObjectHideFlags: 0

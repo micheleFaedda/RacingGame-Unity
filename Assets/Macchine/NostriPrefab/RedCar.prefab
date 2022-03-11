@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 1227431688633429659}
   - component: {fileID: 1227431688633429658}
   - component: {fileID: 1227431688633429661}
+  - component: {fileID: -5742176476028157256}
   m_Layer: 0
   m_Name: RedCar
   m_TagString: Untagged
@@ -539,6 +540,24 @@ MonoBehaviour:
   targeSucctOld: {x: 0, y: 0, z: 0}
   wpDaRaggiungere: 0
   circuito: {fileID: 0}
+--- !u!114 &-5742176476028157256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227431688633429648}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222b21ca1a88345ebaf0e2eac092d8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: red car
+  giro: 0
+  checkPoint: -1
+  checkPointSucc: 0
+  tempoEntrata: 0
+  position: 
 --- !u!1 &1383676181991351596
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/SceltaModalita.unity
+    guid: e0e324a4ef2d041868897c2b94e019a4
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: c2c13f144aa014025827d1addaba758c
   m_configObjects: {}

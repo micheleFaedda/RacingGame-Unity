@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
+
         carController = this.GetComponent<CarController>();
-        
         testoPlayer = Instantiate(prefabtestoGiocatore);
         testoPlayer.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>());
         testoPlayer.GetComponent<Text>().fontSize = 70;
