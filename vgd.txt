@@ -1,0 +1,29 @@
+
+- fare bellina la classifica (si puo anche pensare di colorare il testo in funzione del colore della macchina)
+- le frecce per le macchine (i prefab sono 8: sia nella cartella Resources, sia nella cartella Macchine/NostriPrefab)
+- decidere la disposizione degli elementi durante il gioco
+- risovere con la camera specchio
+
+- fare la scena iniziale (con l'animazione e la possibilita di inserire uno username, "player" di default) (con torna indietro in alto a sx)
+- fare la scena per sbloccare e selezionare le macchine (con torna indietro in alto a sx)
+- fare bella la scena con la scritta Loading.. (con torna indietro in alto a sx)
+- fare la scena con la selezione della madalità
+	- time: immagine
+	- race: immagine + la possibilità di cambiare il numero di giri (da settare in player prefs come "num_giri_race"). 
+	In funzione del numero si settano i punteggi sotto l'immagine.
+	- multi: immagine piu la possibilità di cambiare il numero dei giri (da settare in player prefs come "num_giri_multi").
+	In funzione del numero si settano i punteggi sotto l'immagine.
+- fare il menu di pausa e uscita volontaria dal gioco
+
+- mettere nello script WorldLimit la funzione che riposiziona la macchina nel traguardo (il primo checkPoint)/ o fare game over
+- rivedere i prefab
+- settare le forze delle macchine npc nel GameManager (70, 80, 120, 200)
+- valutare se togliere il multiplayer (funziona, me è da capire se va bene)
+- fare la fine del gioco per ogni modalità
+- Ricommentare gli script
+- Rimuovere le 2 scene che non servono
+
+
+
+
+
