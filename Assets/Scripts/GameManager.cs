@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Linq;
-using Unity.VisualScripting;
+using Photon.Pun;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] countDownElements;
     public GameObject[] macchine;
+    
     public GameObject[] wayPoints;
     private Vector3[] posizioni_npc;
     public GameObject timePoints;
     public GameObject distanza;
     public GameObject coins;
-
+    
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
 
@@ -37,7 +38,6 @@ public class GameManager : MonoBehaviour
                 m.AddComponent<TimeCheckpointManager>();
                 break;
             case "racing":
-                
                 posizioni_npc = new Vector3[3]{new Vector3(-2.92f,0,232), new Vector3(7.1f,0,241), new Vector3(13.7f,0,231.5f)};
                 
                 timePoints.SetActive(false);
@@ -61,13 +61,14 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case "multiplayer":
-                GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
+                GameObject.FindGameObjectWithTag("Classifica").SetActive(true);
                 coins.SetActive(false);
                 foreach (GameObject wp in wayPoints)
                 {
                     wp.SetActive(false);
                 }
                 timePoints.SetActive(false);
+                PhotonNetwork.Instantiate(macchine[PlayerPrefs.GetInt("macchina_giocatore")].name, new Vector3 (1.528828f, 0, 240f), Quaternion.identity * Quaternion.Euler(0, -90, 0)); 
                 break;
         }
         
