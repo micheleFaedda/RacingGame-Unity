@@ -46,7 +46,7 @@ public class CheckpointManager : MonoBehaviour
 
 
     /*************timer MICHI*********************************************/
-    private GameObject timer;
+    public GameObject timer;
     private Stopwatch stopWatch;
 
     private string elapsedTime;
@@ -59,6 +59,8 @@ public class CheckpointManager : MonoBehaviour
     private Vector3 vecchiaPosizione;
 
     /***********************/
+    
+    public PhotonView view;
 
     void Start()
     {
@@ -67,6 +69,8 @@ public class CheckpointManager : MonoBehaviour
         secondoClassificaTesto = GameObject.FindGameObjectWithTag("Secondo");
         terzoClassificaTesto = GameObject.FindGameObjectWithTag("Terzo");
         quartoClassificaTesto = GameObject.FindGameObjectWithTag("Quarto");
+        
+        view = GetComponent<PhotonView>();
         //timer = GameObject.FindGameObjectWithTag("Timer");
 
         if (!(PlayerPrefs.GetString("modalita").Equals("time")))
@@ -77,22 +81,51 @@ public class CheckpointManager : MonoBehaviour
 
         if (gameObject.CompareTag("Player"))
         {
-            timer = GameObject.FindGameObjectWithTag("Timer");
-            if (timer != null)
+            
+            if (PhotonNetwork.IsConnected)
             {
-                stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
+                if (view.IsMine)
+                {
+                    timer = GameObject.FindGameObjectWithTag("Timer");
+            
+                    if (timer != null)
+                    {
+                        stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
+                    }
+
+                    carController = this.GetComponent<CarController>(); //ottengo carController
+                    vecchiaPosizione =
+                        this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
+                    distance += Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position) /
+                                1000f; //inizializzo la distanza
+
+                    if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+                    {
+                        distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
+                            String.Format("{0:0.000}", distance) + " KM"; //visualizzo a video
+                    }
+                }
             }
-
-            carController = this.GetComponent<CarController>(); //ottengo carController
-            vecchiaPosizione =
-                this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
-            distance += Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position) /
-                        1000f; //inizializzo la distanza
-
-            if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+            else
             {
-                distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
-                    String.Format("{0:0.000}", distance) + " KM"; //visualizzo a video
+                timer = GameObject.FindGameObjectWithTag("Timer");
+            
+                if (timer != null)
+                {
+                    stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
+                }
+
+                carController = this.GetComponent<CarController>(); //ottengo carController
+                vecchiaPosizione =
+                    this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
+                distance += Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position) /
+                            1000f; //inizializzo la distanza
+
+                if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+                {
+                    distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
+                        String.Format("{0:0.000}", distance) + " KM"; //visualizzo a video
+                }
             }
         }
     }
@@ -119,9 +152,8 @@ public class CheckpointManager : MonoBehaviour
         {
             setClassifica(position);   
         }
-
-
-        if (gameObject.CompareTag("Player"))
+        
+        if (gameObject.CompareTag("Player") && PhotonNetwork.IsConnected && view.IsMine)
         {
             if (timer != null)
                 CurrentTimer(); //visualizzo il tempo corrente
@@ -188,7 +220,7 @@ public class CheckpointManager : MonoBehaviour
             
                     }
                     
-                    if (gameObject.CompareTag("Player") && timer != null)
+                    if (gameObject.CompareTag("Player") && timer != null && PhotonNetwork.IsConnected && view.IsMine)
                     {
                         /*Se questo è il player allora faccio scattare il timer*/
                         if (!stopWatch.IsRunning)
