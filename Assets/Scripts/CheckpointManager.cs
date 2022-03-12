@@ -109,7 +109,7 @@ public class CheckpointManager : MonoBehaviour
             if (GetComponent<PlayerController>().view == null) return;
             if (GetComponent<PlayerController>().view.IsMine)
             {
-                Debug.Log(PlayerPrefs.GetString("cacca", position));
+                Debug.Log(position);
             }
         }
 
