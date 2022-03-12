@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     public GameObject[] macchine;
     
     public GameObject[] wayPoints;
-    private Vector3[] posizioni_npc;
+    private Vector3[] posizioni_npc = new Vector3[3]{new Vector3(-2.92f,0,232), new Vector3(7.1f,0,241), new Vector3(13.7f,0,231.5f)};
     public GameObject timePoints;
     public GameObject distanza;
     public GameObject coins;
 
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
-
+    
     void Awake()
     {
 
@@ -39,8 +39,7 @@ public class GameManager : MonoBehaviour
                 m.AddComponent<TimeCheckpointManager>();
                 break;
             case "racing":
-                posizioni_npc = new Vector3[3]{new Vector3(-2.92f,0,232), new Vector3(7.1f,0,241), new Vector3(13.7f,0,231.5f)};
-                
+
                 timePoints.SetActive(false);
                 coins.SetActive(false);
                 m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (22.7f, 0, 241f), Quaternion.identity * Quaternion.Euler(0, -90, 0)) as GameObject;
