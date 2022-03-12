@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
+    public static bool flag_started_coundown = false;
     
     void Awake()
     {
@@ -98,8 +99,9 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if (PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers && !start)
+        if (PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers && !flag_started_coundown)
         {
+            flag_started_coundown = true;
             StartCoroutine(CountDown());
         }
     }
