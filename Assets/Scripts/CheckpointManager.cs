@@ -168,6 +168,14 @@ public class CheckpointManager : MonoBehaviour
                                 if (GetComponent<PlayerController>().view.IsMine)
                                 {
                                     PlayerPrefs.SetString("cacca", position);
+
+                                    Debug.Log(PhotonNetwork.PlayerList.Length);
+                                    if (PhotonNetwork.PlayerList.Length <= 1)
+                                    {
+                                        PhotonNetwork.CurrentRoom.IsOpen = false;
+                                        PhotonNetwork.CurrentRoom.IsVisible = false;
+                                    }
+                                    
                                     PhotonNetwork.LeaveRoom();
                                     SceneManager.LoadScene("SceltaModalita");
                                 }

@@ -11,7 +11,7 @@ public class Menu : MonoBehaviour
  
     public void Update()
     {
-        Debug.Log(PlayerPrefs.GetString("cacca"));
+        //Debug.Log(PlayerPrefs.GetString("cacca"));
     }
 
     public void startRacing()
