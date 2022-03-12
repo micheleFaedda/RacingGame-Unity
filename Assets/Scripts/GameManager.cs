@@ -95,11 +95,16 @@ public class GameManager : MonoBehaviour
             item.SetActive(false);
         }
 
+        if (!PhotonNetwork.IsConnected)
+        {
+            StartCoroutine(CountDown());
+        }
+
     }
 
     public void Update()
     {
-        if (PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers && !flag_started_coundown)
+        if (PhotonNetwork.IsConnected && !flag_started_coundown && PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             flag_started_coundown = true;
             StartCoroutine(CountDown());
