@@ -155,7 +155,10 @@ public class CheckpointManager : MonoBehaviour
                     if (PlayerPrefs.GetString("modalita").Equals("racing"))
                     {
                         if (PlayerPrefs.GetInt("num_giri_race") < giro)
+                        {
+                            PlayerPrefs.SetString("posizione_gara", position);
                             SceneManager.LoadScene("SceltaModalita");
+                        }
                     }
 
                     if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
@@ -167,7 +170,7 @@ public class CheckpointManager : MonoBehaviour
                                 if (GetComponent<PlayerController>().view == null) return;
                                 if (GetComponent<PlayerController>().view.IsMine)
                                 {
-                                    PlayerPrefs.SetString("cacca", position);
+                                    PlayerPrefs.SetString("posizione_gara", position);
 
                                     Debug.Log(PhotonNetwork.PlayerList.Length);
                                     if (PhotonNetwork.PlayerList.Length <= 1)

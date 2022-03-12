@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 using UnityEngine.UI;
@@ -8,17 +9,18 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
- 
-    public void Update()
-    {
-        //Debug.Log(PlayerPrefs.GetString("cacca"));
-    }
 
+    public GameObject testoCoins;
+    public GameObject position;
+    
     public void Start()
     {
         Classifica.Reset();
         GameManager.flag_started_coundown = false;
         GameManager.start = false;
+
+        testoCoins.GetComponent<Text>().text = ""+PlayerPrefs.GetInt("coins");
+        position.GetComponent<Text>().text = PlayerPrefs.GetString("posizione_gara");
     }
 
     public void startRacing()
@@ -56,7 +58,7 @@ public class Menu : MonoBehaviour
     public void startMulti()
     {
         //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
-        PlayerPrefs.SetInt("macchina_giocatore", 2);
+        PlayerPrefs.SetInt("macchina_giocatore", 3);
         PlayerPrefs.SetInt("forza", 200);
         PlayerPrefs.SetInt("num_giri_multi", 1);
 

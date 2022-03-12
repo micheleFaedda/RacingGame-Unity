@@ -71,7 +71,8 @@ public class TimeCheckpointManager : MonoBehaviour
             //Se il tempo è finito si esce dal gioco
             if (tempoRimasto < 0)
             {
-                SceneManager.LoadScene(0);
+                PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + numCoins);
+                SceneManager.LoadScene("SceltaModalita");
             }
         }
     }

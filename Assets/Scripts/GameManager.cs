@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
                 m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (1.528828f, 0, 240f), Quaternion.identity * Quaternion.Euler(0, -90, 0)) as GameObject;
                 m.tag = "Player";
                 m.AddComponent<TimeCheckpointManager>();
+                m.GetComponent<CarController>().forza = PlayerPrefs.GetInt("forza");
                 break;
             case "racing":
 
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
                 m.tag = "Player";
                 m.GetComponent<CheckpointManager>().enabled = true;
                 m.GetComponent<CheckpointManager>().playerName = PlayerPrefs.GetString("player_name");
+                m.GetComponent<CarController>().forza = PlayerPrefs.GetInt("forza");
 
                 int index_npc = 0;
                 for (int i = 0; i < macchine.Length; i++)
