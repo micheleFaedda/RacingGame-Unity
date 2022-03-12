@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case "multiplayer":
-                GameObject.FindGameObjectWithTag("Classifica").SetActive(true);
+                GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
                 coins.SetActive(false);
                 foreach (GameObject wp in wayPoints)
                 {

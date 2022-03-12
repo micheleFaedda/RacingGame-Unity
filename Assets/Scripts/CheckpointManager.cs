@@ -115,7 +115,12 @@ public class CheckpointManager : MonoBehaviour
         Classifica.setPosizione(idMacchina, giro, checkPoint, tempoEntrata);
         position = Classifica.GetPosizione(idMacchina);
 
-        setClassifica(position);
+        if (PlayerPrefs.GetString("modalita").Equals("racing"))
+        {
+            setClassifica(position);   
+        }
+
+
         if (gameObject.CompareTag("Player"))
         {
             if (timer != null)
