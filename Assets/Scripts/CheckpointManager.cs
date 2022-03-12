@@ -131,6 +131,27 @@ public class CheckpointManager : MonoBehaviour
                 CurrentDistance(); //visuallizzo la distanza corrente
             }
         }
+        
+        
+        if (PlayerPrefs.GetString("modalita").Equals("racing"))
+        {
+            if (PlayerPrefs.GetInt("num_giri_race") < giro)
+                SceneManager.LoadScene("SceltaModalita");
+        }
+
+        if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
+        {
+            if (PlayerPrefs.GetInt("num_giri_multi") < giro)
+                if (PhotonNetwork.IsConnected)
+                {
+                    if (GetComponent<PlayerController>().view == null) return;
+                    if (GetComponent<PlayerController>().view.IsMine)
+                    {
+                        Debug.Log(position);
+                        //SceneManager.LoadScene("SceltaModalita");
+                    }
+                }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -167,26 +188,6 @@ public class CheckpointManager : MonoBehaviour
                 //nel caso la macchina raggiunga l'ultimo checkPoint allora il checkpoint da raggiungere diventa il primo
                 if (checkPointSucc >= checkPoints.Length)
                     checkPointSucc = 0;
-                
-                if (PlayerPrefs.GetString("modalita").Equals("racing"))
-                {
-                    if (PlayerPrefs.GetInt("num_giri_race") < giro)
-                        SceneManager.LoadScene("SceltaModalita");
-                }
-
-                if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
-                {
-                    if (PlayerPrefs.GetInt("num_giri_multi") < giro)
-                        if (PhotonNetwork.IsConnected)
-                        {
-                            if (GetComponent<PlayerController>().view == null) return;
-                            if (GetComponent<PlayerController>().view.IsMine)
-                            {
-                                Debug.Log(position);
-                                //SceneManager.LoadScene("SceltaModalita");
-                            }
-                        }
-                }
             }
         }
     }
