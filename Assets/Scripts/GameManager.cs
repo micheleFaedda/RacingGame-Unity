@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
             attesa.SetActive(false);
             StartCoroutine(CountDown());
         }
-        else if(PhotonNetwork.IsConnected)
+        else if(PhotonNetwork.IsConnected && flag_started_coundown)
         {
             attesa.SetActive(true);
         }
