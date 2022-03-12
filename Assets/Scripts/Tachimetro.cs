@@ -38,6 +38,7 @@ public class Tachimetro : MonoBehaviour
             }
             else
             {
+                if (GameObject.FindGameObjectWithTag("Player") == null) return;
                 target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
             }
             

@@ -1072,7 +1072,7 @@ GameObject:
   - component: {fileID: 2642675678345133131}
   m_Layer: 5
   m_Name: Intestazione
-  m_TagString: Primo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -31,6 +31,7 @@ public class CameraFollow : MonoBehaviour
             }
             else
             {
+                if (GameObject.FindGameObjectWithTag("Player") == null) return;
                 target = GameObject.FindGameObjectWithTag("Player").transform;
             }
             

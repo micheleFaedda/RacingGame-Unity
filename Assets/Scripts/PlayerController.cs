@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 
         view = GetComponent<PhotonView>();
         
-        if (PhotonNetwork.IsConnected)
+       if (PhotonNetwork.IsConnected)
         {
             if (view.IsMine) 
                 this.transform.Find("CameraRetro").gameObject.SetActive(true);

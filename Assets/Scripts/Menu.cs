@@ -19,6 +19,12 @@ public class Menu : MonoBehaviour
         GameManager.flag_started_coundown = false;
         GameManager.start = false;
 
+        /*Da togliere*/
+        if (!PlayerPrefs.HasKey("player"))
+        {
+            PlayerPrefs.SetString("player", "Vincenzo");
+        }
+
         testoCoins.GetComponent<Text>().text = ""+PlayerPrefs.GetInt("coins");
         position.GetComponent<Text>().text = PlayerPrefs.GetString("posizione_gara");
     }
@@ -60,7 +66,7 @@ public class Menu : MonoBehaviour
         //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
         PlayerPrefs.SetInt("macchina_giocatore", 1);
         PlayerPrefs.SetInt("forza", 200);
-        PlayerPrefs.SetInt("num_giri_multi", 3);
+        PlayerPrefs.SetInt("num_giri_multi", 1);
 
         PlayerPrefs.SetString("modalita", "multiplayer");
         
