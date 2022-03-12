@@ -24,6 +24,7 @@ TagManager:
   - TimePoint
   - frenata
   - Distance
+  - Posizione
   layers:
   - Default
   - TransparentFX
