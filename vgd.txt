@@ -3,6 +3,7 @@
 - le frecce per le macchine (i prefab sono 8: sia nella cartella Resources, sia nella cartella Macchine/NostriPrefab)
 - decidere la disposizione degli elementi durante il gioco
 - risovere con la camera specchio
+- mappa rounded che segue la macchina
 
 - fare la scena iniziale (con l'animazione e la possibilita di inserire uno username, "player" di default) (con torna indietro in alto a sx)
 - fare la scena per sbloccare e selezionare le macchine (con torna indietro in alto a sx)

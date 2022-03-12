@@ -135,9 +135,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2642675679506427942, guid: 8dbfa8eea4b6e4bb78270ada11f89d6a, type: 3}
+      propertyPath: m_TagString
+      value: Classifica
+      objectReference: {fileID: 0}
     - target: {fileID: 7518163682985435117, guid: 8dbfa8eea4b6e4bb78270ada11f89d6a, type: 3}
       propertyPath: m_Name
-      value: Canvas 1
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 7518163682985435121, guid: 8dbfa8eea4b6e4bb78270ada11f89d6a, type: 3}
       propertyPath: m_Pivot.x
@@ -228,6 +232,11 @@ PrefabInstance:
 --- !u!224 &509435142 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7518163682985435121, guid: 8dbfa8eea4b6e4bb78270ada11f89d6a, type: 3}
+  m_PrefabInstance: {fileID: 509435141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &509435143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2642675678827636590, guid: 8dbfa8eea4b6e4bb78270ada11f89d6a, type: 3}
   m_PrefabInstance: {fileID: 509435141}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &671114770 stripped
@@ -844,7 +853,7 @@ PrefabInstance:
     - target: {fileID: 8958114803393859152, guid: 1b605046dc2524d0b9580fdfe7f47f15, type: 3}
       propertyPath: distanza
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 509435143}
     - target: {fileID: 8958114803393859152, guid: 1b605046dc2524d0b9580fdfe7f47f15, type: 3}
       propertyPath: macchine
       value: 
