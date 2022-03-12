@@ -104,15 +104,6 @@ public class CheckpointManager : MonoBehaviour
             carController = this.GetComponent<CarController>();
         }
 
-        if (PhotonNetwork.IsConnected)
-        {
-            if (GetComponent<PlayerController>().view == null) return;
-            if (GetComponent<PlayerController>().view.IsMine)
-            {
-                Debug.Log(position);
-            }
-        }
-
         //se la macchina non è stata registrata la registo e prendo il suo id
         if (!macchinaRegistrata)
         {
@@ -140,31 +131,6 @@ public class CheckpointManager : MonoBehaviour
                 CurrentDistance(); //visuallizzo la distanza corrente
             }
         }
-        
-        
-        if (PlayerPrefs.GetString("modalita").Equals("racing"))
-        {
-            if (PlayerPrefs.GetInt("num_giri_race") < giro)
-                SceneManager.LoadScene("SceltaModalita");
-        }
-
-        if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
-        {
-            if (PlayerPrefs.GetInt("num_giri_multi") < giro)
-            {
-                if (PhotonNetwork.IsConnected)
-                {
-                    if (GetComponent<PlayerController>().view == null) return;
-                    if (GetComponent<PlayerController>().view.IsMine)
-                    {
-                        PlayerPrefs.SetString("cacca", position);
-                        PhotonNetwork.LeaveRoom();
-                        SceneManager.LoadScene("SceltaModalita");
-                    }
-                }
-            }
-            
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -185,6 +151,30 @@ public class CheckpointManager : MonoBehaviour
                 if (checkPoint == 0)
                 {
                     giro++;
+                    
+                    if (PlayerPrefs.GetString("modalita").Equals("racing"))
+                    {
+                        if (PlayerPrefs.GetInt("num_giri_race") < giro)
+                            SceneManager.LoadScene("SceltaModalita");
+                    }
+
+                    if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
+                    {
+                        if (PlayerPrefs.GetInt("num_giri_multi") < giro)
+                        {
+                            if (PhotonNetwork.IsConnected)
+                            {
+                                if (GetComponent<PlayerController>().view == null) return;
+                                if (GetComponent<PlayerController>().view.IsMine)
+                                {
+                                    PlayerPrefs.SetString("cacca", position);
+                                    PhotonNetwork.LeaveRoom();
+                                    SceneManager.LoadScene("SceltaModalita");
+                                }
+                            }
+                        }
+            
+                    }
                     
                     if (gameObject.CompareTag("Player") && timer != null)
                     {
