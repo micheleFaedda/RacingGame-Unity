@@ -27,9 +27,17 @@ public class PlayerController : MonoBehaviour {
         testoPlayer.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>());
         testoPlayer.GetComponent<Text>().fontSize = 70;
 
-        this.transform.Find("CameraRetro").gameObject.SetActive(true);
-        
         view = GetComponent<PhotonView>();
+        
+        if (PhotonNetwork.IsConnected)
+        {
+            if (view.IsMine) 
+                this.transform.Find("CameraRetro").gameObject.SetActive(true);
+        }
+        else
+        {
+            this.transform.Find("CameraRetro").gameObject.SetActive(true);
+        }
     }
 
     void Update()
