@@ -104,7 +104,14 @@ public class CheckpointManager : MonoBehaviour
             carController = this.GetComponent<CarController>();
         }
 
-        Debug.Log(PlayerPrefs.GetString("cacca", position));
+        if (PhotonNetwork.IsConnected)
+        {
+            if (GetComponent<PlayerController>().view == null) return;
+            if (GetComponent<PlayerController>().view.IsMine)
+            {
+                Debug.Log(PlayerPrefs.GetString("cacca", position));
+            }
+        }
 
         //se la macchina non è stata registrata la registo e prendo il suo id
         if (!macchinaRegistrata)
@@ -152,7 +159,7 @@ public class CheckpointManager : MonoBehaviour
                     {
                         PlayerPrefs.SetString("cacca", position);
                         PhotonNetwork.LeaveRoom();
-                        PhotonNetwork.LoadLevel("SceltaModalita");
+                        SceneManager.LoadScene("SceltaModalita");
                     }
                 }
             }
