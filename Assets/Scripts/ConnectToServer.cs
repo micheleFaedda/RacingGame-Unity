@@ -9,6 +9,8 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     void Start()
     {
         Classifica.Reset();
+        GameManager.flag_started_coundown = false;
+        GameManager.start = false;
         PhotonNetwork.ConnectUsingSettings();
     }
 

@@ -14,6 +14,13 @@ public class Menu : MonoBehaviour
         //Debug.Log(PlayerPrefs.GetString("cacca"));
     }
 
+    public void Start()
+    {
+        Classifica.Reset();
+        GameManager.flag_started_coundown = false;
+        GameManager.start = false;
+    }
+
     public void startRacing()
     {
         //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
