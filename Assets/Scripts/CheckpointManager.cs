@@ -152,15 +152,34 @@ public class CheckpointManager : MonoBehaviour
         {
             setClassifica(position);   
         }
-        
-        if (gameObject.CompareTag("Player") && PhotonNetwork.IsConnected && view.IsMine)
-        {
-            if (timer != null)
-                CurrentTimer(); //visualizzo il tempo corrente
 
-            if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+        if (PhotonNetwork.IsConnected)
+        {
+            if (view.IsMine)
             {
-                CurrentDistance(); //visuallizzo la distanza corrente
+                if (gameObject.CompareTag("Player"))
+                {
+                    if (timer != null)
+                        CurrentTimer(); //visualizzo il tempo corrente
+
+                    if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+                    {
+                        CurrentDistance(); //visuallizzo la distanza corrente
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (gameObject.CompareTag("Player"))
+            {
+                if (timer != null)
+                    CurrentTimer(); //visualizzo il tempo corrente
+
+                if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+                {
+                    CurrentDistance(); //visuallizzo la distanza corrente
+                }
             }
         }
     }
@@ -219,14 +238,31 @@ public class CheckpointManager : MonoBehaviour
                         }
             
                     }
-                    
-                    if (gameObject.CompareTag("Player") && timer != null && PhotonNetwork.IsConnected && view.IsMine)
+
+                    if (PhotonNetwork.IsConnected)
                     {
-                        /*Se questo è il player allora faccio scattare il timer*/
-                        if (!stopWatch.IsRunning)
-                            startTimer();
-                        else
-                            stopWatch.Restart();
+                        if (view.IsMine)
+                        {
+                            if (gameObject.CompareTag("Player") && timer != null)
+                            {
+                                /*Se questo è il player allora faccio scattare il timer*/
+                                if (!stopWatch.IsRunning)
+                                    startTimer();
+                                else
+                                    stopWatch.Restart();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (gameObject.CompareTag("Player") && timer != null)
+                        {
+                            /*Se questo è il player allora faccio scattare il timer*/
+                            if (!stopWatch.IsRunning)
+                                startTimer();
+                            else
+                                stopWatch.Restart();
+                        }
                     }
                 }
 
