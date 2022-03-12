@@ -150,12 +150,10 @@ public class CheckpointManager : MonoBehaviour
                     if (GetComponent<PlayerController>().view.IsMine)
                     {
                         PlayerPrefs.SetString("pippo", position);
-                        PhotonNetwork.LeaveRoom();
                         PhotonNetwork.LoadLevel("SceltaModalita");
-                        //SceneManager.LoadScene("SceltaModalita");
+                        PhotonNetwork.LeaveRoom();
                     }
                 }
-                this.gameObject.SetActive(false);
             }
             
         }
