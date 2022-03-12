@@ -58,9 +58,9 @@ public class Menu : MonoBehaviour
     public void startMulti()
     {
         //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
-        PlayerPrefs.SetInt("macchina_giocatore", 3);
+        PlayerPrefs.SetInt("macchina_giocatore", 1);
         PlayerPrefs.SetInt("forza", 200);
-        PlayerPrefs.SetInt("num_giri_multi", 1);
+        PlayerPrefs.SetInt("num_giri_multi", 3);
 
         PlayerPrefs.SetString("modalita", "multiplayer");
         
