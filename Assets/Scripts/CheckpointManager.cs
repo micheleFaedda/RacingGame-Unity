@@ -172,7 +172,6 @@ public class CheckpointManager : MonoBehaviour
                                     Debug.Log(PhotonNetwork.PlayerList.Length);
                                     if (PhotonNetwork.PlayerList.Length <= 1)
                                     {
-                                        Classifica.Reset();
                                         PhotonNetwork.CurrentRoom.IsOpen = false;
                                         PhotonNetwork.CurrentRoom.IsVisible = false;
                                     }

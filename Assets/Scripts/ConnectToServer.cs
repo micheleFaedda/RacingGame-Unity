@@ -8,6 +8,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 {
     void Start()
     {
+        Classifica.Reset();
         PhotonNetwork.ConnectUsingSettings();
     }
 
