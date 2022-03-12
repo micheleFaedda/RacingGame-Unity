@@ -1,28 +1,68 @@
+Metto qui per comodita le chiavi:
+	player_name -> player di dafault
 
-- fare bellina la classifica (si puo anche pensare di colorare il testo in funzione del colore della macchina)
-- le frecce per le macchine (i prefab sono 8: sia nella cartella Resources, sia nella cartella Macchine/NostriPrefab)
-- decidere la disposizione degli elementi durante il gioco
-- risovere con la camera specchio
-- mappa rounded che segue la macchina
+	num_giri_multi -> numero giri in multiplayer
+	num_giri_race -> numero giri in race
 
-- fare la scena iniziale (con l'animazione e la possibilita di inserire uno username, "player" di default) (con torna indietro in alto a sx)
-- fare la scena per sbloccare e selezionare le macchine (con torna indietro in alto a sx)
-- fare bella la scena con la scritta Loading.. (con torna indietro in alto a sx)
-- fare la scena con la selezione della madalità
-	- time: immagine
-	- race: immagine + la possibilità di cambiare il numero di giri (da settare in player prefs come "num_giri_race"). 
-	In funzione del numero si settano i punteggi sotto l'immagine.
-	- multi: immagine piu la possibilità di cambiare il numero dei giri (da settare in player prefs come "num_giri_multi").
-	In funzione del numero si settano i punteggi sotto l'immagine.
-- fare il menu di pausa e uscita volontaria dal gioco
+	modalita -> {"multiplayer", "time", "racing" }
 
-- mettere nello script WorldLimit la funzione che riposiziona la macchina nel traguardo (il primo checkPoint)/ o fare game over
-- rivedere i prefab
-- settare le forze delle macchine npc nel GameManager (70, 80, 120, 200)
-- valutare se togliere il multiplayer (funziona, me è da capire se va bene)
-- fare la fine del gioco per ogni modalità
-- Ricommentare gli script
-- Rimuovere le 2 scene che non servono
+	macchina_giocatore -> da 0 a 3 (0 di default)
+	forza -> la forza della macchina del giocatore (di default la forza della machina blu, quella gia sloccata)
+
+	coins -> il numero di coins raccolti dal giocatore (non durante il gioco, ma è la somma di tutti i coins che ha) (0 di default)
+	
+	posizione_gara -> {"first", "second", "third", "forth"} posizione raggiunta nell'ultima gara fatta (sia multiplayer, sia racing)
+
+
+Facile:
+	- mettere tutte le canvas in "Screen Space - Overlay" (attributo "Render Mode" di "Canvas" nell'inspector) 
+	- fare tutte le canvas in 1920x1080 per tutte le scermate e controllare che tutti gli elementi siano ancorati
+	( la scena "Game" è un esempio)
+
+	- decidere la disposizione degli elementi durante il gioco
+
+	- fare la scena iniziale (con l'animazione e la possibilita di inserire uno username, "player" di default) (con torna indietro in alto a sx)
+	Usare haskey(), se è true allora non fa niente se è false allora si setta "player"(stringa) in playerprefs
+	Usare haskey() anche per coins, se è true allora niente, se è false allora si setta 0(intero).
+
+	- fare la scena della creazione delle stanze dinamica (si può specificare il nome della stanza alla quale collegarsi o creare). Sarebbero 2 button e due text, oppure solo due inputfield. (Lo script è CreateAndJoinRoom.cs)
+	(in questa sezione se riesco sarebbe da mettere anche il feedback nel caso non si riesca a connettere o cose cosi, da lasciare alla fine)
+
+	- fare bella la scena con la scritta Loading.. (con torna indietro in alto a sx)
+
+	- mettere nello script WorldLimit la funzione che o riposiziona la macchina nel traguardo (il primo checkPoint) o si fa il game over
+
+	- rivedere i prefab (faccio io)
+
+	- Rimuovere le 2 scene che non servono ("Time", "TrackMichi")
+
+	- Ricommentare gli script
+
+	- Rimuovere con attenzione le icone che abbiamo messo nella cartella ui (fare commit e push prima di fare questa modifica)
+
+	- Rimuovere tutti i settaggi in playerprefs che non servono nello script "Menu.cs" (questo solo dopo che si possono sbloccare e selezionare le macchine)
+
+Così così:
+	
+	- fare il menu di pausa e uscita volontaria dal gioco
+
+	- fare la selezione del numero di giri. Pensandoci di nuovo riproporrei 3 giri, meno ci giocano e meglio è
+	Usere haskey() per il numero di giri nella modalità race, se è true allora niente, se è false allora si setta 1(intero) -> chiave: "num_giri_race"
+	Usere haskey() per il numero di giri nella modalità multiplayer, se è true allora niente, se è false allora si setta 1(intero) -> chiave: "num_giri_multi"
+
+	- fare la scena per sbloccare e selezionare le macchine, con torna indietro in alto a sx.
+	Quando si seleziona una macchina si setta in PlayerPrefs il suo indice (da 0 a 3, la chiave è "macchina_giocatore") e anche la sua forza
+	Usere haskey() per il numero della macchina, se è true allora niente, se è false allora si setta 0(intero) -> chiave: "macchina_giocatore". Se è false si setta anche la forza (chiave: "forza")
+	Le 4 macchine in un array da 5 (la 5 è il prefab della macchina da sbloccare).
+	Anche un array da 4 di interi per le forze delle macchine
+	L'ordine nell'array è molto importante (blu, gialla, nera, rossa ) dalla piu scarsa alla meno scarsa.
+
+Difficile:
+
+	- risolvere il bug "releasing render texture that is set as Camera.targetTexture!" che conpare solo nella build quando viene terminato il gioco (abbastanza difficile questo)
+
+
+
 
 
 
