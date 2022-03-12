@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     
     public PhotonView view;
 
+    private int num_giri;
+
     void Start()
     {
 
@@ -37,6 +39,14 @@ public class PlayerController : MonoBehaviour {
         else
         {
             this.transform.Find("CameraRetro").gameObject.SetActive(true);
+        }
+        
+        if(PlayerPrefs.GetString("modalita").Equals("racing"))
+        {
+            num_giri = PlayerPrefs.GetInt("num_giri_race");
+        }else if(PlayerPrefs.GetString("modalita").Equals("multiplayer"))
+        {
+            num_giri = PlayerPrefs.GetInt("num_giri_multi");
         }
     }
 
@@ -63,7 +73,7 @@ public class PlayerController : MonoBehaviour {
         else
         {
             text = this.GetComponent<CheckpointManager>().position + "\nLap: " +
-                   this.GetComponent<CheckpointManager>().giro;
+                   this.GetComponent<CheckpointManager>().giro + "/" + num_giri;
         }
         
         testoPlayer.GetComponent<Text>().text = text;

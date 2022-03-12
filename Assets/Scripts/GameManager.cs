@@ -14,13 +14,15 @@ public class GameManager : MonoBehaviour
     public GameObject timePoints;
     public GameObject distanza;
     public GameObject coins;
-
+    public GameObject attesa;
+    
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
     public static bool flag_started_coundown = false;
     
     void Awake()
     {
+        attesa.SetActive(false);
 
         GameObject m;
         switch (PlayerPrefs.GetString("modalita"))
@@ -108,6 +110,10 @@ public class GameManager : MonoBehaviour
         {
             flag_started_coundown = true;
             StartCoroutine(CountDown());
+        }
+        else if(PhotonNetwork.IsConnected)
+        {
+            attesa.SetActive(true);
         }
     }
 
