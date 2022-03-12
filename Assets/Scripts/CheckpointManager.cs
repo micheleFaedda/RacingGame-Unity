@@ -153,7 +153,7 @@ public class CheckpointManager : MonoBehaviour
                         //SceneManager.LoadScene("SceltaModalita");
                     }
                 }
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
             }
             
         }
