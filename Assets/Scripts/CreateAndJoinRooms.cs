@@ -12,12 +12,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void CreateRoom(){
         //PhotonNetwork.CreateRoom(createInput.text);
-        PhotonNetwork.CreateRoom("aa");
+        PhotonNetwork.CreateRoom("bb");
     }
 
     public void JoinRoom(){
         //PhotonNetwork.JoinRoom(joinInput.text);
-        PhotonNetwork.JoinRoom("aa");
+        PhotonNetwork.JoinRoom("bb");
     }
 
     public override void OnJoinedRoom(){
