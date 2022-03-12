@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using Photon.Pun;
@@ -148,6 +149,7 @@ public class CheckpointManager : MonoBehaviour
                     if (GetComponent<PlayerController>().view == null) return;
                     if (GetComponent<PlayerController>().view.IsMine)
                     {
+                        PhotonNetwork.LeaveRoom();
                         PhotonNetwork.LoadLevel("SceltaModalita");
                         PlayerPrefs.SetString("pippo", position);
                         //SceneManager.LoadScene("SceltaModalita");
@@ -253,4 +255,5 @@ public class CheckpointManager : MonoBehaviour
             String.Format("{0:0.000}", distance) + " KM"; //stampo a video
         vecchiaPosizione = carController.rb.position; //aggiorno la vecchia posizione 
     }
+    
 }
