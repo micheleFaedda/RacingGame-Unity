@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject timePoints;
     public GameObject distanza;
     public GameObject coins;
-    
+
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
 

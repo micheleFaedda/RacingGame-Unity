@@ -1,10 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+ 
+    public void Update()
+    {
+        Debug.Log(PlayerPrefs.GetString("pippo"));
+    }
+
     public void startRacing()
     {
         //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
