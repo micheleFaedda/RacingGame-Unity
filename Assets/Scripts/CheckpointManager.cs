@@ -75,7 +75,17 @@ public class CheckpointManager : MonoBehaviour
 
         if (!(PlayerPrefs.GetString("modalita").Equals("time")))
         {
-            distanceCanvas = GameObject.FindGameObjectWithTag("Distance");
+            if (PhotonNetwork.IsConnected)
+            {
+                if (view.IsMine)
+                {
+                    distanceCanvas = GameObject.FindGameObjectWithTag("Distance");
+                }
+            }
+            else
+            {
+                distanceCanvas = GameObject.FindGameObjectWithTag("Distance");
+            }
         }
 
 
