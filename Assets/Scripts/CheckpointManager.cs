@@ -142,6 +142,7 @@ public class CheckpointManager : MonoBehaviour
         if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
         {
             if (PlayerPrefs.GetInt("num_giri_multi") < giro)
+            {
                 if (PhotonNetwork.IsConnected)
                 {
                     if (GetComponent<PlayerController>().view == null) return;
@@ -152,6 +153,9 @@ public class CheckpointManager : MonoBehaviour
                         //SceneManager.LoadScene("SceltaModalita");
                     }
                 }
+                Destroy(this.gameObject);
+            }
+            
         }
     }
 
