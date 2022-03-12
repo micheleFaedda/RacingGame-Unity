@@ -94,7 +94,10 @@ public class GameManager : MonoBehaviour
             item.SetActive(false);
         }
 
-        StartCoroutine(CountDown());
+        if (PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            StartCoroutine(CountDown());
+        }
     }
 
     IEnumerator CountDown()
