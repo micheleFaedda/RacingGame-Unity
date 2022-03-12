@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
 
@@ -146,7 +147,18 @@ public class CheckpointManager : MonoBehaviour
                 if (checkPoint == 0)
                 {
                     giro++;
-                    
+                    if (PlayerPrefs.GetString("modalita").Equals("racing"))
+                    {
+                        if (PlayerPrefs.GetInt("num_giri_race") < giro)
+                            SceneManager.LoadScene("SceltaModalita");
+                        Debug.Log(position);
+                    }
+                    if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
+                    {
+                        if (PlayerPrefs.GetInt("num_giri_multi") < giro)
+                            SceneManager.LoadScene("SceltaModalita");
+                        Debug.Log(position);
+                    }
          
                     if (gameObject.CompareTag("Player") && timer != null)
                     {    /*Se questo è il player allora faccio scattare il timer*/
