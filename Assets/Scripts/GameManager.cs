@@ -93,24 +93,27 @@ public class GameManager : MonoBehaviour
         {
             item.SetActive(false);
         }
-        
-        StartCoroutine(CountDown());
 
+    }
+
+    public void Update()
+    {
+        if (PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers && !start)
+        {
+            StartCoroutine(CountDown());
+        }
     }
 
     IEnumerator CountDown()
     {
         yield return new WaitForSeconds(2);
-        if (PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers)
+        foreach (GameObject item in countDownElements)
         {
-            foreach (GameObject item in countDownElements)
-            {
-                item.SetActive(true);
-                yield return new WaitForSeconds(1);
-                item.SetActive(false);
-                if (item == countDownElements.Last())
-                    start = true;
-            }
+            item.SetActive(true);
+            yield return new WaitForSeconds(1);
+            item.SetActive(false);
+            if (item == countDownElements.Last())
+                start = true;
         }
     }
 }
