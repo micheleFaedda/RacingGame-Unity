@@ -64,7 +64,7 @@ public class CheckpointManager : MonoBehaviour
         secondoClassificaTesto = GameObject.FindGameObjectWithTag("Secondo");
         terzoClassificaTesto = GameObject.FindGameObjectWithTag("Terzo");
         quartoClassificaTesto = GameObject.FindGameObjectWithTag("Quarto");
-        timer = GameObject.FindGameObjectWithTag("Timer");
+        //timer = GameObject.FindGameObjectWithTag("Timer");
         
         if (!(PlayerPrefs.GetString("modalita").Equals("time")))
         {
@@ -74,10 +74,12 @@ public class CheckpointManager : MonoBehaviour
         
         
         if (gameObject.CompareTag("Player"))
-        {   
-            if(timer != null)
+        {   timer = GameObject.FindGameObjectWithTag("Timer");
+            if (timer != null)
+            {   
                 stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
-            
+            }
+
             carController = this.GetComponent<CarController>();//ottengo carController
             vecchiaPosizione = this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
             distance +=Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position)/ 1000f; //inizializzo la distanza
