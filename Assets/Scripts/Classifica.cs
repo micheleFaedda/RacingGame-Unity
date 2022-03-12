@@ -25,6 +25,12 @@ public class Classifica {
         infoMacchine.Add(numMacchineRegistrate, new InfoMacchina(nome, 0, 0.0f));
         return numMacchineRegistrate;
     }
+    
+    public static void Reset() {
+
+        infoMacchine.Clear();
+        numMacchineRegistrate = -1;
+    }
 
     public static void setPosizione(int id, int giro, int checkpoint, float t) {
         int posizione = giro * 1000 + checkpoint;
