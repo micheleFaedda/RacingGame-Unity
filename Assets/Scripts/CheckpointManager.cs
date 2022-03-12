@@ -177,6 +177,7 @@ public class CheckpointManager : MonoBehaviour
                                     }
                                     
                                     PhotonNetwork.LeaveRoom();
+                                    PhotonNetwork.Disconnect();
                                     SceneManager.LoadScene("SceltaModalita");
                                 }
                             }
