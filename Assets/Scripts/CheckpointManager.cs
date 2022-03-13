@@ -92,10 +92,11 @@ public class CheckpointManager : MonoBehaviour
         if (gameObject.CompareTag("Player"))
         {
             //If per il multiplayer e per settare il timer e distanza in locale
-            if (PhotonNetwork.IsConnected && view.IsMine)
+            if (PhotonNetwork.IsConnected)
             {   
-                //inizializzo la distanza per il player in modalità multiplayer
-                InitializeDistance();
+                if(view.IsMine)
+                    //inizializzo la distanza per il player in modalità multiplayer
+                    InitializeDistance();
                 
             }
             else //modalità race

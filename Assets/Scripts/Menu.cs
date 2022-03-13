@@ -77,4 +77,35 @@ public class Menu : MonoBehaviour
         
         
     }
+    
+    
+    public void goMulti()
+    {
+        GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
+        GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
+        GameObject.FindWithTag("ResumeTimeAttack").SetActive(false);
+        GameObject.FindWithTag("ResumeRacing").SetActive(false);
+        
+        
+    }
+    
+    public void goRacing()
+    {
+        GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
+        GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
+        GameObject.FindWithTag("ResumeTimeAttack").SetActive(false);
+        GameObject.FindWithTag("ResumeMultiplayer").SetActive(false);
+        
+    }
+    
+    public void goTimeAttack()
+    {
+
+        GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
+        GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
+        GameObject.FindWithTag("ResumeRacing").SetActive(false);
+        GameObject.FindWithTag("ResumeMultiplayer").SetActive(false);
+        
+        
+    }
 }

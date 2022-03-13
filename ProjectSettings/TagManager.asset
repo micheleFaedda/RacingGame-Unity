@@ -25,6 +25,19 @@ TagManager:
   - frenata
   - Distance
   - Posizione
+  - ResumeRacing
+  - ResumeMultiplayer
+  - ResumeTimeAttack
+  - ResumeModalita
+  - FirstCoins
+  - SecondCoins
+  - ThirdCoins
+  - FourthCoins
+  - PlayMultiplayer
+  - PlayRacing
+  - PlayTimeAttack
+  - CanvasMods
+  - CanvasRules
   layers:
   - Default
   - TransparentFX
