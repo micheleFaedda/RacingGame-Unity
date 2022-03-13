@@ -39,6 +39,8 @@ TagManager:
   - CanvasMods
   - CanvasRules
   - ChoseLaps
+  - CreateLobby
+  - JoinLobby
   layers:
   - Default
   - TransparentFX
