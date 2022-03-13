@@ -38,6 +38,7 @@ TagManager:
   - PlayTimeAttack
   - CanvasMods
   - CanvasRules
+  - ChoseLaps
   layers:
   - Default
   - TransparentFX

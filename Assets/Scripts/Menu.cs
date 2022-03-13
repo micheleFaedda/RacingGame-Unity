@@ -45,7 +45,7 @@ public class Menu : MonoBehaviour
     }
     
     void Update () {
-        car.transform.Rotate(0, 30 * Time.deltaTime, 0);
+        car.transform.Rotate(0, 50 * Time.deltaTime, 0);
         
     }
 
@@ -54,7 +54,9 @@ public class Menu : MonoBehaviour
         //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
         PlayerPrefs.SetInt("macchina_giocatore", 0);
         PlayerPrefs.SetInt("forza", 200);
-        PlayerPrefs.SetInt("num_giri_race", 1);
+        
+        String laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
+        PlayerPrefs.SetInt("num_giri_race", Int32.Parse(laps));
         
         PlayerPrefs.SetString("modalita", "racing");
         
@@ -103,8 +105,7 @@ public class Menu : MonoBehaviour
     {
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
-        GameObject.FindWithTag("ResumeTimeAttack").SetActive(false);
-        GameObject.FindWithTag("ResumeRacing").SetActive(false);
+        GameObject.FindWithTag("ResumeMultiplayer").GetComponent<Canvas>().enabled = true;
         
         
     }
@@ -113,8 +114,8 @@ public class Menu : MonoBehaviour
     {
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
-        GameObject.FindWithTag("ResumeTimeAttack").SetActive(false);
-        GameObject.FindWithTag("ResumeMultiplayer").SetActive(false);
+        GameObject.FindWithTag("ResumeRacing").GetComponent<Canvas>().enabled = true;
+   
         
     }
     
@@ -123,9 +124,41 @@ public class Menu : MonoBehaviour
 
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
-        GameObject.FindWithTag("ResumeRacing").SetActive(false);
-        GameObject.FindWithTag("ResumeMultiplayer").SetActive(false);
+        GameObject.FindWithTag("ResumeTimeAttack").GetComponent<Canvas>().enabled = true;
         
         
+        
+    }
+    
+    public void goBack()
+    {
+
+        GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = true;
+        GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = false;
+        
+        
+        
+    }
+
+    public void AddLaps()
+    {
+        string laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
+        int max = 5;
+        int min = 1;
+        int x = Int32.Parse(laps);
+        x++;
+       GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text =  Math.Clamp(x, min, max) + "";
+
+    }
+    
+    public void MinusLaps()
+    {
+        string laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
+        int max = 5;
+        int min = 1;
+        int x = Int32.Parse(laps);
+        x--;
+        GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text =  Math.Clamp(x, min, max) + "";
+
     }
 }
