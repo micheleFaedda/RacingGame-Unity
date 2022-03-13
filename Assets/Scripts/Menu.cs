@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour
 
     public GameObject testoCoins;
     public GameObject position;
-    
+    public GameObject[] cars;
     public void Start()
     {
         Classifica.Reset();
