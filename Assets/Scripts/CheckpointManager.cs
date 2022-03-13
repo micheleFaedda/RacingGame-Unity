@@ -91,60 +91,27 @@ public class CheckpointManager : MonoBehaviour
 
         if (gameObject.CompareTag("Player"))
         {
-            
-            if (PhotonNetwork.IsConnected)
-            {
-                if (view.IsMine)
-                {
-                    timer = GameObject.FindGameObjectWithTag("Timer");
-            
-                    if (timer != null)
-                    {
-                        stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
-                    }
-
-                    carController = this.GetComponent<CarController>(); //ottengo carController
-                    vecchiaPosizione =
-                        this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
-                    distance += Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position) /
-                                1000f; //inizializzo la distanza
-
-                    if (!(PlayerPrefs.GetString("modalita").Equals("time")))
-                    {
-                        distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
-                            String.Format("{0:0.000}", distance) + " KM"; //visualizzo a video
-                    }
-                }
+            //If per il multiplayer e per settare il timer e distanza in locale
+            if (PhotonNetwork.IsConnected && view.IsMine)
+            {   
+                //inizializzo la distanza per il player in modalità multiplayer
+                InitializeDistance();
+                
             }
-            else
-            {
-                timer = GameObject.FindGameObjectWithTag("Timer");
-            
-                if (timer != null)
-                {
-                    stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch
-                }
-
-                carController = this.GetComponent<CarController>(); //ottengo carController
-                vecchiaPosizione =
-                    this.GetComponent<Rigidbody>().position; //inizializzo la vecchia posizione con quella di partenza 
-                distance += Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position) /
-                            1000f; //inizializzo la distanza
-
-                if (!(PlayerPrefs.GetString("modalita").Equals("time")))
-                {
-                    distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
-                        String.Format("{0:0.000}", distance) + " KM"; //visualizzo a video
-                }
+            else //modalità race
+            {   
+                //inizializzo la distanza per il player in modalità race
+                InitializeDistance();
             }
         }
     }
 
     void FixedUpdate()
-    {
+    {   
+        //se questo risulta essere null allora sono gli NPC e recupero il car controller
         if (carController == null)
         {
-            carController = this.GetComponent<CarController>();
+            carController = GetComponent<CarController>();
         }
 
         //se la macchina non è stata registrata la registo e prendo il suo id
@@ -154,13 +121,14 @@ public class CheckpointManager : MonoBehaviour
             macchinaRegistrata = true;
             return;
         }
-
+        
+        //setting della posizione in classifica
         Classifica.setPosizione(idMacchina, giro, checkPoint, tempoEntrata);
         position = Classifica.GetPosizione(idMacchina);
 
         if (PlayerPrefs.GetString("modalita").Equals("racing"))
         {
-            setClassifica(position);   
+            SetClassifica(position);   
         }
 
         if (PhotonNetwork.IsConnected)
@@ -170,12 +138,11 @@ public class CheckpointManager : MonoBehaviour
                 if (gameObject.CompareTag("Player"))
                 {
                     if (timer != null)
-                        CurrentTimer(); //visualizzo il tempo corrente
+                        //visualizzo il tempo corrente
+                        CurrentTimer();
 
-                    if (!(PlayerPrefs.GetString("modalita").Equals("time")))
-                    {
-                        CurrentDistance(); //visuallizzo la distanza corrente
-                    }
+                    //visuallizzo la distanza corrente
+                    CurrentDistance();
                 }
             }
         }
@@ -184,11 +151,13 @@ public class CheckpointManager : MonoBehaviour
             if (gameObject.CompareTag("Player"))
             {
                 if (timer != null)
-                    CurrentTimer(); //visualizzo il tempo corrente
+                    //visualizzo il tempo corrente
+                    CurrentTimer(); 
 
                 if (!(PlayerPrefs.GetString("modalita").Equals("time")))
-                {
-                    CurrentDistance(); //visuallizzo la distanza corrente
+                {   
+                    //visuallizzo la distanza corrente
+                    CurrentDistance(); 
                 }
             }
         }
@@ -196,8 +165,8 @@ public class CheckpointManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "CheckPoint" && (PlayerPrefs.GetString("modalita").Equals("racing") ||
-                                                     PlayerPrefs.GetString("modalita").Equals("multiplayer")))
+        if (other.gameObject.CompareTag("CheckPoint") && (PlayerPrefs.GetString("modalita").Equals("racing") ||
+                                                          PlayerPrefs.GetString("modalita").Equals("multiplayer")))
         {
             int numeroCheckPointCorrente = int.Parse(other.gameObject.name);
 
@@ -213,6 +182,7 @@ public class CheckpointManager : MonoBehaviour
                 {
                     giro++;
                     
+                    //se siamo in modalita racing allora controllo se sono finiti i giri e setto la posizione raggiunta a fine gara
                     if (PlayerPrefs.GetString("modalita").Equals("racing"))
                     {
                         if (PlayerPrefs.GetInt("num_giri_race") < giro)
@@ -221,58 +191,27 @@ public class CheckpointManager : MonoBehaviour
                             SceneManager.LoadScene("SceltaModalita");
                         }
                     }
-
+                    
+                    /*se siamo in modalita multiplayer allora controllo se sono finiti i giri e 
+                      */
                     if (PlayerPrefs.GetString("modalita").Equals("multiplayer"))
                     {
                         if (PlayerPrefs.GetInt("num_giri_multi") < giro)
-                        {
-                            if (PhotonNetwork.IsConnected)
-                            {
-                                if (GetComponent<PlayerController>().view == null) return;
-                                if (GetComponent<PlayerController>().view.IsMine)
-                                {
-                                    PlayerPrefs.SetString("posizione_gara", position);
-
-                                    Debug.Log(PhotonNetwork.PlayerList.Length);
-                                    if (PhotonNetwork.PlayerList.Length <= 1)
-                                    {
-                                        PhotonNetwork.CurrentRoom.IsOpen = false;
-                                        PhotonNetwork.CurrentRoom.IsVisible = false;
-                                    }
-                                    
-                                    PhotonNetwork.LeaveRoom();
-                                    PhotonNetwork.Disconnect();
-                                    SceneManager.LoadScene("SceltaModalita");
-                                }
-                            }
+                        {  
+                            CloseRoomAndRedirect(position);
                         }
             
                     }
-
+                    
+                    //se siamo collegati alla lobby e il player è quello locale allora gestisco il timer
                     if (PhotonNetwork.IsConnected)
-                    {
-                        if (view.IsMine)
-                        {
-                            if (gameObject.CompareTag("Player") && timer != null)
-                            {
-                                /*Se questo è il player allora faccio scattare il timer*/
-                                if (!stopWatch.IsRunning)
-                                    startTimer();
-                                else
-                                    stopWatch.Restart();
-                            }
-                        }
+                    {  
+                        if(view.IsMine)
+                            ManageTimer();
                     }
-                    else
+                    else //altrimenti siamo in un'altra modalità con il tag player
                     {
-                        if (gameObject.CompareTag("Player") && timer != null)
-                        {
-                            /*Se questo è il player allora faccio scattare il timer*/
-                            if (!stopWatch.IsRunning)
-                                startTimer();
-                            else
-                                stopWatch.Restart();
-                        }
+                        ManageTimer();
                     }
                 }
 
@@ -284,8 +223,9 @@ public class CheckpointManager : MonoBehaviour
             }
         }
     }
-
-    private void setClassifica(string position)
+    
+    /*Metodo che si occupa di settare la classifica*/
+    private void SetClassifica(string position)
     {
         switch (position)
         {
@@ -303,18 +243,36 @@ public class CheckpointManager : MonoBehaviour
                 break;
         }
     }
-
-    private void startTimer()
-    {
-        stopWatch.Start(); //lo faccio partire 
-        TimeSpan ts = stopWatch.Elapsed; //prendo il suo tempo corrente e lo assegno ad un TimeSpan
-
-        elapsedTime = String.Format("{1:00}:{2:00}:{3:00}",
-            ts.Hours, ts.Minutes, ts.Seconds,
-            ts.Milliseconds / 10); //formatto il tempo corrente
-
-
-        timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime + ""; //stampo nella UI
+    
+    
+    /*Metodo che si occupa di far scattare o resettare il timer in base al tag player*/
+    private void ManageTimer()
+    {   
+        /*Se questo è il player allora faccio scattare il timer*/
+        if (gameObject.CompareTag("Player") && timer != null)
+        {
+            //se non è partito lo faccio partire altrimenti lo resetto
+            if (!stopWatch.IsRunning)
+            {   
+                //lo faccio partire 
+                stopWatch.Start(); 
+                
+                //prendo il suo tempo corrente e lo assegno ad un TimeSpan
+                TimeSpan ts = stopWatch.Elapsed; 
+                
+                //formatto il tempo corrente
+                elapsedTime = String.Format("{1:00}:{2:00}:{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10); 
+                
+                //stampo nella UI
+                timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime + ""; 
+            }
+            else
+            {
+                stopWatch.Restart();
+            }
+        }
     }
 
     private void CurrentTimer() //stessa cosa di sopra solo che viene stampato il tempo corrente
@@ -331,15 +289,85 @@ public class CheckpointManager : MonoBehaviour
             timer.GetComponent<UnityEngine.UI.Text>().text = elapsedTime + "";
         }
     }
+    
+    /*Metodo che si occupa di inizializzare la distanza a video*/
+    private void InitializeDistance()
+    {
+        //otttengo l'oggetto timer
+        timer = GameObject.FindGameObjectWithTag("Timer");
+            
+        if (timer != null)
+        {
+            stopWatch = new Stopwatch(); //stanzio un oggetto stopwatch per il timer
+        }
+                    
+        //Ottengo il carController del Player
+        carController = GetComponent<CarController>(); 
+                    
+        //inizializzo la vecchia posizione con quella di partenza 
+        vecchiaPosizione = GetComponent<Rigidbody>().position; 
+                   
+        //inizializzo la distanza in KM
+        distance += Vector3.Distance(vecchiaPosizione, this.GetComponent<Rigidbody>().position) / 1000f;
 
+        if (!(PlayerPrefs.GetString("modalita").Equals("time")))
+        {   if(distanceCanvas != null)
+                distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
+                 String.Format("{0:0.000}", distance) + " KM"; //visualizzo a video
+        }
+    }
+
+    
+    
     /*Metodo che si occupa di calcolare la distanza percorsa a partire da quella vecchia*/
     private void CurrentDistance()
+    {   
+        //calcolo la distanza percorsa
+        distance += Vector3.Distance(vecchiaPosizione, carController.rb.position) / 1000f; 
+        
+        
+        if(distanceCanvas != null)
+            //stampo a video
+            distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
+                String.Format("{0:0.000}", distance) + " KM"; 
+        
+        //aggiorno la vecchia posizione
+        vecchiaPosizione = carController.rb.position;  
+    }
+    
+    /*Metodo che si occupa di chiudere la stanza nel caso ci sia solo un player in uscita e di settare i rusultati ottenuti
+     in gara*/
+    private void CloseRoomAndRedirect(string position)
     {
-        distance += Vector3.Distance(vecchiaPosizione, carController.rb.position) /
-                    1000f; //calcolo la distanza percorsa
-        distanceCanvas.GetComponent<UnityEngine.UI.Text>().text =
-            String.Format("{0:0.000}", distance) + " KM"; //stampo a video
-        vecchiaPosizione = carController.rb.position; //aggiorno la vecchia posizione 
+        if (PhotonNetwork.IsConnected)
+        {
+            if (GetComponent<PlayerController>().view == null) return;
+            
+            //se è il player locale
+            if (GetComponent<PlayerController>().view.IsMine)
+            {
+                //setto il risulato ottenuto
+                PlayerPrefs.SetString("posizione_gara", position);
+                                    
+                Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+                
+                //se vi è solo un player chiudo la room
+                if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)
+                {
+                    PhotonNetwork.CurrentRoom.IsOpen = false;
+                    PhotonNetwork.CurrentRoom.IsVisible = false;
+                }
+                
+                //esco dalla stanza
+                PhotonNetwork.LeaveRoom();
+                
+                //disconnetto il player
+                PhotonNetwork.Disconnect();
+                
+                //carico la scena della modalità 
+                SceneManager.LoadScene("SceltaModalita");
+            }
+        }
     }
     
 }
