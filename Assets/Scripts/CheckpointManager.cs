@@ -44,35 +44,35 @@ public class CheckpointManager : MonoBehaviour
     //Array di checkPoints per tenere conto del numero di giri fatti
     private GameObject[] checkPoints;
 
-
-    /*************timer MICHI*********************************************/
+    //Oggetti per gestire il timer 
     public GameObject timer;
     private Stopwatch stopWatch;
-
     private string elapsedTime;
-    /********************************************************/
 
-
-    /*********DISTANZA MICHI*********/
+    //Oggetti per gestire la distanza
     private GameObject distanceCanvas;
     private float distance = 0.0f;
     private Vector3 vecchiaPosizione;
-
-    /***********************/
     
+    //Oggetto per il multiplayer
     public PhotonView view;
 
     void Start()
-    {
+    {   
+        //recupero gli oggetti per la gestione dei giri e della classifica
         checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         primoClassificaTesto = GameObject.FindGameObjectWithTag("Primo");
         secondoClassificaTesto = GameObject.FindGameObjectWithTag("Secondo");
         terzoClassificaTesto = GameObject.FindGameObjectWithTag("Terzo");
         quartoClassificaTesto = GameObject.FindGameObjectWithTag("Quarto");
         
+        //recupero il componente per il multiplayer
         view = GetComponent<PhotonView>();
+        
+        
         //timer = GameObject.FindGameObjectWithTag("Timer");
-
+        
+        //Sezione per settare la visualizzazione di distanza e timer nelle modalità multiplayer e race
         if (!(PlayerPrefs.GetString("modalita").Equals("time")))
         {
             if (PhotonNetwork.IsConnected)
