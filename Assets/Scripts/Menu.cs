@@ -13,12 +13,27 @@ public class Menu : MonoBehaviour
     public GameObject testoCoins;
     public GameObject position;
     public GameObject[] cars;
+    private GameObject car;
+   
     public void Start()
     {
         Classifica.Reset();
         GameManager.flag_started_coundown = false;
         GameManager.start = false;
-
+        foreach (GameObject c  in cars)
+        {
+            c.GetComponent<Rigidbody>().useGravity = false;
+            c.gameObject.transform.localScale = new Vector3(20, 20, 20);
+            c.gameObject.transform.rotation =
+                new Quaternion(-0.0252383146f, 0.983145773F, -0.0892141908F, -0.157569751F);
+            c.gameObject.transform.position = new Vector3(-1291.09998f, -164.300003f, -512.099976f);
+        }
+        car = Instantiate(cars[2]);
+        car.transform.SetParent(GameObject.FindWithTag("CanvasMods").transform,false);
+        
+        
+        
+       
         /*Da togliere*/
         if (!PlayerPrefs.HasKey("player"))
         {
@@ -27,6 +42,11 @@ public class Menu : MonoBehaviour
 
         testoCoins.GetComponent<Text>().text = ""+PlayerPrefs.GetInt("coins");
         position.GetComponent<Text>().text = PlayerPrefs.GetString("posizione_gara");
+    }
+    
+    void Update () {
+        car.transform.Rotate(0, 30 * Time.deltaTime, 0);
+        
     }
 
     public void startRacing()
