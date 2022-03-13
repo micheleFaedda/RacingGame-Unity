@@ -74,17 +74,7 @@ public class GameManager : MonoBehaviour
                 }
                 timePoints.SetActive(false);
 
-                int pos_multiplayer;
-
-                if (PhotonNetwork.PlayerList.Length == 1)
-                {
-                    pos_multiplayer = 0;
-                }
-                else
-                {
-                    pos_multiplayer = 1;
-                }
-
+                int pos_multiplayer = PhotonNetwork.CurrentRoom.PlayerCount-1;
 
                 m = PhotonNetwork.Instantiate(macchine[PlayerPrefs.GetInt("macchina_giocatore")].name, posizioni_npc[pos_multiplayer], Quaternion.identity * Quaternion.Euler(0, -90, 0));
                 m.tag = "Player";
