@@ -13,6 +13,9 @@ public class Menu : MonoBehaviour
     public GameObject testoCoins;
     public GameObject position;
     public GameObject[] cars;
+    public GameObject raceMode;
+    public GameObject timeMode;
+    public GameObject multiMode; 
     private GameObject car;
    
     public void Start()
@@ -105,7 +108,8 @@ public class Menu : MonoBehaviour
     {
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
-        GameObject.FindWithTag("ResumeMultiplayer").GetComponent<Canvas>().enabled = true;
+        timeMode.SetActive(false);
+        raceMode.SetActive(false);
         
         
     }
@@ -114,9 +118,9 @@ public class Menu : MonoBehaviour
     {
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
-        GameObject.FindWithTag("ResumeRacing").GetComponent<Canvas>().enabled = true;
-   
-        
+        timeMode.SetActive(false);
+        multiMode.SetActive(false);
+
     }
     
     public void goTimeAttack()
@@ -124,8 +128,8 @@ public class Menu : MonoBehaviour
 
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
-        GameObject.FindWithTag("ResumeTimeAttack").GetComponent<Canvas>().enabled = true;
-        
+        raceMode.SetActive(false);
+        multiMode.SetActive(false);
         
         
     }
@@ -135,6 +139,9 @@ public class Menu : MonoBehaviour
 
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = true;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = false;
+        raceMode.SetActive(true);
+        multiMode.SetActive(true);
+        timeMode.SetActive(true);
         
         
         
