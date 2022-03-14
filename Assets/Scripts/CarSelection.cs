@@ -9,12 +9,20 @@ public class CarSelection : MonoBehaviour
     [SerializeField] private Button previousButton;
     [SerializeField] private Button nextButton;
     private int currentCar;
-    public GameObject chooseCarScreen;
+    
+    public Button goToChooseMode;
+    public Button unlockCar;
+    public Text coins;
+    private int numMacchine = 3;
 
     private void Start()
     {
         currentCar = PlayerPrefs.GetInt("macchina_giocatore");
         SelectCar(currentCar);
+        coins.text = PlayerPrefs.GetInt("coins").ToString();
+        
+        PlayerPrefs.SetInt("0", 1);
+        unlockCar.interactable = false;
     }
 
 
@@ -43,7 +51,20 @@ public class CarSelection : MonoBehaviour
             currentCar = transform.childCount - 1;
 
         PlayerPrefs.SetInt("macchina_giocatore", currentCar);
-        Debug.Log(currentCar);
+        
+        
+        if(PlayerPrefs.GetInt(currentCar.ToString(),0) == 0)
+        {
+            goToChooseMode.interactable = false;
+            unlockCar.interactable = true;
+        }
+        else
+        {
+            goToChooseMode.interactable = true;
+            unlockCar.interactable = false;
+        }
+        
+        
         switch (currentCar)
         {
             case 0:
@@ -60,5 +81,20 @@ public class CarSelection : MonoBehaviour
                 break;
         }
         SelectCar(currentCar);
+    }
+    
+    public void UnlockCar()
+    {
+        if (int.Parse(coins.text) >= 0)
+        {
+            PlayerPrefs.SetInt(currentCar.ToString(), 1);
+            transform.GetChild(currentCar + numMacchine).gameObject.SetActive(false);
+            SelectCar(currentCar);
+        }
+        else
+        {
+            Debug.Log("Non hai i soldi");
+        }
+        
     }
 }
