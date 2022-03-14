@@ -27,14 +27,12 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        //this.GetComponent<Canvas>().enabled = false;
         ui.SetActive(false);
         Time.timeScale = 1f;
         pause = false;
     }
     public void Pause()
     {
-        //this.GetComponent<Canvas>().enabled = true;
         ui.SetActive(true);
         Time.timeScale = 0f;
         pause = true;
@@ -43,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(menu);
+        SceneManager.LoadScene("SceltaModalita");
     }
 
     public void QuitGame()
