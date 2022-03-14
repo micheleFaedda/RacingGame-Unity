@@ -37,7 +37,7 @@ public class Menu : MonoBehaviour
             c.gameObject.transform.position = new Vector3(-1291.09998f, -164.300003f, -512.099976f);
         }
 
-        car = Instantiate(cars[2]);
+        car = Instantiate(cars[PlayerPrefs.GetInt("macchina_giocatore")]);
         car.transform.SetParent(GameObject.FindWithTag("CanvasMods").transform, false);
 
 
@@ -60,15 +60,13 @@ public class Menu : MonoBehaviour
 
     public void startRacing()
     {
-        //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
-        PlayerPrefs.SetInt("macchina_giocatore", 0);
-        PlayerPrefs.SetInt("forza", 200);
-
+   
         String laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
         PlayerPrefs.SetInt("num_giri_race", Int32.Parse(laps));
 
         PlayerPrefs.SetString("modalita", "racing");
 
+        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         //Questo da settare in partenza, nella scena iniziale (o se non settato deve essere player di default), da qui deve essere tolto
         PlayerPrefs.SetString("player_name", "Vicenzo");
 
@@ -78,12 +76,10 @@ public class Menu : MonoBehaviour
 
     public void startTime()
     {
-        //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
-        PlayerPrefs.SetInt("macchina_giocatore", 1);
-        PlayerPrefs.SetInt("forza", 80);
 
         PlayerPrefs.SetString("modalita", "time");
 
+        ///////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
         //Questo da settare in partenza, nella scena iniziale (o se non settato deve essere player di default), da qui deve essere tolto
         PlayerPrefs.SetString("player_name", "Vicenzo");
 
@@ -94,19 +90,15 @@ public class Menu : MonoBehaviour
     /*Questa e la precedente sono solo di debug, alla fine diventano un unica funzione*/
     public void startMulti()
     {
-        //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
-        PlayerPrefs.SetInt("macchina_giocatore", 1);
-        PlayerPrefs.SetInt("forza", 200);
         
-
         PlayerPrefs.SetString("modalita", "multiplayer");
         PlayerPrefs.SetInt("num_giri_multi", 1);
 
+        ///////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         //Questo da settare in partenza, nella scena iniziale (o se non settato deve essere player di default), da qui deve essere tolto
         PlayerPrefs.SetString("player_name", "Vicenzo");
 
         SceneManager.LoadScene("Loading");
-
 
     }
 
