@@ -356,7 +356,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6175676297218675184, guid: 4f4da7bcb51a64bc193933b0304ba2d7, type: 3}
       propertyPath: m_Name
-      value: CoinsText (1)
+      value: intestazioneTorque
       objectReference: {fileID: 0}
     - target: {fileID: 6175676297218675184, guid: 4f4da7bcb51a64bc193933b0304ba2d7, type: 3}
       propertyPath: m_TagString
@@ -1118,9 +1118,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 87019680}
     m_Modifications:
+    - target: {fileID: 3652672838818428665, guid: 383c2b1fa4e9843bd8cc6425df1875c2, type: 3}
+      propertyPath: m_Text
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3652672838818428668, guid: 383c2b1fa4e9843bd8cc6425df1875c2, type: 3}
       propertyPath: m_Name
-      value: Coins (2)
+      value: Cost
       objectReference: {fileID: 0}
     - target: {fileID: 3652672838818428668, guid: 383c2b1fa4e9843bd8cc6425df1875c2, type: 3}
       propertyPath: m_TagString
@@ -1277,6 +1281,10 @@ MonoBehaviour:
   goToChooseMode: {fileID: 8945100988374164250}
   unlockCar: {fileID: 295907125}
   coins: {fileID: 115061100}
+  intestCost: {fileID: 1299504797}
+  intestTorque: {fileID: 122165836}
+  torque: {fileID: 1244227557}
+  cost: {fileID: 895387562}
 --- !u!4 &944890711
 Transform:
   m_ObjectHideFlags: 0
@@ -1565,9 +1573,13 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3652672838818428665, guid: 383c2b1fa4e9843bd8cc6425df1875c2, type: 3}
+      propertyPath: m_Text
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3652672838818428668, guid: 383c2b1fa4e9843bd8cc6425df1875c2, type: 3}
       propertyPath: m_Name
-      value: Coins (1)
+      value: torqueForce
       objectReference: {fileID: 0}
     - target: {fileID: 3652672838818428668, guid: 383c2b1fa4e9843bd8cc6425df1875c2, type: 3}
       propertyPath: m_TagString
@@ -1699,7 +1711,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6175676297218675184, guid: 4f4da7bcb51a64bc193933b0304ba2d7, type: 3}
       propertyPath: m_Name
-      value: CoinsText (2)
+      value: intestazioneCost
       objectReference: {fileID: 0}
     - target: {fileID: 6175676297218675184, guid: 4f4da7bcb51a64bc193933b0304ba2d7, type: 3}
       propertyPath: m_TagString

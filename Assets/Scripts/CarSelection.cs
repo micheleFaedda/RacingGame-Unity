@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,23 +11,24 @@ public class CarSelection : MonoBehaviour
     [SerializeField] private Button nextButton;
     private int currentCar;
     
-    public Button goToChooseMode;
-    public Button unlockCar;
+    public GameObject goToChooseMode;
+    public GameObject unlockCar;
     public Text coins;
     public GameObject intestCost;
     public GameObject intestTorque;
     public GameObject torque;
     public GameObject cost;
-    private int numMacchine = 3;
+    private int numMacchine = 4;
     
     private void Start()
     {
+        InitializeCars();
         currentCar = PlayerPrefs.GetInt("macchina_giocatore");
         SelectCar(currentCar);
         coins.text = PlayerPrefs.GetInt("coins").ToString();
         
         PlayerPrefs.SetInt("0", 1);
-        unlockCar.interactable = false;
+        SetInterface(true);
     }
 
 
@@ -48,46 +50,20 @@ public class CarSelection : MonoBehaviour
 
     public void ChangeCar(int _change)
     {
+       
         currentCar += _change;
-        if (currentCar > transform.childCount - 1)
-            currentCar = 0;
-        else if (currentCar < 0)
-            currentCar = transform.childCount - 1;
-
+        currentCar = Math.Clamp(currentCar, 0, numMacchine);
         PlayerPrefs.SetInt("macchina_giocatore", currentCar);
         
         //attivo le scritte per la forza
         intestTorque.SetActive(true);
         torque.SetActive(true);
         
-        if(PlayerPrefs.GetInt(currentCar.ToString(),0) == 0)
-        {
-            goToChooseMode.interactable = false;
-            unlockCar.interactable = true;
-            
-            //attivo le scritte per il costo se non è già comprata
-            intestCost.SetActive(true);
-            cost.SetActive(true);
-            
-            
-        }
-        else
-        {
-            goToChooseMode.interactable = true;
-            unlockCar.interactable = false;
-            
-            //disattivo le scritte per il costo se è già comprata
-            intestCost.SetActive(false);
-            cost.SetActive(false);
-            
-        }
-        
-        
         switch (currentCar)
         {
             case 0:
                 PlayerPrefs.SetInt("forza", 100);
-                    break;
+                break;
             case 1:
                 PlayerPrefs.SetInt("forza", 120);
                 break;
@@ -98,15 +74,36 @@ public class CarSelection : MonoBehaviour
                 PlayerPrefs.SetInt("forza", 210);
                 break;
         }
+        
+        
+        
+        if(PlayerPrefs.GetString(currentCar.ToString()).Equals("true"))
+        {
+           SetInterface(true);
+        }
+        else
+        {
+            SetInterface(false);
+            
+        }
         SelectCar(currentCar);
     }
     
     public void UnlockCar()
     {
-        if (int.Parse(coins.text) >= 0)
+        int coinsPlayer = PlayerPrefs.GetInt("coins");
+        int cost = int.Parse(this.cost.GetComponent<Text>().text);
+        
+        if (coinsPlayer >= cost)
         {
-            PlayerPrefs.SetInt(currentCar.ToString(), 1);
-            transform.GetChild(currentCar + numMacchine).gameObject.SetActive(false);
+            PlayerPrefs.SetString(currentCar.ToString(), "true");
+            Debug.Log(coinsPlayer - cost);
+            PlayerPrefs.SetInt("coins",coinsPlayer-cost);
+            
+            SetInterface(true);
+            
+            coins.text = PlayerPrefs.GetInt("coins") + "";
+           // transform.GetChild(currentCar + numMacchine).gameObject.SetActive(false);
             SelectCar(currentCar);
         }
         else
@@ -114,5 +111,32 @@ public class CarSelection : MonoBehaviour
             Debug.Log("Non hai i soldi");
         }
         
+    }
+
+
+    private void SetInterface(bool set)
+    {
+        if (set)
+        {
+            
+            unlockCar.SetActive(false); 
+            goToChooseMode.GetComponent<Button>().interactable = true;
+            cost.SetActive(false);
+            intestCost.SetActive(false);
+        }
+        else
+        {
+            unlockCar.SetActive(true);
+            goToChooseMode.GetComponent<Button>().interactable = false;
+            cost.SetActive(true);
+            intestCost.SetActive(true);
+        }
+    }
+    private void InitializeCars()
+    {   
+        PlayerPrefs.SetString("0","true");
+        PlayerPrefs.SetString("1","false");
+        PlayerPrefs.SetString("2","false");
+        PlayerPrefs.SetString("3","false");
     }
 }
