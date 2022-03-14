@@ -13,16 +13,15 @@ public class Menu : MonoBehaviour
 {
 
     public GameObject testoCoins;
-    public GameObject position;
     public GameObject[] cars;
     public GameObject raceMode;
     public GameObject timeMode;
     public GameObject multiMode;
     private GameObject car;
-    private int firstCoins = 500;
-    private  int secondCoins = 350;
-    private  int thirdCoins = 250;
-    private  int fourthCoins = 200;
+    public static int firstCoins = 500;
+    public static  int secondCoins = 350;
+    public static int thirdCoins = 250;
+    public static int fourthCoins = 200;
 
     public void Start()
     {
@@ -49,8 +48,8 @@ public class Menu : MonoBehaviour
             PlayerPrefs.SetString("player", "Vincenzo");
         }
 
-        testoCoins.GetComponent<Text>().text = "" + PlayerPrefs.GetInt("coins");
-        position.GetComponent<Text>().text = PlayerPrefs.GetString("posizione_gara");
+        testoCoins.GetComponent<Text>().text = "Actual coins: " + PlayerPrefs.GetInt("coins");
+       
     }
 
     void Update()
@@ -98,7 +97,7 @@ public class Menu : MonoBehaviour
         //Questi due parametri da settare quando viene selezionata la macchina (da qui devono essere tolti)
         PlayerPrefs.SetInt("macchina_giocatore", 1);
         PlayerPrefs.SetInt("forza", 200);
-        PlayerPrefs.SetInt("num_giri_multi", 1);
+        
 
         PlayerPrefs.SetString("modalita", "multiplayer");
 

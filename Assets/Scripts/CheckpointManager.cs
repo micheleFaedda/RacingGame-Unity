@@ -186,9 +186,30 @@ public class CheckpointManager : MonoBehaviour
                     //se siamo in modalita racing allora controllo se sono finiti i giri e setto la posizione raggiunta a fine gara
                     if (PlayerPrefs.GetString("modalita").Equals("racing"))
                     {
-                        if (PlayerPrefs.GetInt("num_giri_race") < giro)
+                        if (PlayerPrefs.GetInt("num_giri_race") < giro && CompareTag("Player"))
                         {
                             PlayerPrefs.SetString("posizione_gara", position);
+                            int guadagnato = 0;
+                            switch (position)
+                            {
+                                case "First":
+                                     guadagnato = Menu.firstCoins + 40 * (PlayerPrefs.GetInt("num_giri_race") - 1);
+                                    PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + guadagnato );
+                                    break;
+                                case "Second":
+                                     guadagnato = Menu.secondCoins + 40 * (PlayerPrefs.GetInt("num_giri_race") - 1);
+                                    PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + guadagnato );
+                                    break;
+                                case "Third":
+                                     guadagnato = Menu.thirdCoins + 40 * (PlayerPrefs.GetInt("num_giri_race") - 1);
+                                    PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + guadagnato );
+                                    break;
+                                case "Fourth":
+                                     guadagnato = Menu.fourthCoins + 40 * (PlayerPrefs.GetInt("num_giri_race") - 1);
+                                    PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + guadagnato );
+                                    break;
+                                    
+                            }
                             SceneManager.LoadScene("SceltaModalita");
                         }
                     }
@@ -347,10 +368,20 @@ public class CheckpointManager : MonoBehaviour
             //se è il player locale
             if (GetComponent<PlayerController>().view.IsMine)
             {
-                //setto il risulato ottenuto
-                PlayerPrefs.SetString("posizione_gara", position);
+
+                switch (position)
+                {
+                    case "First":
+                        PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 1500 );
+                        break;
+                    case "Second":
+                        PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 1000 );
+                        break;
+                    case "Third":
+                        PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 500 );
+                        break;
                                     
-                Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+                }
                 
                 //se vi è solo un player chiudo la room
                 if (PhotonNetwork.CurrentRoom.PlayerCount <= 1)

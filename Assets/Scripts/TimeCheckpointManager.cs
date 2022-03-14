@@ -24,7 +24,7 @@ public class TimeCheckpointManager : MonoBehaviour
     private GameObject testoTimer;
 
     //Tempo rimasto al giocatore
-    private float tempoRimasto = 40;
+    private float tempoRimasto = 20;
 
     //Array di collezionabili
     private GameObject[] timePoints;
@@ -109,7 +109,14 @@ public class TimeCheckpointManager : MonoBehaviour
             tempoRimasto += 10;
             
             //A ogni giro si da piu punteggio
-            numCoins += 100 * giro;
+            if (numCoins==0)
+            {
+                numCoins = 1;
+            }
+            else
+            {
+                numCoins *=2;
+            }
             testoCoins.GetComponent<UnityEngine.UI.Text>().text = "Coins: " + numCoins;
             
             //Il collezionabile viene disabilitato (verra abilitato al prossimo giro)
