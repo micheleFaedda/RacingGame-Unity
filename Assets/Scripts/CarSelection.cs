@@ -3,6 +3,8 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class CarSelection : MonoBehaviour
 {
@@ -22,13 +24,16 @@ public class CarSelection : MonoBehaviour
     
     private void Start()
     {
-        InitializeCars();
+        if (!PlayerPrefs.HasKey("blue_car"))
+        {
+            InitializeCars();
+        }
+        
         currentCar = PlayerPrefs.GetInt("macchina_giocatore");
         SelectCar(currentCar);
         coins.text = PlayerPrefs.GetInt("coins").ToString();
-        
-        PlayerPrefs.SetInt("0", 1);
         SetInterface(true);
+        
     }
 
 
@@ -74,8 +79,9 @@ public class CarSelection : MonoBehaviour
                 PlayerPrefs.SetInt("forza", 210);
                 break;
         }
-        
-        
+
+        torque.GetComponent<Text>().text = PlayerPrefs.GetInt("forza").ToString();
+        cost.GetComponent<Text>().text = PlayerPrefs.GetInt(currentCar + "_costo").ToString();
         
         if(PlayerPrefs.GetString(currentCar.ToString()).Equals("true"))
         {
@@ -134,9 +140,18 @@ public class CarSelection : MonoBehaviour
     }
     private void InitializeCars()
     {   
+        /*Macchine*/
         PlayerPrefs.SetString("0","true");
         PlayerPrefs.SetString("1","false");
         PlayerPrefs.SetString("2","false");
         PlayerPrefs.SetString("3","false");
+        
+        
+        PlayerPrefs.SetInt("1_costo",250);
+        PlayerPrefs.SetInt("2_costo",1000);
+        PlayerPrefs.SetInt("3_costo",2500);
+       
+        
+        
     }
 }
