@@ -41,6 +41,9 @@ TagManager:
   - ChoseLaps
   - CreateLobby
   - JoinLobby
+  - Cost
+  - TorqueForce
+  - intestazione
   layers:
   - Default
   - TransparentFX

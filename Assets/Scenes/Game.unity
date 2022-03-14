@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d2f24bfdb0a758e41813bbc7ae4f978f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.38421768, g: 0.4398716, b: 0.6067618, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3674,6 +3674,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8088164622391916229, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 102.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8088164622391916229, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -145.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8088164623297965366, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3729,6 +3737,14 @@ PrefabInstance:
     - target: {fileID: 8088164623297965367, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}
       propertyPath: m_Name
       value: WAYPOINTS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8088164623880633844, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 97.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 8088164623880633844, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -137.67
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d2f24bfdb0a758e41813bbc7ae4f978f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.45306468, g: 0.56681454, b: 0.73238677, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -223,6 +223,8 @@ MonoBehaviour:
   checkPointSucc: 0
   tempoEntrata: 0
   position: 
+  timer: {fileID: 0}
+  view: {fileID: 0}
 --- !u!1001 &122341424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,6 +325,8 @@ MonoBehaviour:
   checkPointSucc: 0
   tempoEntrata: 0
   position: 
+  timer: {fileID: 0}
+  view: {fileID: 0}
 --- !u!1001 &135993271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -415,6 +419,8 @@ MonoBehaviour:
   checkPointSucc: 0
   tempoEntrata: 0
   position: 
+  timer: {fileID: 0}
+  view: {fileID: 0}
 --- !u!1 &366102187 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8088164623384020173, guid: faa88d0db2a9b4f4bbe2fe2c466e00a3, type: 3}
@@ -550,6 +556,8 @@ MonoBehaviour:
   checkPointSucc: 0
   tempoEntrata: 0
   position: 
+  timer: {fileID: 0}
+  view: {fileID: 0}
 --- !u!1001 &2642675679072031367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -654,6 +662,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4019460386305209056, guid: 677f2f5a8f05a4328bc0fc9c1c00392e, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4019460386305209058, guid: 677f2f5a8f05a4328bc0fc9c1c00392e, type: 3}
       propertyPath: offset.y
       value: 2
