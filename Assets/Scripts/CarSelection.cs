@@ -36,6 +36,11 @@ public class CarSelection : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        Debug.Log(PlayerPrefs.GetInt("forza"));
+    }
+
 
     public void GoToChooseMode()
     {
@@ -51,20 +56,8 @@ public class CarSelection : MonoBehaviour
         {
             transform.GetChild(i).gameObject.SetActive(i == _index);
         }
-    }
-
-    public void ChangeCar(int _change)
-    {
-       
-        currentCar += _change;
-        currentCar = Math.Clamp(currentCar, 0, numMacchine);
-        PlayerPrefs.SetInt("macchina_giocatore", currentCar);
         
-        //attivo le scritte per la forza
-        intestTorque.SetActive(true);
-        torque.SetActive(true);
-        
-        switch (currentCar)
+        switch (_index)
         {
             case 0:
                 PlayerPrefs.SetInt("forza", 100);
@@ -79,6 +72,18 @@ public class CarSelection : MonoBehaviour
                 PlayerPrefs.SetInt("forza", 210);
                 break;
         }
+    }
+
+    public void ChangeCar(int _change)
+    {
+       
+        currentCar += _change;
+        currentCar = Math.Clamp(currentCar, 0, numMacchine);
+        PlayerPrefs.SetInt("macchina_giocatore", currentCar);
+        
+        //attivo le scritte per la forza
+        intestTorque.SetActive(true);
+        torque.SetActive(true);
 
         torque.GetComponent<Text>().text = PlayerPrefs.GetInt("forza").ToString();
         cost.GetComponent<Text>().text = PlayerPrefs.GetInt(currentCar + "_costo").ToString();

@@ -39,14 +39,7 @@ public class Menu : MonoBehaviour
 
         car = Instantiate(cars[PlayerPrefs.GetInt("macchina_giocatore")]);
         car.transform.SetParent(GameObject.FindWithTag("CanvasMods").transform, false);
-
-
-
-        /*Da togliere*/
-        if (!PlayerPrefs.HasKey("player"))
-        {
-            PlayerPrefs.SetString("player", "Vincenzo");
-        }
+        
 
         testoCoins.GetComponent<Text>().text = "Actual coins: " + PlayerPrefs.GetInt("coins");
        
@@ -60,44 +53,23 @@ public class Menu : MonoBehaviour
 
     public void startRacing()
     {
-   
         String laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
         PlayerPrefs.SetInt("num_giri_race", Int32.Parse(laps));
-
         PlayerPrefs.SetString("modalita", "racing");
-
-        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        //Questo da settare in partenza, nella scena iniziale (o se non settato deve essere player di default), da qui deve essere tolto
-        PlayerPrefs.SetString("player_name", "Vicenzo");
-
-
         SceneManager.LoadScene("Game");
     }
 
     public void startTime()
     {
-
         PlayerPrefs.SetString("modalita", "time");
-
-        ///////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
-        //Questo da settare in partenza, nella scena iniziale (o se non settato deve essere player di default), da qui deve essere tolto
-        PlayerPrefs.SetString("player_name", "Vicenzo");
-
-
         SceneManager.LoadScene("Game");
     }
 
     /*Questa e la precedente sono solo di debug, alla fine diventano un unica funzione*/
     public void startMulti()
     {
-        
         PlayerPrefs.SetString("modalita", "multiplayer");
         PlayerPrefs.SetInt("num_giri_multi", 1);
-
-        ///////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        //Questo da settare in partenza, nella scena iniziale (o se non settato deve essere player di default), da qui deve essere tolto
-        PlayerPrefs.SetString("player_name", "Vicenzo");
-
         SceneManager.LoadScene("Loading");
 
     }
@@ -109,8 +81,6 @@ public class Menu : MonoBehaviour
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = true;
         timeMode.SetActive(false);
         raceMode.SetActive(false);
-
-
     }
 
     public void goRacing()
@@ -135,15 +105,11 @@ public class Menu : MonoBehaviour
 
     public void goBack()
     {
-
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = true;
         GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = false;
         raceMode.SetActive(true);
         multiMode.SetActive(true);
         timeMode.SetActive(true);
-
-
-
     }
 
     public void AddLaps()

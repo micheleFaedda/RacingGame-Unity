@@ -121,6 +121,8 @@ public class GameManager : MonoBehaviour
         {
             attesa.SetActive(true);//
         }
+        
+        Debug.Log(start);
     }
 
     IEnumerator CountDown()
