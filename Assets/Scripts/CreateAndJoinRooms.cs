@@ -11,7 +11,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void CreateRoom(){
         //PhotonNetwork.CreateRoom(createInput.text);
-        PhotonNetwork.CreateRoom("bb", new RoomOptions { MaxPlayers = 3 }, TypedLobby.Default);
+        PhotonNetwork.CreateRoom("bb", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
     }
 
     public void JoinRoom(){
