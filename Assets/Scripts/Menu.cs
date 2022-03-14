@@ -19,10 +19,10 @@ public class Menu : MonoBehaviour
     public GameObject timeMode;
     public GameObject multiMode;
     private GameObject car;
-    private static  int  firstCoins = 500;
-    private static  int  secondCoins = 350;
-    private static  int  thirdCoins = 250;
-    private static  int  fourthCoins = 200;
+    private int firstCoins = 250;
+    private  int secondCoins = 200;
+    private  int thirdCoins = 150;
+    private  int fourthCoins = 50;
 
     public void Start()
     {
@@ -157,7 +157,7 @@ public class Menu : MonoBehaviour
     public void AddLaps()
     {
         string laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
-        int max = 3;
+        int max = 5;
         int min = 1;
         int x = Int32.Parse(laps);
         x++;
@@ -170,7 +170,7 @@ public class Menu : MonoBehaviour
     public void MinusLaps()
     {
         string laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
-        int max = 3;
+        int max = 5;
         int min = 1;
         int x = Int32.Parse(laps);
         
@@ -184,12 +184,12 @@ public class Menu : MonoBehaviour
 
     private void SetCoinsMenu(int laps)
     {
-        firstCoins = 500;
-        secondCoins = 350;
-        thirdCoins = 250;
-        fourthCoins = 200;
+        firstCoins = 250;
+        secondCoins = 200;
+        thirdCoins = 150;
+        fourthCoins = 50;
 
-        int variablesCoins = 50 * (laps-1);
+        int variablesCoins = 30 * (laps-1);
 
         firstCoins += variablesCoins;
         secondCoins += variablesCoins;
