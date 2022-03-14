@@ -13,8 +13,12 @@ public class CarSelection : MonoBehaviour
     public Button goToChooseMode;
     public Button unlockCar;
     public Text coins;
+    public GameObject intestCost;
+    public GameObject intestTorque;
+    public GameObject torque;
+    public GameObject cost;
     private int numMacchine = 3;
-
+    
     private void Start()
     {
         currentCar = PlayerPrefs.GetInt("macchina_giocatore");
@@ -52,16 +56,30 @@ public class CarSelection : MonoBehaviour
 
         PlayerPrefs.SetInt("macchina_giocatore", currentCar);
         
+        //attivo le scritte per la forza
+        intestTorque.SetActive(true);
+        torque.SetActive(true);
         
         if(PlayerPrefs.GetInt(currentCar.ToString(),0) == 0)
         {
             goToChooseMode.interactable = false;
             unlockCar.interactable = true;
+            
+            //attivo le scritte per il costo se non è già comprata
+            intestCost.SetActive(true);
+            cost.SetActive(true);
+            
+            
         }
         else
         {
             goToChooseMode.interactable = true;
             unlockCar.interactable = false;
+            
+            //disattivo le scritte per il costo se è già comprata
+            intestCost.SetActive(false);
+            cost.SetActive(false);
+            
         }
         
         
