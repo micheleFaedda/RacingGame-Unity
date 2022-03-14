@@ -43,7 +43,7 @@ public class CarSelection : MonoBehaviour
             currentCar = transform.childCount - 1;
 
         PlayerPrefs.SetInt("macchina_giocatore", currentCar);
-
+        Debug.Log(currentCar);
         switch (currentCar)
         {
             case 0:
