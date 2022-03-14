@@ -1,51 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-
     public string chooseCar;
     public GameObject resOption;
     public GameObject option;
     public GameObject audioOption;
-    public GameObject nome;
-    public GameObject benvenuto;
-    public TMPro.TextMeshProUGUI testoBenvenuto;
-    public TMPro.TextMeshProUGUI testoNome;
+   // public GameObject audioOption;
     
     // Start is called before the first frame update
     void Start()
     {
 
-       
-        
-        if (PlayerPrefs.HasKey("User") || !(PlayerPrefs.GetString("User").Equals("")) ) {
-            nome.SetActive(false);
-            benvenuto.SetActive(true);
-            testoBenvenuto.text = "benvenuto " + PlayerPrefs.GetString("User").ToString();
-       }
-        else { 
-
-        nome.SetActive(true);
-        benvenuto.SetActive(false);
-        }
-     
     }
 
-    //Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ChooseCar()
     {
-        if (!PlayerPrefs.HasKey("User"))
-        {
-            PlayerPrefs.SetString(("User"), testoNome.text);
-        }
-            SceneManager.LoadScene(chooseCar);
+        SceneManager.LoadScene(chooseCar);
     }
 
   
