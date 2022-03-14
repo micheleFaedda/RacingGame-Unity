@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /*
  * Nel gioco non ci dovrebbero essere punti dove la macchina potrebbe uscire dal piano.
@@ -11,7 +10,9 @@ public class WorldLimit : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(0);
+            GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
+            other.gameObject.transform.position = checkPoints[0].transform.position;
+            other.gameObject.transform.rotation = checkPoints[0].transform.rotation;
         }
     }
 }
