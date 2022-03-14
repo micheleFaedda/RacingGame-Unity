@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,15 +17,26 @@ public class GameManager : MonoBehaviour
     public GameObject distanza;
     public GameObject coins;
     public GameObject attesa;
+    public Material giorno;
+    public Material notte; 
+    
     
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
     public static bool flag_started_coundown = false;
     
     void Awake()
-    {
+    {   
+        /*settaggio della modalità notte o giorno*/
+        if (Random.Range(0, 10) % 2 == 0)
+            RenderSettings.skybox = giorno;
+        else 
+            RenderSettings.skybox = notte;
+        
         attesa.SetActive(false);
-
+        
+        
+        
         GameObject m;
         switch (PlayerPrefs.GetString("modalita"))
         {
