@@ -100,6 +100,7 @@ public class Menu : MonoBehaviour
         
 
         PlayerPrefs.SetString("modalita", "multiplayer");
+        PlayerPrefs.SetInt("num_giri_multi", 1);
 
         //Questo da settare in partenza, nella scena iniziale (o se non settato deve essere player di default), da qui deve essere tolto
         PlayerPrefs.SetString("player_name", "Vicenzo");
