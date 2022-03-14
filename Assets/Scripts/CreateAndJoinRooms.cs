@@ -1,17 +1,18 @@
-using System;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
+    
+    //Input per sceare la sstanza
     public TMP_InputField createInput;
+    
+    //Input per collegarsi alla stanza
     public TMP_InputField joinInput;
 
+    //Funzione per tornare al menu per la selezione delle modalità
     public void BackButton()
     {
         if (PhotonNetwork.IsConnected)
@@ -33,22 +34,4 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom(){
         PhotonNetwork.LoadLevel("Game");
     }
-    
-    /*Metodo che si occupa di settare il bottone corretto nel caso in cui ci sia o meno la stanza attivata
-    void SetButtons()
-    {
-        if (PhotonNetwork.CountOfPlayersInRooms > 0) //se vi sono player allora la stanza è aperta altrimenti no
-        {
-            buttonCreate.SetActive(false);
-            buttonJoin.SetActive(true);
-            buttonJoin.GetComponent<RectTransform>().localPosition = new Vector3(-631f, 43f, 0f);
-        }
-        else
-        {
-            buttonJoin.SetActive(false);
-            buttonCreate.SetActive(true);
-            buttonCreate.GetComponent<RectTransform>().localPosition = new Vector3(-631f, 43f, 0f);
-
-        }
-    }*/
 }

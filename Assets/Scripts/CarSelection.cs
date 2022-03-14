@@ -1,9 +1,7 @@
-
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
 public class CarSelection : MonoBehaviour
@@ -39,6 +37,11 @@ public class CarSelection : MonoBehaviour
     private void Update()
     {
         Debug.Log(PlayerPrefs.GetInt("forza"));
+    }
+    
+    public void BackButton()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
 
@@ -155,8 +158,6 @@ public class CarSelection : MonoBehaviour
         PlayerPrefs.SetInt("1_costo",250);
         PlayerPrefs.SetInt("2_costo",1000);
         PlayerPrefs.SetInt("3_costo",2500);
-       
-        
-        
+
     }
 }

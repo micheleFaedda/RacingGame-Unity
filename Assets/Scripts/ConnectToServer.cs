@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
@@ -28,4 +25,14 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
          //settaggio della scena
          SceneManager.LoadScene("Lobby");
     } 
+     
+     public void BackButton()
+     {
+         if (PhotonNetwork.IsConnected)
+         {
+             PhotonNetwork.Disconnect();
+         }
+
+         SceneManager.LoadScene("SceltaModalita");
+     }
 }

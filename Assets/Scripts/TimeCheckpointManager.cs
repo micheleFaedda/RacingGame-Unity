@@ -68,7 +68,7 @@ public class TimeCheckpointManager : MonoBehaviour
                 testoTimer.GetComponent<UnityEngine.UI.Text>().color = normalTimerColor;
             }
 
-            //Se il tempo è finito si esce dal gioco
+            //Se il tempo è finito si esce dal gioco e si settano i cois raccolti
             if (tempoRimasto < 0)
             {
                 PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + numCoins);
@@ -108,7 +108,7 @@ public class TimeCheckpointManager : MonoBehaviour
         {
             tempoRimasto += 10;
             
-            //A ogni giro si da piu punteggio
+            //A ogni cubetto preso si moltiplica per 2 il numero di coins
             if (numCoins==0)
             {
                 numCoins = 1;

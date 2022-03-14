@@ -1,28 +1,44 @@
-using System;
 using System.Collections;
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    //I numeri del count Down
     public GameObject[] countDownElements;
+    
+    //Le macchine che possono essere istanziate
     public GameObject[] macchine;
     
+    //Waypoints per gli npc
     public GameObject[] wayPoints;
-    private Vector3[] posizioni_npc = new Vector3[3]{new Vector3(-2.92f,0,232), new Vector3(7.1f,0,241), new Vector3(13.7f,0,231.5f)};
+    
+    //Timepoints per la modalità time
     public GameObject timePoints;
+    
+    //Testo della distanza sullo schermo
     public GameObject distanza;
+    
+    //Testo dei coins sullo schermo
     public GameObject coins;
+    
+    //Posizioni iniziali delle macchine
+    private Vector3[] posizioni_npc = new Vector3[3]{new Vector3(-2.92f,0,232), new Vector3(7.1f,0,241), new Vector3(13.7f,0,231.5f)};
+
+    //Testo di attesa dei giocatori quando si è in multiplayer
     public GameObject attesa;
+    
+    //Materiali per le skybox
     public Material giorno;
     public Material notte; 
     
     
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
+    
+    //Serve per far partire il countDown allo stesso tempo per la macchine in multiplayer
     public static bool flag_started_coundown = false;
     
     void Awake()
@@ -34,10 +50,10 @@ public class GameManager : MonoBehaviour
             RenderSettings.skybox = notte;
         
         attesa.SetActive(false);
-        
-        
-        
+
         GameObject m;
+        
+        //A seconda della modalità abilitiamo solo le cose che ci servono
         switch (PlayerPrefs.GetString("modalita"))
         {
             case "time":
@@ -50,6 +66,8 @@ public class GameManager : MonoBehaviour
                     wp.SetActive(false);
                 }
                 timePoints.SetActive(true);
+                
+                //Viene istanziata la macchina del giocatore e viene settata la sua forza
                 m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (1.528828f, 0, 240f), Quaternion.identity * Quaternion.Euler(0, -90, 0)) as GameObject;
                 m.tag = "Player";
                 m.AddComponent<TimeCheckpointManager>();
@@ -59,12 +77,15 @@ public class GameManager : MonoBehaviour
 
                 timePoints.SetActive(false);
                 coins.SetActive(false);
+                
+                //Viene istanziata la macchina del giocatore e viene settata la sua forza
                 m = Instantiate (macchine[PlayerPrefs.GetInt("macchina_giocatore")], new Vector3 (22.7f, 0, 241f), Quaternion.identity * Quaternion.Euler(0, -90, 0)) as GameObject;
                 m.tag = "Player";
                 m.GetComponent<CheckpointManager>().enabled = true;
                 m.GetComponent<CheckpointManager>().playerName = PlayerPrefs.GetString("player_name");
                 m.GetComponent<CarController>().forza = PlayerPrefs.GetInt("forza");
 
+                //Istanziamo le macchine NPC in posizioni prestabilite
                 int index_npc = 0;
                 for (int i = 0; i < macchine.Length; i++)
                 {
@@ -89,6 +110,7 @@ public class GameManager : MonoBehaviour
 
                 int pos_multiplayer = PhotonNetwork.CurrentRoom.PlayerCount-1;
 
+                //Viene istanziata la macchina del giocatore (la posizione dipenda da quanti giocatori sono gia presenti nella stanza) e viene settata la sua forza
                 m = PhotonNetwork.Instantiate(macchine[PlayerPrefs.GetInt("macchina_giocatore")].name, posizioni_npc[pos_multiplayer], Quaternion.identity * Quaternion.Euler(0, -90, 0));
                 m.tag = "Player";
                 m.GetComponent<CheckpointManager>().playerName = PlayerPrefs.GetString("player_name");
@@ -109,6 +131,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /*
+     * Gestiamo il countDown e la partenza sincronizzata dei player in modalità multiplayer
+     */
     public void Update()
     {
         if (PhotonNetwork.IsConnected && !flag_started_coundown && PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers)
@@ -119,12 +144,15 @@ public class GameManager : MonoBehaviour
         }
         else if(PhotonNetwork.IsConnected && !flag_started_coundown)
         {
-            attesa.SetActive(true);//
+            attesa.SetActive(true);
         }
         
         Debug.Log(start);
     }
 
+    /*
+     * Coroutine per visualizzare i numeri del countdown a scermo all'inizio del gioco
+     */
     IEnumerator CountDown()
     {
         yield return new WaitForSeconds(2);
