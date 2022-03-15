@@ -44,12 +44,12 @@ public class MainMenu : MonoBehaviour
     }
     
     public void Options()
-    {
+    {   nome.gameObject.SetActive(false);
         option.SetActive(true);
     }
     
     public void CloseOptions()
-    {
+    {   nome.gameObject.SetActive(true);
         resOption.SetActive(false);
         option.SetActive(false);
         audioOption.SetActive(false);

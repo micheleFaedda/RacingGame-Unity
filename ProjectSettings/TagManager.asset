@@ -44,6 +44,7 @@ TagManager:
   - Cost
   - TorqueForce
   - intestazione
+  - Music
   layers:
   - Default
   - TransparentFX
