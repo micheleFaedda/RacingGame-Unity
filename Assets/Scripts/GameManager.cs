@@ -32,8 +32,10 @@ public class GameManager : MonoBehaviour
     
     //Materiali per le skybox
     public Material giorno;
-    public Material notte; 
-    
+    public Material notte;
+
+    public GameObject timerRace;
+    public GameObject timerTime;
     
     //Serve per non far partire le macchine prima della fine del count down
     public static bool start = false;
@@ -57,6 +59,8 @@ public class GameManager : MonoBehaviour
         switch (PlayerPrefs.GetString("modalita"))
         {
             case "time":
+                timerTime.SetActive(true);
+                timerRace.SetActive(false);
                 GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
                 distanza.SetActive(false);
                 coins.SetActive(true);
@@ -74,7 +78,8 @@ public class GameManager : MonoBehaviour
                 m.GetComponent<CarController>().forza = PlayerPrefs.GetInt("forza");
                 break;
             case "racing":
-
+                timerTime.SetActive(false);
+                timerRace.SetActive(true);
                 timePoints.SetActive(false);
                 coins.SetActive(false);
                 
@@ -100,6 +105,8 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case "multiplayer":
+                timerTime.SetActive(false);
+                timerRace.SetActive(true);
                 GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
                 coins.SetActive(false);
                 foreach (GameObject wp in wayPoints)
@@ -146,8 +153,6 @@ public class GameManager : MonoBehaviour
         {
             attesa.SetActive(true);
         }
-        
-        Debug.Log(start);
     }
 
     /*

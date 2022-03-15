@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        
         //Se è la prima volta che viene aperto il gioco si setta il player name di dafault
         if (!PlayerPrefs.HasKey("player_name"))
         {
