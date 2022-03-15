@@ -10,7 +10,7 @@ public class OptionsScreen : MonoBehaviour
     private int selectedResolution;
     public TMP_Text resolutionLabel;
     
-    // Start is called before the first frame update
+    
     void Start()
     {
         fullscreen.isOn = Screen.fullScreen;
@@ -80,7 +80,7 @@ public class OptionsScreen : MonoBehaviour
     public void updateResLabel()
     {
         resolutionLabel.text = resultions[selectedResolution].horizontal.ToString() + " x "
-            + resultions[selectedResolution].horizontal.ToString();
+            + resultions[selectedResolution].vertical.ToString();
     }
 
     public void ApplyChangesGraph()
