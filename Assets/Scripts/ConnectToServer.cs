@@ -12,8 +12,15 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         GameManager.flag_started_coundown = false;
         GameManager.start = false;
         
-        //connessione
-        PhotonNetwork.ConnectUsingSettings();
+        //se si è gia connessi ci si riconentte altrimenti nuova connessione
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
+        
+            //connessione
+            PhotonNetwork.ConnectUsingSettings();
+        
     }
 
     public override void OnConnectedToMaster() {

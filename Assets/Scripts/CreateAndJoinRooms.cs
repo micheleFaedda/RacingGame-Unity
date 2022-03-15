@@ -1,7 +1,10 @@
+using System;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
@@ -24,7 +27,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     
     public void CreateRoom(){
-        PhotonNetwork.CreateRoom(createInput.text, new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
+        
+        int numPlayers = int.Parse(GameObject.FindGameObjectWithTag("chosePlayers").GetComponent<Text>().text);
+        PlayerPrefs.SetInt("num_multi_players",numPlayers);
+        PhotonNetwork.CreateRoom(createInput.text, new RoomOptions { MaxPlayers = (byte) numPlayers }, TypedLobby.Default);
     }
 
     public void JoinRoom(){
@@ -33,5 +39,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom(){
         PhotonNetwork.LoadLevel("Game");
+    }
+
+    public void AddMinusPlayers(int players)
+    {
+        players = int.Parse(GameObject.FindGameObjectWithTag("chosePlayers").GetComponent<Text>().text) + players;
+        players = Math.Clamp(players, 2, 3);
+        
+        GameObject.FindGameObjectWithTag("chosePlayers").GetComponent<Text>().text = players + "";
     }
 }
