@@ -135,6 +135,11 @@ public class Menu : MonoBehaviour
 
     }
 
+    public void goShop()
+    {
+        SceneManager.LoadScene("ChooseCar");
+    }
+
     private void SetCoinsMenu(int laps)
     {
         firstCoins = 500;
