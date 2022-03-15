@@ -26,7 +26,7 @@ public class DontDestroyMusicMenu : MonoBehaviour
          trova nella cella 0*/
         GameObject[] music =  GameObject.FindGameObjectsWithTag("Music");
 
-        Debug.Log("Musiche " +music.Length);
+//        Debug.Log("Musiche " +music.Length);
 
         for (int i = music.Length - 1; i > 0; i--)
         {

@@ -28,17 +28,15 @@ public class CarSelection : MonoBehaviour
         }
         
         currentCar = PlayerPrefs.GetInt("macchina_giocatore");
-        SelectCar(currentCar);
+        
+        ChangeCar(currentCar);
+        
         coins.text = PlayerPrefs.GetInt("coins").ToString();
-        SetInterface(true);
+        
+        
         
     }
 
-    private void Update()
-    {
-        Debug.Log(PlayerPrefs.GetInt("forza"));
-    }
-    
     public void BackButton()
     {
         SceneManager.LoadScene("Menu");
@@ -76,22 +74,30 @@ public class CarSelection : MonoBehaviour
                 break;
         }
     }
-
+    
+    /*Metodo per cambiare la macchina nello shop*/
     public void ChangeCar(int _change)
     {
        
         currentCar += _change;
-        currentCar = Math.Clamp(currentCar, 0, numMacchine);
+        currentCar = Math.Clamp(currentCar, 0, numMacchine-1); //clamp dell indice passato
+        
         PlayerPrefs.SetInt("macchina_giocatore", currentCar);
+        
+        //selezione a video della macchina
+        SelectCar(currentCar);
         
         //attivo le scritte per la forza
         intestTorque.SetActive(true);
         torque.SetActive(true);
-
+        
+        //setto la forza a video
         torque.GetComponent<Text>().text = PlayerPrefs.GetInt("forza").ToString();
+        
+        //setto il costo
         cost.GetComponent<Text>().text = PlayerPrefs.GetInt(currentCar + "_costo").ToString();
         
-        if(PlayerPrefs.GetString(currentCar.ToString()).Equals("true"))
+        if(PlayerPrefs.GetString(currentCar.ToString()).Equals("true")) //se è stata comprata allora setto la sua interfaccia 
         {
            SetInterface(true);
         }
@@ -100,9 +106,9 @@ public class CarSelection : MonoBehaviour
             SetInterface(false);
             
         }
-        SelectCar(currentCar);
+        
     }
-    
+    /*Metodo che si occupa dello shop della macchina in base ai coins*/
     public void UnlockCar()
     {
         int coinsPlayer = PlayerPrefs.GetInt("coins");
@@ -111,23 +117,19 @@ public class CarSelection : MonoBehaviour
         if (coinsPlayer >= cost)
         {
             PlayerPrefs.SetString(currentCar.ToString(), "true");
-            Debug.Log(coinsPlayer - cost);
+        
             PlayerPrefs.SetInt("coins",coinsPlayer-cost);
             
             SetInterface(true);
             
             coins.text = PlayerPrefs.GetInt("coins") + "";
-           // transform.GetChild(currentCar + numMacchine).gameObject.SetActive(false);
+;
             SelectCar(currentCar);
-        }
-        else
-        {
-            Debug.Log("Non hai i soldi");
         }
         
     }
 
-
+    /*Metodo che setta l'interfaccia se una macchina è stata comprata o meno*/
     private void SetInterface(bool set)
     {
         if (set)
@@ -154,7 +156,7 @@ public class CarSelection : MonoBehaviour
         PlayerPrefs.SetString("2","false");
         PlayerPrefs.SetString("3","false");
         
-        
+        /*Costo*/
         PlayerPrefs.SetInt("1_costo",250);
         PlayerPrefs.SetInt("2_costo",1000);
         PlayerPrefs.SetInt("3_costo",2500);
