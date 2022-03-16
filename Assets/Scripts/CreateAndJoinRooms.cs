@@ -15,6 +15,14 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     //Input per collegarsi alla stanza
     public TMP_InputField joinInput;
 
+    public void Start()
+    {
+        TextMeshProUGUI placeholder = (TextMeshProUGUI)createInput.placeholder;
+        placeholder.text = "Enter New Room Name";
+        placeholder = (TextMeshProUGUI)joinInput.placeholder;
+        placeholder.text = "Enter Room Name";
+    }
+
     //Funzione per tornare al menu per la selezione delle modalità
     public void BackButton()
     {

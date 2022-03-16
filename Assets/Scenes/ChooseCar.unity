@@ -2991,7 +2991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -236.83624, y: -214.87674}
+  m_AnchoredPosition: {x: -291, y: -214.87674}
   m_SizeDelta: {x: 319.4796, y: 337.7252}
   m_Pivot: {x: 0.49999994, y: 0.5}
 --- !u!114 &3652672839911067375
@@ -3680,7 +3680,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 11
-  m_Text: 'Coins:
+  m_Text: 'Actual Coins:
 
 '
 --- !u!222 &6175676297240306405
@@ -3708,8 +3708,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -571, y: -54.479}
-  m_SizeDelta: {x: 140.43, y: 54.477}
+  m_AnchoredPosition: {x: -561.7538, y: -78.899994}
+  m_SizeDelta: {x: 430.4, y: 102.4641}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6175676297240306407
 MonoBehaviour:
