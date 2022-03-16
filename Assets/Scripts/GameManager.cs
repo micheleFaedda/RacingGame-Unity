@@ -153,6 +153,8 @@ public class GameManager : MonoBehaviour
     {
         if (PhotonNetwork.IsConnected && !flag_started_coundown && PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
             flag_started_coundown = true;
             attesa.SetActive(false);
             StartCoroutine(CountDown());

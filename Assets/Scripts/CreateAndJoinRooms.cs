@@ -66,6 +66,16 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Game");
     }
 
+   public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        StartCoroutine(FeedBack("Failed to join room. It is probably already full."));
+    }
+    
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        StartCoroutine(FeedBack("Failed to create room. It is probably already created."));
+    }
+
     public void AddMinusPlayers(int players)
     {
         players = int.Parse(GameObject.FindGameObjectWithTag("chosePlayers").GetComponent<Text>().text) + players;
