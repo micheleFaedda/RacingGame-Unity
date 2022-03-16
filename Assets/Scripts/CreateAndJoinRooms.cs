@@ -68,7 +68,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
    public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        StartCoroutine(FeedBack("Failed to join room. It is probably already full."));
+        StartCoroutine(FeedBack("Failed to join room. It is probably already full or not exsists."));
     }
     
     public override void OnCreateRoomFailed(short returnCode, string message)
