@@ -15,6 +15,7 @@ public class AudioOptions : MonoBehaviour
 
     void Start()
     {
+        //inizializzo i valori del Master volume, Music volume e SFX volume degli slider con i valori del mixer 
         float vol = 0f;
         mixer.GetFloat("Master Vol", out vol);
         masterS.value = vol;
@@ -36,6 +37,8 @@ public class AudioOptions : MonoBehaviour
         
     }
 
+    // Aggiorno il testo del label rispetto allo slider, modifico questo valore nell'effettivo mixer e salvo quest'informazioni nel PlayerPrefs
+    // Questo operazione la eseguo per tutti e tre i tipi di volume (Master, Music, SFX)
     public void SetMasterVolume()
     {
         masterL.text = Mathf.RoundToInt(masterS.value+80).ToString();

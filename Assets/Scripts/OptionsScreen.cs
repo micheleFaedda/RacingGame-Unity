@@ -5,7 +5,7 @@ using TMPro;
 
 public class OptionsScreen : MonoBehaviour
 {
-    public Toggle fullscreen, vsync;
+    public Toggle fullscreen;
     public List<ResItem> resultions = new List<ResItem>();
     private int selectedResolution;
     public TMP_Text resolutionLabel;
@@ -13,17 +13,10 @@ public class OptionsScreen : MonoBehaviour
     
     void Start()
     {
+
         fullscreen.isOn = Screen.fullScreen;
 
-        if (QualitySettings.vSyncCount == 0)
-        {
-            vsync.isOn = false;
-        }
-        else
-        {
-            vsync.isOn = true;
-        }
-
+        // se faccio partire il gioco con una risoluzione tra quelle non di default, la aggiungo alla lista
         bool foundRes = false;
 
         for(int i = 0; i < resultions.Count; i++)
@@ -48,12 +41,7 @@ public class OptionsScreen : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //scorro verso destra o sinistra la lista di risoluzioni, cambiando quindi il label corrispondente
     public void ResLeft()
     {
         selectedResolution--;
@@ -83,23 +71,17 @@ public class OptionsScreen : MonoBehaviour
             + resultions[selectedResolution].vertical.ToString();
     }
 
+    //applico i cambiamenti grafici (risoluzione e/o fullscreen)
     public void ApplyChangesGraph()
     {
         
-        if (vsync.isOn)
-        {
-            QualitySettings.vSyncCount = 1;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 0;
-
-        }
+       
         Screen.SetResolution(resultions[selectedResolution].horizontal, resultions[selectedResolution].vertical
             , fullscreen.isOn);
     }
 }
 
+//classe per definire la risoluzione
 [System.Serializable]
 public class ResItem
 {
