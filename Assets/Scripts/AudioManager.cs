@@ -6,9 +6,9 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public AudioMixer mixer;
-    // Start is called before the first frame update
     void Start()
     {
+        //setto i valori dei volumi della sessione precedente nel mixer
         if (PlayerPrefs.HasKey("Master Vol"))
         {
             mixer.SetFloat("Master Vol", PlayerPrefs.GetFloat("Master Vol"));
