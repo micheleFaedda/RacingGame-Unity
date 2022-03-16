@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -45,11 +46,7 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {   
-        /*settaggio della modalità notte o giorno*/
-        if (Random.Range(0, 10) % 2 == 0)
-            RenderSettings.skybox = giorno;
-        else 
-            RenderSettings.skybox = notte;
+       
         
         attesa.SetActive(false);
 
@@ -59,6 +56,7 @@ public class GameManager : MonoBehaviour
         switch (PlayerPrefs.GetString("modalita"))
         {
             case "time":
+                GiornoNotte(Random.Range(0, 10));
                 timerTime.SetActive(true);
                 timerRace.SetActive(false);
                 GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
@@ -78,6 +76,7 @@ public class GameManager : MonoBehaviour
                 m.GetComponent<CarController>().forza = PlayerPrefs.GetInt("forza");
                 break;
             case "racing":
+                GiornoNotte(Random.Range(0, 10));
                 timerTime.SetActive(false);
                 timerRace.SetActive(true);
                 timePoints.SetActive(false);
@@ -105,6 +104,9 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case "multiplayer":
+                //a seconda della lunghezza del nome della stanza setto la modalita giorno o notte
+                GiornoNotte(PhotonNetwork.CurrentRoom.Name.Length); 
+                
                 timerTime.SetActive(false);
                 timerRace.SetActive(true);
                 GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
@@ -169,5 +171,14 @@ public class GameManager : MonoBehaviour
             if (item == countDownElements.Last())
                 start = true;
         }
+    }
+
+    private void GiornoNotte(int x)
+    {
+        if (x % 2 == 0)
+            RenderSettings.skybox = giorno;
+        else 
+            RenderSettings.skybox = notte;
+        
     }
 }

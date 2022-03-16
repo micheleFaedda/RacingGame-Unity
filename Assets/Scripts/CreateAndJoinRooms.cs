@@ -31,6 +31,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         int numPlayers = int.Parse(GameObject.FindGameObjectWithTag("chosePlayers").GetComponent<Text>().text);
         PlayerPrefs.SetInt("num_multi_players",numPlayers);
         PhotonNetwork.CreateRoom(createInput.text, new RoomOptions { MaxPlayers = (byte) numPlayers }, TypedLobby.Default);
+        
     }
 
     public void JoinRoom(){

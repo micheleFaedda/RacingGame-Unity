@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     public GameObject resOption;
     public GameObject option;
     public GameObject audioOption;
+    public GameObject commands;
     
     //Il nome del player ("YourName" di default)
     public TMP_InputField nome;
@@ -49,11 +50,18 @@ public class MainMenu : MonoBehaviour
         option.SetActive(true);
     }
     
+    public void Commands()
+    {   nome.gameObject.SetActive(false);
+        option.SetActive(false);
+        commands.SetActive(true);
+    }
+    
     public void CloseOptions()
     {   nome.gameObject.SetActive(true);
         resOption.SetActive(false);
         option.SetActive(false);
         audioOption.SetActive(false);
+        commands.SetActive(false);
     }
 
     public void QuitGame()

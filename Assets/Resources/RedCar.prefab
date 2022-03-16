@@ -545,6 +545,8 @@ MonoBehaviour:
   checkPointSucc: 0
   tempoEntrata: 0
   position: 
+  timer: {fileID: 0}
+  view: {fileID: 0}
 --- !u!114 &-4973405214092945836
 MonoBehaviour:
   m_ObjectHideFlags: 0

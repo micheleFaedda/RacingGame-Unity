@@ -12,6 +12,8 @@ public class Menu : MonoBehaviour
     public GameObject raceMode;
     public GameObject timeMode;
     public GameObject multiMode;
+    public GameObject timeResult;
+    public GameObject otherResult;
     private GameObject car;
     public static int firstCoins = 500;
     public static  int secondCoins = 350;
@@ -19,10 +21,11 @@ public class Menu : MonoBehaviour
     public static int fourthCoins = 200;
 
     public void Start()
-    {
+    {    
         Classifica.Reset();
         GameManager.flag_started_coundown = false;
         GameManager.start = false;
+        
         foreach (GameObject c in cars)
         {
             c.GetComponent<Rigidbody>().useGravity = false;
@@ -31,12 +34,48 @@ public class Menu : MonoBehaviour
                 new Quaternion(-0.0252383146f, 0.983145773F, -0.0892141908F, -0.157569751F);
             c.gameObject.transform.position = new Vector3(-1291.09998f, -164.300003f, -512.099976f);
         }
-
+            
         car = Instantiate(cars[PlayerPrefs.GetInt("macchina_giocatore")]);
         car.transform.SetParent(GameObject.FindWithTag("CanvasMods").transform, false);
         
+        //se sto navigando nel menu allora visualizzo la canvas della modalità
+        if (PlayerPrefs.GetString("timeResult").Equals("false") && PlayerPrefs.GetString("otherResult").Equals("false"))
+        {
 
-        testoCoins.GetComponent<Text>().text = "Actual coins: " + PlayerPrefs.GetInt("coins");
+            testoCoins.GetComponent<Text>().text = "Actual coins: " + PlayerPrefs.GetInt("coins");
+        }
+        
+        //se si torna da una dalla modalità time attack allora visualizzo il risultato 
+        if (PlayerPrefs.GetString("timeResult").Equals("true"))
+        {
+            GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
+            GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = false;
+            GameObject.FindWithTag("CanvasResults").GetComponent<Canvas>().enabled = true;
+            timeResult.SetActive(true);
+            otherResult.SetActive(false);
+            GameObject.FindGameObjectWithTag("CoinsEarn").GetComponent<Text>().text =
+                PlayerPrefs.GetInt("CoinsEarn").ToString();
+            PlayerPrefs.SetString("timeResult","false");
+        }
+        
+        //se si torna da una gara race o multiplayer allora visualizzo il risultato della gara
+        if (PlayerPrefs.GetString("otherResult").Equals("true"))
+        {
+            GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
+            GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = false;
+            GameObject.FindWithTag("CanvasResults").GetComponent<Canvas>().enabled = true;
+            timeResult.SetActive(false);
+            otherResult.SetActive(true);
+            GameObject.FindGameObjectWithTag("Posizione").GetComponent<Text>().text =
+                PlayerPrefs.GetString("posizione_gara");
+            
+            GameObject.FindGameObjectWithTag("CoinsEarn").GetComponent<Text>().text =
+                PlayerPrefs.GetInt("CoinsEarn").ToString();
+            
+            PlayerPrefs.SetString("otherResult","false");
+            
+        }
+        
        
     }
 
@@ -105,6 +144,24 @@ public class Menu : MonoBehaviour
         raceMode.SetActive(true);
         multiMode.SetActive(true);
         timeMode.SetActive(true);
+    }
+    
+    public void goBackFromResult()
+    {   
+        //setto le canvas correttamente
+        GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = true;
+        GameObject.FindWithTag("CanvasRules").GetComponent<Canvas>().enabled = false;
+        GameObject.FindWithTag("CanvasResults").GetComponent<Canvas>().enabled = false;
+        
+        //riattivo le modalità per la selezione futura
+        raceMode.SetActive(true);
+        multiMode.SetActive(true);
+        timeMode.SetActive(true);
+        
+        //setto le variabili per non visualizzare i risultati
+        PlayerPrefs.SetString("otherResult","false");
+        PlayerPrefs.SetString("timeResult","false");
+        testoCoins.GetComponent<Text>().text = "Actual coins: " + PlayerPrefs.GetInt("coins");
     }
 
     public void AddLaps()

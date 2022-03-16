@@ -45,6 +45,10 @@ public class CarSelection : MonoBehaviour
     {
         PlayerPrefs.SetInt("macchina_giocatore", currentCar);
         SceneManager.LoadScene("SceltaModalita");
+        
+        //variabili per settare la canvas giusta
+        PlayerPrefs.SetString("otherResult","false");
+        PlayerPrefs.SetString("timeResult","false");
     }
 
     private void SelectCar(int _index)
@@ -152,8 +156,13 @@ public class CarSelection : MonoBehaviour
         PlayerPrefs.SetInt("2_costo",1000);
         PlayerPrefs.SetInt("3_costo",2500);
         
+        /*macchina e coins del giocatore*/
         PlayerPrefs.SetInt("macchina_giocatore",0);
         PlayerPrefs.SetInt("coins",0);
+        
+        //variabili per settare la canvas giusta
+        PlayerPrefs.SetString("otherResult","false");
+        PlayerPrefs.SetString("timeResult","false");
 
     }
 }

@@ -195,6 +195,7 @@ public class CheckpointManager : MonoBehaviour
                                 case "First":
                                      guadagnato = Menu.firstCoins + 40 * (PlayerPrefs.GetInt("num_giri_race") - 1);
                                     PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + guadagnato );
+                                    
                                     break;
                                 case "Second":
                                      guadagnato = Menu.secondCoins + 40 * (PlayerPrefs.GetInt("num_giri_race") - 1);
@@ -210,6 +211,9 @@ public class CheckpointManager : MonoBehaviour
                                     break;
                                     
                             }
+                            PlayerPrefs.SetInt("CoinsEarn", guadagnato);
+                            PlayerPrefs.SetString("otherResult","true");
+                            PlayerPrefs.SetString("timeResult","false");
                             SceneManager.LoadScene("SceltaModalita");
                         }
                     }
@@ -373,12 +377,15 @@ public class CheckpointManager : MonoBehaviour
                 {
                     case "First":
                         PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 1500 );
+                        PlayerPrefs.SetInt("CoinsEarn", 1500 );
                         break;
                     case "Second":
                         PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 1000 );
+                        PlayerPrefs.SetInt("CoinsEarn", 1000 );
                         break;
                     case "Third":
                         PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + 500 );
+                        PlayerPrefs.SetInt("CoinsEarn", 500 );
                         break;
                                     
                 }
@@ -389,6 +396,11 @@ public class CheckpointManager : MonoBehaviour
                     PhotonNetwork.CurrentRoom.IsOpen = false;
                     PhotonNetwork.CurrentRoom.IsVisible = false;
                 }
+                
+                //setto parametri per la canvas risultati
+                PlayerPrefs.SetString("posizione_gara", position);
+                PlayerPrefs.SetString("otherResult","true");
+                PlayerPrefs.SetString("timeResult","false");
                 
                 //esco dalla stanza
                 PhotonNetwork.LeaveRoom();

@@ -46,6 +46,9 @@ TagManager:
   - intestazione
   - Music
   - chosePlayers
+  - Coins Time
+  - CanvasResults
+  - CoinsEarn
   layers:
   - Default
   - TransparentFX
