@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
@@ -13,8 +14,11 @@ public class MainMenu : MonoBehaviour
     //Il nome del player ("YourName" di default)
     public TMP_InputField nome;
 
+    public GameObject feedback;
+    
     void Start()
     {
+        nome.characterLimit = 16;
         
         //Se è la prima volta che viene aperto il gioco si setta il player name di dafault
         if (!PlayerPrefs.HasKey("player_name"))
@@ -29,8 +33,16 @@ public class MainMenu : MonoBehaviour
     //Per passare alla schermata della selezione delle modalità di gioco
     public void ChooseCar()
     {
-        PlayerPrefs.SetString(("player_name"), nome.text);
-        SceneManager.LoadScene("ChooseCar");
+        Debug.Log(name.Length);
+        if(nome.text.Length >= 4){
+            PlayerPrefs.SetString(("player_name"), nome.text);
+            SceneManager.LoadScene("ChooseCar");
+        }
+        else
+        {
+            StartCoroutine(FeedBack());
+        }
+        
     }
 
     public void ResolutionOption()
@@ -68,6 +80,13 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+    
+    IEnumerator FeedBack()
+    {
+        feedback.GetComponent<TMP_Text>().text = "Your name name must have 4 characters minimum.";
+        yield return new WaitForSeconds(2);
+        feedback.GetComponent<TMP_Text>().text = "";
     }
     
 }
