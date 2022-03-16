@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
        
         
         attesa.SetActive(false);
-
+       
         GameObject m;
         
         //A seconda della modalità abilitiamo solo le cose che ci servono
@@ -109,6 +109,12 @@ public class GameManager : MonoBehaviour
                 
                 timerTime.SetActive(false);
                 timerRace.SetActive(true);
+                timerRace.transform.position = new Vector3(timerRace.transform.position.x, timerRace.transform.position.y + 230f, 0);
+                distanza.transform.position = new Vector3(distanza.transform.position.x, distanza.transform.position.y + 230f, 0);
+           
+                
+                   //timerRace.GetComponent<RectTransform>().anchoredPosition = Vector2.up + Vector2.right;
+               
                 GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
                 coins.SetActive(false);
                 foreach (GameObject wp in wayPoints)
