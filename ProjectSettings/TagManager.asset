@@ -49,6 +49,8 @@ TagManager:
   - Coins Time
   - CanvasResults
   - CoinsEarn
+  - TerzoIntestazione
+  - QuartoIntestazione
   layers:
   - Default
   - TransparentFX

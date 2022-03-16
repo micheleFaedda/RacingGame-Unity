@@ -30,11 +30,17 @@ public class PlayerController : MonoBehaviour {
         testoPlayer.GetComponent<Text>().fontSize = 70;
 
         view = GetComponent<PhotonView>();
-        
-       if (PhotonNetwork.IsConnected)
+
+        if (PhotonNetwork.IsConnected)
         {
-            if (view.IsMine) 
+            if (view.IsMine)
+            {
                 this.transform.Find("CameraRetro").gameObject.SetActive(true);
+            }
+            else
+            {
+                this.GetComponent<CheckpointManager>().playerName = this.view.Owner.NickName;
+            }
         }
         else
         {

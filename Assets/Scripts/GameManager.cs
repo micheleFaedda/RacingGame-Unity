@@ -104,18 +104,29 @@ public class GameManager : MonoBehaviour
                 
                 break;
             case "multiplayer":
+                
+                if (PhotonNetwork.IsConnected)
+                {
+                    switch (PhotonNetwork.CurrentRoom.MaxPlayers)
+                    {
+                        case 2:
+                            GameObject.FindGameObjectWithTag("TerzoIntestazione").SetActive(false);
+                            GameObject.FindGameObjectWithTag("QuartoIntestazione").SetActive(false);
+                            break;
+                        case 3: 
+                            GameObject.FindGameObjectWithTag("QuartoIntestazione").SetActive(false);
+                            break;
+                    }
+                }
                 //a seconda della lunghezza del nome della stanza setto la modalita giorno o notte
                 GiornoNotte(PhotonNetwork.CurrentRoom.Name.Length); 
                 
                 timerTime.SetActive(false);
                 timerRace.SetActive(true);
-                timerRace.transform.position = new Vector3(timerRace.transform.position.x, timerRace.transform.position.y + 230f, 0);
-                distanza.transform.position = new Vector3(distanza.transform.position.x, distanza.transform.position.y + 230f, 0);
+                //timerRace.transform.position = new Vector3(timerRace.transform.position.x, timerRace.transform.position.y + 230f, 0);
+                //distanza.transform.position = new Vector3(distanza.transform.position.x, distanza.transform.position.y + 230f, 0);
            
-                
-                   //timerRace.GetComponent<RectTransform>().anchoredPosition = Vector2.up + Vector2.right;
-               
-                GameObject.FindGameObjectWithTag("Classifica").SetActive(false);
+                GameObject.FindGameObjectWithTag("Classifica").SetActive(true);
                 coins.SetActive(false);
                 foreach (GameObject wp in wayPoints)
                 {

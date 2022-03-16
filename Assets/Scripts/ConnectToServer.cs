@@ -1,4 +1,5 @@
 using Photon.Pun;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
@@ -25,6 +26,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster() {
         //join alla lobby
+        PhotonNetwork.NickName = PlayerPrefs.GetString("player_name");
         PhotonNetwork.JoinLobby();
     } 
 

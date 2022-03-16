@@ -56,9 +56,9 @@ public class CheckpointManager : MonoBehaviour
     
     //Oggetto per il multiplayer
     public PhotonView view;
-
+    
     void Start()
-    {   
+    {
         //recupero gli oggetti per la gestione dei giri e della classifica
         checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         primoClassificaTesto = GameObject.FindGameObjectWithTag("Primo");
@@ -127,7 +127,7 @@ public class CheckpointManager : MonoBehaviour
         Classifica.setPosizione(idMacchina, giro, checkPoint, tempoEntrata);
         position = Classifica.GetPosizione(idMacchina);
 
-        if (PlayerPrefs.GetString("modalita").Equals("racing"))
+        if (!PlayerPrefs.GetString("modalita").Equals("time") )
         {
             SetClassifica(position);   
         }
@@ -262,10 +262,33 @@ public class CheckpointManager : MonoBehaviour
                 secondoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
                 break;
             case "Third":
-                terzoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                if (PhotonNetwork.IsConnected)
+                {
+                    if (PhotonNetwork.CurrentRoom.MaxPlayers == 3)
+                    {
+                        terzoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName; 
+                    }
+                    
+                }
+                else
+                {
+                    terzoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;   
+                }
                 break;
             case "Fourth":
-                quartoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                if (PhotonNetwork.IsConnected)
+                {
+                    if (PhotonNetwork.CurrentRoom.MaxPlayers == 4)
+                    {
+                        quartoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                    }
+                    
+                }
+                else
+                {
+                    quartoClassificaTesto.GetComponent<UnityEngine.UI.Text>().text = playerName;
+                }
+
                 break;
         }
     }
