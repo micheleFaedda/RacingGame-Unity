@@ -22,19 +22,17 @@ public class CarSelection : MonoBehaviour
     
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("blue_car"))
+        if (!PlayerPrefs.HasKey("0"))
         {
             InitializeCars();
         }
         
         currentCar = PlayerPrefs.GetInt("macchina_giocatore");
         
-        ChangeCar(currentCar);
+        ChangeCar(0);
         
         coins.text = PlayerPrefs.GetInt("coins").ToString();
-        
-        
-        
+
     }
 
     public void BackButton()
@@ -45,7 +43,12 @@ public class CarSelection : MonoBehaviour
 
     public void GoToChooseMode()
     {
+        PlayerPrefs.SetInt("macchina_giocatore", currentCar);
         SceneManager.LoadScene("SceltaModalita");
+        
+        //variabili per settare la canvas giusta
+        PlayerPrefs.SetString("otherResult","false");
+        PlayerPrefs.SetString("timeResult","false");
     }
 
     private void SelectCar(int _index)
@@ -81,9 +84,7 @@ public class CarSelection : MonoBehaviour
        
         currentCar += _change;
         currentCar = Math.Clamp(currentCar, 0, numMacchine-1); //clamp dell indice passato
-        
-        PlayerPrefs.SetInt("macchina_giocatore", currentCar);
-        
+
         //selezione a video della macchina
         SelectCar(currentCar);
         
@@ -97,15 +98,8 @@ public class CarSelection : MonoBehaviour
         //setto il costo
         cost.GetComponent<Text>().text = PlayerPrefs.GetInt(currentCar + "_costo").ToString();
         
-        if(PlayerPrefs.GetString(currentCar.ToString()).Equals("true")) //se è stata comprata allora setto la sua interfaccia 
-        {
-           SetInterface(true);
-        }
-        else
-        {
-            SetInterface(false);
-            
-        }
+        SetInterface(PlayerPrefs.GetString(currentCar.ToString()).Equals("true"));
+      
         
     }
     /*Metodo che si occupa dello shop della macchina in base ai coins*/
@@ -148,6 +142,7 @@ public class CarSelection : MonoBehaviour
             intestCost.SetActive(true);
         }
     }
+    
     private void InitializeCars()
     {   
         /*Macchine*/
@@ -160,6 +155,14 @@ public class CarSelection : MonoBehaviour
         PlayerPrefs.SetInt("1_costo",250);
         PlayerPrefs.SetInt("2_costo",1000);
         PlayerPrefs.SetInt("3_costo",2500);
+        
+        /*macchina e coins del giocatore*/
+        PlayerPrefs.SetInt("macchina_giocatore",0);
+        PlayerPrefs.SetInt("coins",0);
+        
+        //variabili per settare la canvas giusta
+        PlayerPrefs.SetString("otherResult","false");
+        PlayerPrefs.SetString("timeResult","false");
 
     }
 }

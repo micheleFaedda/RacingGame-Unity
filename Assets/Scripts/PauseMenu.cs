@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
 public class PauseMenu : MonoBehaviour
 {
 
@@ -45,6 +43,10 @@ public class PauseMenu : MonoBehaviour
     //Torno al menù principale cambiando scena
     public void LoadMenu()
     {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
         Time.timeScale = 1f;
         SceneManager.LoadScene("SceltaModalita");
     }
@@ -52,6 +54,10 @@ public class PauseMenu : MonoBehaviour
     //esco dal gioco
     public void QuitGame()
     {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
         Debug.Log("Quit");
         Application.Quit();
     }

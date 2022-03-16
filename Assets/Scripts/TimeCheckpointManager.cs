@@ -72,6 +72,9 @@ public class TimeCheckpointManager : MonoBehaviour
             if (tempoRimasto < 0)
             {
                 PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + numCoins);
+                PlayerPrefs.SetInt("CoinsEarn", numCoins);
+                PlayerPrefs.SetString("timeResult","true");
+                PlayerPrefs.SetString("otherResult","false");
                 SceneManager.LoadScene("SceltaModalita");
             }
         }
