@@ -143,13 +143,22 @@ public class CarController : MonoBehaviour
                 audioIdle.Play();
 
             audioAccelerazione.Stop();
+            
+            //calcolo il suono in base alla distanza dell'NPC con il player
+            SuonoInBaseADistanza(audioIdle);
         }
         else
         {
             audioIdle.Stop();
 
             if (!audioAccelerazione.isPlaying)
+            {
                 audioAccelerazione.Play();
+                
+                
+            }
+            //calcolo il suono in base alla distanza dell'NPC con il player
+            SuonoInBaseADistanza(audioAccelerazione);
         }
     }
     
@@ -178,8 +187,12 @@ public class CarController : MonoBehaviour
                 if (!suonoSgommata.isPlaying)
                 {
                     suonoSgommata.Play();
-                }
 
+                }
+                
+                //calcolo il suono in base alla distanza dell'NPC con il player
+                SuonoInBaseADistanza(suonoSgommata);
+                
                 //inzio della sgommata per la ruota 'i' a video (traccia)
                 InizioSgommata(i);
 
@@ -270,6 +283,22 @@ public class CarController : MonoBehaviour
             /*Applico all'attributo position della transform la rotazione tramite il quaternione anche alla mesh per
              * poter avere coerenza tra movimento del collider e la mesh dato che sono scomposti*/
             ruote[i].transform.position = posizione;
+        }
+    }
+    
+    /*Metodo che si occupa di calcolare il suono in base alla distanza degli NPC*/
+    private void SuonoInBaseADistanza(AudioSource audio)
+    {
+        if (audio.isPlaying)
+        {
+            if (!gameObject.CompareTag("Player"))
+            {
+                float distanza =  Mathf.Abs(Vector3.Distance(rb.position,
+                    GameObject.FindWithTag("Player").gameObject.transform.position));
+
+                audio.volume = 1f -  (distanza / 100);
+                audio.volume -= 0.25f;
+            }
         }
     }
 }
