@@ -21,11 +21,15 @@ public class Menu : MonoBehaviour
     public static int fourthCoins = 200;
 
     public void Start()
-    {    
+    {   
+        //eseguo il reset della classifica
         Classifica.Reset();
+        
+        //reinizializzo le flag per il game
         GameManager.flag_started_coundown = false;
         GameManager.start = false;
         
+        //posiziono le macchine nella camera per mostrarla nella canvas mentre ruota
         foreach (GameObject c in cars)
         {
             c.GetComponent<Rigidbody>().useGravity = false;
@@ -34,14 +38,14 @@ public class Menu : MonoBehaviour
                 new Quaternion(-0.0252383146f, 0.983145773F, -0.0892141908F, -0.157569751F);
             c.gameObject.transform.position = new Vector3(-1291.09998f, -164.300003f, -512.099976f);
         }
-            
+         
+        //istanzio la macchina del giocatore per mostrarla nella canvas
         car = Instantiate(cars[PlayerPrefs.GetInt("macchina_giocatore")]);
         car.transform.SetParent(GameObject.FindWithTag("CanvasMods").transform, false);
         
         //se sto navigando nel menu allora visualizzo la canvas della modalità
         if (PlayerPrefs.GetString("timeResult").Equals("false") && PlayerPrefs.GetString("otherResult").Equals("false"))
         {
-
             testoCoins.GetComponent<Text>().text = "Actual coins: " + PlayerPrefs.GetInt("coins");
         }
         
@@ -78,13 +82,15 @@ public class Menu : MonoBehaviour
         
        
     }
-
+    
+    //rotazione della macchina
     void Update()
     {
-        car.transform.Rotate(0, 50 * Time.deltaTime, 0);
+        car.transform.Rotate(0, 70 * Time.deltaTime, 0);
 
     }
-
+    
+    /*metodo per iniziare la modalità racing*/
     public void startRacing()
     {
         String laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
@@ -92,14 +98,15 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetString("modalita", "racing");
         SceneManager.LoadScene("Game");
     }
-
+    
+    /*metodo per iniziare la modalità time*/
     public void startTime()
     {
         PlayerPrefs.SetString("modalita", "time");
         SceneManager.LoadScene("Game");
     }
 
-    /*Questa e la precedente sono solo di debug, alla fine diventano un unica funzione*/
+    /*Meotodo per iniziare la modalità multiplayer*/
     public void startMulti()
     {
         PlayerPrefs.SetString("modalita", "multiplayer");
@@ -108,7 +115,8 @@ public class Menu : MonoBehaviour
 
     }
 
-
+    
+    /*Metodo per mostrare nella canvas le regole del multiplayer*/
     public void goMulti()
     {
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
@@ -116,7 +124,8 @@ public class Menu : MonoBehaviour
         timeMode.SetActive(false);
         raceMode.SetActive(false);
     }
-
+    
+    /*Metodo per mostrare nella canvas le regole del racing*/
     public void goRacing()
     {
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = false;
@@ -125,7 +134,8 @@ public class Menu : MonoBehaviour
         multiMode.SetActive(false);
 
     }
-
+    
+    /*Metodo per mostrare nella canvas le regole del timeAttack*/
     public void goTimeAttack()
     {
 
@@ -137,6 +147,7 @@ public class Menu : MonoBehaviour
 
     }
 
+    /*Metodo per mostrare nella canvas il menu scelta modalità*/
     public void goBack()
     {
         GameObject.FindWithTag("CanvasMods").GetComponent<Canvas>().enabled = true;
@@ -146,6 +157,7 @@ public class Menu : MonoBehaviour
         timeMode.SetActive(true);
     }
     
+    /*Metodo per mostrare nella canvas il menu scelta modalità*/
     public void goBackFromResult()
     {   
         //setto le canvas correttamente
@@ -163,7 +175,8 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetString("timeResult","false");
         testoCoins.GetComponent<Text>().text = "Actual coins: " + PlayerPrefs.GetInt("coins");
     }
-
+    
+    /*Metodo per aggiungere a video i giri*/
     public void AddLaps()
     {
         string laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
@@ -176,7 +189,8 @@ public class Menu : MonoBehaviour
         GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text = Math.Clamp(x, min, max) + "";
         SetCoinsMenu(x);
     }
-
+    
+    /*Metodo per diminuire a video i giri*/
     public void MinusLaps()
     {
         string laps = GameObject.FindWithTag("ChoseLaps").GetComponent<Text>().text;
@@ -191,12 +205,13 @@ public class Menu : MonoBehaviour
         SetCoinsMenu(x);
 
     }
-
+    /*Metodo per mostrare la scena dello shop*/
     public void goShop()
     {
         SceneManager.LoadScene("ChooseCar");
     }
-
+    
+    /*Metodo per mostrare le ricompense in base al numero di giri in racing*/
     private void SetCoinsMenu(int laps)
     {
         firstCoins = 500;
