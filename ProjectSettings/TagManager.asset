@@ -51,6 +51,7 @@ TagManager:
   - CoinsEarn
   - TerzoIntestazione
   - QuartoIntestazione
+  - canvasGame
   layers:
   - Default
   - TransparentFX

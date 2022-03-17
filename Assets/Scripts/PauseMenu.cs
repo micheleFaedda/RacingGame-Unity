@@ -24,23 +24,24 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    //faccio ripartire il gioco dalla pausa e quindi disattivo l'interfaccia, e faccio tornare timescale a 1 (cioè il tempo tornerà a scorrere normalmente)
+    //faccio ripartire il gioco dalla pausa e quindi disattivo l'interfaccia, e faccio tornare timescale a 1 (cioï¿½ il tempo tornerï¿½ a scorrere normalmente)
     public void Resume()
     {
+        GameObject.FindGameObjectWithTag("canvasGame").GetComponent<Canvas>().enabled = true; 
         ui.SetActive(false);
         Time.timeScale = 1f;
         pause = false;
     }
 
-    //metto in pausa il gioco, attivo quindi l'interfaccia del menu di pausa, e metto timescale a 0 (cioè il tempo si fermerà)
+    //metto in pausa il gioco, attivo quindi l'interfaccia del menu di pausa, e metto timescale a 0 (cioï¿½ il tempo si fermerï¿½)
     public void Pause()
-    {
+    {   GameObject.FindGameObjectWithTag("canvasGame").GetComponent<Canvas>().enabled = false; 
         ui.SetActive(true);
         Time.timeScale = 0f;
         pause = true;
     }
 
-    //Torno al menù principale cambiando scena
+    //Torno al menï¿½ principale cambiando scena
     public void LoadMenu()
     {
         if (PhotonNetwork.IsConnected)

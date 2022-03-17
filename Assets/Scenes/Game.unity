@@ -81027,7 +81027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.5536, y: -197.17828}
+  m_AnchoredPosition: {x: 34.181, y: 321}
   m_SizeDelta: {x: 250.1507, y: 68.2489}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5704139475689093246
@@ -81223,7 +81223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.9847433, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: -0.000030517578, y: -10.096}
   m_SizeDelta: {x: 142.5891, y: 20.1915}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5704139475902969900
@@ -81845,7 +81845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: -406}
+  m_AnchoredPosition: {x: 46.021, y: -239}
   m_SizeDelta: {x: 197.2149, y: 65.364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5704139477104812507
@@ -81987,7 +81987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: -301}
+  m_AnchoredPosition: {x: 34.181, y: 175}
   m_SizeDelta: {x: 173.5339, y: 66.4176}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5704139477269990869
@@ -97154,7 +97154,7 @@ GameObject:
   - component: {fileID: 7518163683290874601}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: canvasGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
