@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     
-    public GameObject resOption;
+    
     public GameObject option;
     public GameObject audioOption;
     public GameObject commands;
@@ -45,11 +45,7 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    public void ResolutionOption()
-    {
-        resOption.SetActive(true);
-        option.SetActive(false);
-    }
+    
 
     public void AudioOption()
     {
@@ -70,7 +66,7 @@ public class MainMenu : MonoBehaviour
     
     public void CloseOptions()
     {   nome.gameObject.SetActive(true);
-        resOption.SetActive(false);
+        
         option.SetActive(false);
         audioOption.SetActive(false);
         commands.SetActive(false);
