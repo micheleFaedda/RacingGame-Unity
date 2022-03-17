@@ -110,7 +110,7 @@ public class Menu : MonoBehaviour
     public void startMulti()
     {
         PlayerPrefs.SetString("modalita", "multiplayer");
-        PlayerPrefs.SetInt("num_giri_multi", 1);
+        PlayerPrefs.SetInt("num_giri_multi", 3);
         SceneManager.LoadScene("Loading");
 
     }
