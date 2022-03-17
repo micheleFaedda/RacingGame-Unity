@@ -191,7 +191,8 @@ public class GameManager : MonoBehaviour
                 start = true;
         }
     }
-
+    
+    /*metodo per settare la modalità notte o giorno*/
     private void GiornoNotte(int x)
     {
         if (x % 2 == 0)
