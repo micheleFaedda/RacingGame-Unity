@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
     //Per passare alla schermata della selezione delle modalità di gioco
     public void ChooseCar()
     {
-        Debug.Log(name.Length);
+        //Debug.Log(name.Length);
         if(nome.text.Length >= 4){
             PlayerPrefs.SetString(("player_name"), nome.text);
             SceneManager.LoadScene("ChooseCar");
@@ -74,7 +74,7 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit");
+        //Debug.Log("Quit");
         Application.Quit();
     }
     

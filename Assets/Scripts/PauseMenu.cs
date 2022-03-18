@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         {
             PhotonNetwork.Disconnect();
         }
-        Debug.Log("Quit");
+        //Debug.Log("Quit");
         Application.Quit();
     }
 }

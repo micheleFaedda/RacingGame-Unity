@@ -117,8 +117,8 @@ public class NPController : MonoBehaviour
                 //Per riposizionare la macchina non basta settare la posizione, serve anche la rotazione per metterlo nella direzone giusta
                 this.transform.position =  waypoints[wpDaRaggiungere-1].transform.position + Vector3.up * 1.2f;
                 this.transform.rotation = waypoints[wpDaRaggiungere-1].transform.rotation;
-                Debug.Log("DEBUG GIRATO: \nSONO LA MACCHINA: "+ carController.name);
-                //targeSucctOld = waypoints[wpDaRaggiungere-1].transform.position;
+                //Debug.Log("DEBUG GIRATO: \nSONO LA MACCHINA: "+ carController.name);
+                
             }
         }
         
